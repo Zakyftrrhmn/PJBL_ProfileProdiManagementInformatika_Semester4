@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('deskripsi', function (Blueprint $table) {
             $table->id();
             $table->text('deskripsi');
-            $table->softDeletes();
             $table->timestamps();
         });
     }

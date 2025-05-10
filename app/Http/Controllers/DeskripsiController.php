@@ -10,14 +10,18 @@ class DeskripsiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() {}
+    public function index()
+    {
+        $deskripsi = Deskripsi::all();
+        return view('pages.deskripsi.index', compact('deskripsi'));
+    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('pages.deskripsi.create');
     }
 
     /**
@@ -25,7 +29,18 @@ class DeskripsiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'deskripsi' => 'required|max:500',
+            ],
+            [
+                'deskripsi.required' => 'Deskripsi harus diisi',
+                'deskripsi.max' => 'Deskripsi maksimal 500 karakter',
+            ]
+        );
+
+        Deskripsi::create($request->all());
+        return redirect()->route('deskripsi.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -33,7 +48,7 @@ class DeskripsiController extends Controller
      */
     public function show(Deskripsi $deskripsi)
     {
-        //
+        return view('404');
     }
 
     /**
@@ -41,7 +56,7 @@ class DeskripsiController extends Controller
      */
     public function edit(Deskripsi $deskripsi)
     {
-        //
+        return view('pages.deskripsi.edit', compact('deskripsi'));
     }
 
     /**
@@ -49,7 +64,18 @@ class DeskripsiController extends Controller
      */
     public function update(Request $request, Deskripsi $deskripsi)
     {
-        //
+        $request->validate(
+            [
+                'deskripsi' => 'required|max:500',
+            ],
+            [
+                'deskripsi.required' => 'Deskripsi harus diisi',
+                'deskripsi.max' => 'Deskripsi maksimal 500 karakter',
+            ]
+        );
+
+        $deskripsi->update($request->all());
+        return redirect()->route('deskripsi.index')->with('success', 'Data berhasil diubah');
     }
 
     /**
@@ -57,6 +83,7 @@ class DeskripsiController extends Controller
      */
     public function destroy(Deskripsi $deskripsi)
     {
-        //
+        $deskripsi->delete();
+        return redirect()->route('deskripsi.index')->with('success', 'Data berhasil dihapus');
     }
 }
