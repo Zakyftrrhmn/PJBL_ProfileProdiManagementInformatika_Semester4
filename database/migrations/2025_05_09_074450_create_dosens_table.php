@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('dosen', function (Blueprint $table) {
             $table->id();
             $table->string('nama_dosen');
-            $table->string('nidn_dosen');
-            $table->string('gelar_dosen');
+            $table->string('nip');
+            $table->string('nidn');
             $table->string('keahlian_dosen');
             $table->string('foto_dosen');
             $table->softDeletes();

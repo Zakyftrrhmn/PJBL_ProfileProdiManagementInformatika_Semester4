@@ -29,10 +29,17 @@ class ProfileKelulusanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama_profile' => 'required',
-            'deskripsi' => 'required',
-        ]);
+        $request->validate(
+            [
+                'nama_profile' => 'required',
+                'deskripsi' => 'required|max:255',
+            ],
+            [
+                'nama_profile.required' => 'Nama profile harus diisi',
+                'deskripsi.required' => 'Deskripsi harus diisi',
+                'deskripsi.max' => 'Deskripsi maksimal 255 karakter',
+            ]
+        );
 
         ProfileKelulusan::create($request->all());
         return redirect()->route('profile_kelulusan.index')->with('success', 'Data berhasil ditambahkan');
@@ -60,10 +67,17 @@ class ProfileKelulusanController extends Controller
      */
     public function update(Request $request, ProfileKelulusan $profileKelulusan)
     {
-        $request->validate([
-            'nama_profile' => 'required',
-            'deskripsi' => 'required',
-        ]);
+        $request->validate(
+            [
+                'nama_profile' => 'required',
+                'deskripsi' => 'required|max:255',
+            ],
+            [
+                'nama_profile.required' => 'Nama profile harus diisi',
+                'deskripsi.required' => 'Deskripsi harus diisi',
+                'deskripsi.max' => 'Deskripsi maksimal 255 karakter',
+            ]
+        );
 
         $profileKelulusan->update($request->all());
         return redirect()->route('profile_kelulusan.index')->with('success', 'Data berhasil diubah');

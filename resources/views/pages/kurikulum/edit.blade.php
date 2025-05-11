@@ -42,7 +42,7 @@
 
 
                     <div class="mb-4">
-                        <label for="file_kurikulum" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Upload File Kurikulum (PDF)</label>
+                        <label for="file_kurikulum" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Upload File Kurikulum</label>
                         <input type="file" name="file_kurikulum" id="file_kurikulum" class="block w-full text-sm text-slate-700 border border-slate-300 rounded-lg cursor-pointer bg-white dark:bg-slate-700 dark:text-white dark:border-slate-600 dark:placeholder-slate-400 @error('file_kurikulum') border-red-500 dark:border-red-500 @enderror">
                         @if($kurikulum->file_kurikulum)
                             <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">
