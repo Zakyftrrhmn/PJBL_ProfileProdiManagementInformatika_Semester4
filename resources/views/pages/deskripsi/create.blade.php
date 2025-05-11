@@ -17,7 +17,7 @@
                     @csrf
 
                     <div class="mb-4">
-                        <label for="kategori" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Deskripsi</label>
+                        <label for="deskripsi" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Deskripsi</label>
                         <textarea id="deskripsi" name="deskripsi" rows="4" class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 dark:placeholder-slate-400 dark:focus:ring-blue-500 @error('deskripsi') border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500 @enderror" required>{{ old('deskripsi') }}</textarea>
 
                         @error('deskripsi')

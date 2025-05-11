@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('visi');
             $table->string('misi');
-            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::resource('/deskripsi', DeskripsiController::class);
-Route::resource('/vis_misi', VisiMisiController::class);
+Route::resource('/visi_misi', VisiMisiController::class);
 Route::resource('/kurikulum', KurikulumController::class);
 Route::resource('/profile_kelulusan', ProfileKelulusanController::class);
 Route::resource('/dosen', DosenController::class);

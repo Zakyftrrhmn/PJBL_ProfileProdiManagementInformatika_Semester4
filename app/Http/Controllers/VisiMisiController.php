@@ -12,7 +12,8 @@ class VisiMisiController extends Controller
      */
     public function index()
     {
-        //
+        $visiMisi = VisiMisi::all();
+        return view('pages.visiMisi.index', compact('visiMisi'));
     }
 
     /**
@@ -20,7 +21,7 @@ class VisiMisiController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.visiMisi.create');
     }
 
     /**
@@ -28,7 +29,18 @@ class VisiMisiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'visi' => 'required|max:255',
+            'misi' => 'required|max:255',
+        ], [
+            'visi.required' => 'Visi wajib diisi',
+            'misi.required' => 'Misi wajib diisi',
+            'visi.max' => 'Visi maksimal 255 karakter',
+            'misi.max' => 'Misi maksimal 255 karakter',
+        ]);
+
+        VisiMisi::create($request->all());
+        return redirect()->route('visi_misi.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -36,7 +48,7 @@ class VisiMisiController extends Controller
      */
     public function show(VisiMisi $visiMisi)
     {
-        //
+        return view('404');
     }
 
     /**
@@ -44,7 +56,8 @@ class VisiMisiController extends Controller
      */
     public function edit(VisiMisi $visiMisi)
     {
-        //
+        $visiMisi = VisiMisi::find($visiMisi->id);
+        return view('pages.visiMisi.edit', compact('visiMisi'));
     }
 
     /**
@@ -52,7 +65,18 @@ class VisiMisiController extends Controller
      */
     public function update(Request $request, VisiMisi $visiMisi)
     {
-        //
+        $request->validate([
+            'visi' => 'required|max:255',
+            'misi' => 'required|max:255',
+        ], [
+            'visi.required' => 'Visi wajib diisi',
+            'misi.required' => 'Misi wajib diisi',
+            'visi.max' => 'Visi maksimal 255 karakter',
+            'misi.max' => 'Misi maksimal 255 karakter',
+        ]);
+
+        $visiMisi->update($request->all());
+        return redirect()->route('visi_misi.index')->with('success', 'Data berhasil diubah');
     }
 
     /**
@@ -60,6 +84,7 @@ class VisiMisiController extends Controller
      */
     public function destroy(VisiMisi $visiMisi)
     {
-        //
+        $visiMisi->delete();
+        return redirect()->route('visi_misi.index')->with('success', 'Data berhasil dihapus');
     }
 }
