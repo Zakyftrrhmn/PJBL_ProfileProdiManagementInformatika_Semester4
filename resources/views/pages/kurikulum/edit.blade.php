@@ -17,14 +17,7 @@
                     @method('PUT')
                     @csrf
 
-                    <div class="mb-4">
-                        <label for="tahun_kurikulum" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Tahun Berlaku</label>
-                        <input type="number" name="tahun_kurikulum" id="tahun_kurikulum" value="{{ old('tahun_kurikulum', $kurikulum->tahun_kurikulum) }}" class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 dark:focus:ring-blue-500 @error('tahun_kurikulum') border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500 @enderror" required>
-                        @error('tahun_kurikulum')
-                            <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
-                        @enderror
-                    </div>
-
+                    
                     <div class="mb-4">
                         <label for="nama_kurikulum" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Nama Kurikulum</label>
                         <input type="text" name="nama_kurikulum" id="nama_kurikulum" value="{{ old('nama_kurikulum', $kurikulum->nama_kurikulum) }}" class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 dark:focus:ring-blue-500 @error('nama_kurikulum') border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500 @enderror" required>
@@ -32,6 +25,21 @@
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
+
+                    <div class="mb-4">
+                        <label for="tahun_kurikulum" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Tahun Berlaku</label>
+                        <select name="tahun_kurikulum" id="tahun_kurikulum" class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 dark:focus:ring-blue-500 @error('tahun_kurikulum') border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500 @enderror" required>
+                            <option value="">-- Pilih Tahun --</option>
+                            @for ($year = now()->year; $year >= 2010; $year--)
+                                <option value="{{ $year }}" {{ old('tahun_kurikulum', $kurikulum->tahun_kurikulum) == $year ? 'selected' : '' }}>{{ $year }}</option>
+                            @endfor
+                        </select>
+                        @error('tahun_kurikulum')
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+
 
                     <div class="mb-4">
                         <label for="file_kurikulum" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Upload File Kurikulum (PDF)</label>

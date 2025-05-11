@@ -23,14 +23,20 @@
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
-
+                    
                     <div class="mb-4">
                         <label for="tahun_kurikulum" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Tahun Berlaku</label>
-                        <input type="number" id="tahun_kurikulum" name="tahun_kurikulum" class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('tahun_kurikulum') border-red-500 dark:border-red-500 @enderror" value="{{ old('tahun_kurikulum') }}" required>
+                        <select id="tahun_kurikulum" name="tahun_kurikulum" class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('tahun_kurikulum') border-red-500 dark:border-red-500 @enderror" required>
+                            <option value="">-- Pilih Tahun --</option>
+                            @for ($year = now()->year; $year >= 2010; $year--)
+                                <option value="{{ $year }}" {{ old('tahun_kurikulum') == $year ? 'selected' : '' }}>{{ $year }}</option>
+                            @endfor
+                        </select>
                         @error('tahun_kurikulum')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
+
 
                     <div class="mb-4">
                         <label for="file_kurikulum" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Upload File Kurikulum</label>

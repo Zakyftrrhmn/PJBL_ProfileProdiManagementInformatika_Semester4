@@ -12,7 +12,8 @@ class ProfileKelulusanController extends Controller
      */
     public function index()
     {
-        //
+        $profileKelulusan = ProfileKelulusan::all();
+        return view('pages.profileKelulusan.index', compact('profileKelulusan'));
     }
 
     /**
@@ -20,7 +21,7 @@ class ProfileKelulusanController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.profileKelulusan.create');
     }
 
     /**
@@ -28,7 +29,13 @@ class ProfileKelulusanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_profile' => 'required',
+            'deskripsi' => 'required',
+        ]);
+
+        ProfileKelulusan::create($request->all());
+        return redirect()->route('profile_kelulusan.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -36,7 +43,7 @@ class ProfileKelulusanController extends Controller
      */
     public function show(ProfileKelulusan $profileKelulusan)
     {
-        //
+        return view('404');
     }
 
     /**
@@ -44,7 +51,8 @@ class ProfileKelulusanController extends Controller
      */
     public function edit(ProfileKelulusan $profileKelulusan)
     {
-        //
+        ProfileKelulusan::findOrFail($profileKelulusan->id);
+        return view('pages.profileKelulusan.edit', compact('profileKelulusan'));
     }
 
     /**
@@ -52,7 +60,13 @@ class ProfileKelulusanController extends Controller
      */
     public function update(Request $request, ProfileKelulusan $profileKelulusan)
     {
-        //
+        $request->validate([
+            'nama_profile' => 'required',
+            'deskripsi' => 'required',
+        ]);
+
+        $profileKelulusan->update($request->all());
+        return redirect()->route('profile_kelulusan.index')->with('success', 'Data berhasil diubah');
     }
 
     /**
@@ -60,6 +74,7 @@ class ProfileKelulusanController extends Controller
      */
     public function destroy(ProfileKelulusan $profileKelulusan)
     {
-        //
+        $profileKelulusan->delete();
+        return redirect()->route('profile_kelulusan.index')->with('success', 'Data berhasil dihapus');
     }
 }

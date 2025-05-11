@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             DeskripsiSeeder::class,
             VisiMisiSeeder::class,
-            KurikulumSeeder::class
+            KurikulumSeeder::class,
+            ProfileKelulusanSeeder::class
         ]);
     }
 }
