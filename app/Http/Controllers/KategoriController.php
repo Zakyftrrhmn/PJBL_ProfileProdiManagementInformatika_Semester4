@@ -12,7 +12,8 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        //
+        $kategori = Kategori::all();
+        return view('pages.kategori.index', compact('kategori'));
     }
 
     /**
@@ -20,7 +21,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.kategori.create');
     }
 
     /**
@@ -28,7 +29,19 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'nama_kategori' => 'required|unique:kategori|max:20',
+            ],
+            [
+                'nama_kategori.required' => 'Kategori harus diisi',
+                'nama_kategori.unique' => 'Kategori sudah ada',
+                'nama_kategori.max' => 'Kategori maksimal 20 karakter',
+            ]
+        );
+
+        Kategori::create($request->all());
+        return redirect()->route('kategori.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -36,7 +49,7 @@ class KategoriController extends Controller
      */
     public function show(Kategori $kategori)
     {
-        //
+        return view('404');
     }
 
     /**
@@ -44,7 +57,8 @@ class KategoriController extends Controller
      */
     public function edit(Kategori $kategori)
     {
-        //
+        $kategori = Kategori::find($kategori->id);
+        return view('pages.kategori.edit', compact('kategori'));
     }
 
     /**
@@ -52,7 +66,19 @@ class KategoriController extends Controller
      */
     public function update(Request $request, Kategori $kategori)
     {
-        //
+        $request->validate(
+            [
+                'nama_kategori' => 'required|unique:kategori|max:20',
+            ],
+            [
+                'nama_kategori.required' => 'Kategori harus diisi',
+                'nama_kategori.unique' => 'Kategori sudah ada',
+                'nama_kategori.max' => 'Kategori maksimal 20 karakter',
+            ]
+        );
+
+        $kategori->update($request->all());
+        return redirect()->route('kategori.index')->with('success', 'Data berhasil diubah');
     }
 
     /**
@@ -60,6 +86,7 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
-        //
+        $kategori->delete();
+        return redirect()->route('kategori.index')->with('success', 'Data berhasil dihapus');
     }
 }
