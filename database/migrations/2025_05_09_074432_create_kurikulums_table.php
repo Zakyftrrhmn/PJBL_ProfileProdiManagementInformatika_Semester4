@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('kurikulum', function (Blueprint $table) {
             $table->id();
-            $table->integer('tahun');
+            $table->integer('tahun_kurikulum');
             $table->string('nama_kurikulum');
             $table->string('file_kurikulum');
             $table->softDeletes();

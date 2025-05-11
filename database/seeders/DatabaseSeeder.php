@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             DeskripsiSeeder::class,
-            VisiMisiSeeder::class
+            VisiMisiSeeder::class,
+            KurikulumSeeder::class
         ]);
     }
 }

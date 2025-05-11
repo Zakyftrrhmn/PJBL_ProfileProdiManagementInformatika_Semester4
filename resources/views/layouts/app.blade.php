@@ -18,3 +18,5 @@
     </main>
 
 @include('includes.scripts')
+@stack('scripts')
+
