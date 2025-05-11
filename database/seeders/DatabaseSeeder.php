@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
             DeskripsiSeeder::class,
             VisiMisiSeeder::class,
             KurikulumSeeder::class,
-            ProfileKelulusanSeeder::class
+            ProfileKelulusanSeeder::class,
+            HubungiKamiSeeder::class
         ]);
     }
 }

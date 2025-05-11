@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Kalender Akademik')
+@section('title', 'Pesan Masuk')
 @section('content')
     
         <div class="flex flex-wrap -mx-3">
@@ -26,27 +26,25 @@
             <div class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
               <div class="flex justify-between">
                 <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                  <h6 class="dark:text-white">Tabel @yield('title') </h6>
-                </div>
-                <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                      <a href="{{ route('kalender_akademik.create') }}" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Tambah Data</a>
+                  <h6 class="dark:text-white">Daftar @yield('title') </h6>
                 </div>
               </div>
               
               <div class="flex-auto px-0 pt-5 pb-2">
                 <div class="p-4 overflow-x-auto">
-                  <table id="kalender_akademik_table" class="items-center justify-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
+                  <table id="hubungiKamiTable" class="items-center justify-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
                     <thead class="align-bottom">
                       <tr>
                         
-                        <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">No</th>
-                        <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Tahun Ajaran</th>
-                        <th class="px-6 py-3 font-bold uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 !text-center">File Kalender</th>
+                        <th class="px-6 py-3 font-bold !text-center uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">No</th>
+                        <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Nama</th>
+                        <th class="px-6 py-3 font-bold uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 text-left">Email</th>
+                        <th class="px-6 py-3 font-bold uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Subject</th>
                         <th class="px-6 py-3 font-bold uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 !text-center">Action</th>
                       </tr>
                     </thead>
                     <tbody class="border-t">
-                      @foreach ($kalenderAkademik as $ka)
+                      @foreach ($hubungiKami as $hk)
                       <tr>
 
                         <td class=" align-middle bg-transparent">
@@ -54,7 +52,7 @@
                             <h6 class="mb-0 text-sm leading-normal dark:text-white
                                       max-w-xl
                                       whitespace-normal break-words
-                                      text-justify">
+                                      text-center">
                                       {{ $loop->iteration }}
                             </h6>
                           </div>
@@ -66,31 +64,39 @@
                                       max-w-xl
                                       whitespace-normal break-words
                                       text-justify">
-                                      {{ $ka->tahun_ajaran }}
+                                      {{ $hk->nama }}
                             </h6>
                           </div>
                         </td>
 
-                        <td class="align-middle bg-transparent text-center">
-                          <div class="my-auto">                            
-                            @if ($ka->file_kalender)
-                              <a 
-                                href="{{ asset('storage/kalenderAkademik/' . $ka->file_kalender) }}" 
-                                download 
-                                class="text-blue-400 hover:text-white border border-blue-400 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:border-blue-300 dark:text-blue-300 dark:hover:text-white dark:hover:bg-blue-400 dark:focus:ring-blue-900"
-                              >
-                                <i class="fas fa-download mr-1"></i> Download File
-                              </a>
-                            @endif
+                        <td class="align-middle bg-transparent">
+                          <div class="my-auto">
+                            <h6 class="mb-0 text-sm leading-normal dark:text-white
+                                      max-w-xl
+                                      whitespace-normal break-words
+                                      text-justify">
+                                      {{ $hk->email }}
+                            </h6>
+                          </div>
+                        </td>
+
+                        <td class="align-middle bg-transparent">
+                          <div class="my-auto">
+                            <h6 class="mb-0 text-sm leading-normal dark:text-white
+                                      max-w-xl
+                                      whitespace-normal break-words
+                                      text-justify">
+                                      {{ $hk->subjek }}
+                            </h6>
                           </div>
                         </td>
 
                         <td class="align-middle bg-transparent border-b-0 whitespace-nowrap shadow-transparent items-center ">
                             <div class="flex space-x-1 justify-center">
-                                <a href="{{ route('kalender_akademik.edit', $ka) }}" class="text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900">
-                                <i class="fas fa-edit mr-1"></i> Edit
+                                <a href="{{ route('hubungi_kami.show', $hk) }}" class="text-green-400 hover:text-white border border-green-400 hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:border-green-300 dark:text-green-300 dark:hover:text-white dark:hover:bg-green-400 dark:focus:ring-green-900">
+                                <i class="fas fa-eye mr-1"></i> Detail
                                 </a>
-                                <form action="{{ route('kalender_akademik.destroy', $ka) }}" method="POST">
+                                <form action="{{ route('hubungi_kami.destroy', $hk) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
@@ -115,8 +121,8 @@
 @push('scripts')
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        if (document.getElementById("kalender_akademik_table") && typeof simpleDatatables !== 'undefined' && typeof simpleDatatables.DataTable !== 'undefined') {
-            const dataTable = new simpleDatatables.DataTable("#kalender_akademik_table", {
+        if (document.getElementById("hubungiKamiTable") && typeof simpleDatatables !== 'undefined' && typeof simpleDatatables.DataTable !== 'undefined') {
+            const dataTable = new simpleDatatables.DataTable("#hubungiKamiTable", {
                 paging: true,
                 perPage: 10,
                 perPageSelect: [5, 10, 15, 20, 25],

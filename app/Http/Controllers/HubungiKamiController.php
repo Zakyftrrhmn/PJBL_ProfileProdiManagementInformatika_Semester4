@@ -12,7 +12,8 @@ class HubungiKamiController extends Controller
      */
     public function index()
     {
-        //
+        $hubungiKami = HubungiKami::all();
+        return view('pages.hubungiKami.index', compact('hubungiKami'));
     }
 
     /**
@@ -36,7 +37,8 @@ class HubungiKamiController extends Controller
      */
     public function show(HubungiKami $hubungiKami)
     {
-        //
+        HubungiKami::find($hubungiKami->id);
+        return view('pages.hubungiKami.show', compact('hubungiKami'));
     }
 
     /**
@@ -44,7 +46,7 @@ class HubungiKamiController extends Controller
      */
     public function edit(HubungiKami $hubungiKami)
     {
-        //
+        return view('404');
     }
 
     /**
@@ -52,7 +54,7 @@ class HubungiKamiController extends Controller
      */
     public function update(Request $request, HubungiKami $hubungiKami)
     {
-        //
+        return view('404');
     }
 
     /**
@@ -60,6 +62,7 @@ class HubungiKamiController extends Controller
      */
     public function destroy(HubungiKami $hubungiKami)
     {
-        //
+        $hubungiKami->delete();
+        return redirect()->route('hubungi_kami.index')->with('success', 'Data berhasil dihapus');
     }
 }
