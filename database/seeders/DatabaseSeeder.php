@@ -19,7 +19,9 @@ class DatabaseSeeder extends Seeder
             KurikulumSeeder::class,
             ProfileKelulusanSeeder::class,
             HubungiKamiSeeder::class,
-            KategoriSeeder::class
+            KategoriSeeder::class,
+            RolePermissionSeeder::class,
+            UserSeeder::class
         ]);
     }
 }

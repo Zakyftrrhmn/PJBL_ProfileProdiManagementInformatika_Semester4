@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class KalenderAkademikController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */

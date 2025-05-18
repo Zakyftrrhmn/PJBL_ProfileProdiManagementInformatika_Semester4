@@ -31,11 +31,12 @@ class ProfileKelulusanController extends Controller
     {
         $request->validate(
             [
-                'nama_profile' => 'required',
+                'nama_profile' => 'required|max:100',
                 'deskripsi' => 'required|max:255',
             ],
             [
                 'nama_profile.required' => 'Nama profile harus diisi',
+                'deskripsi.max' => 'Nama Profile maksimal 100 karakter',
                 'deskripsi.required' => 'Deskripsi harus diisi',
                 'deskripsi.max' => 'Deskripsi maksimal 255 karakter',
             ]
@@ -69,11 +70,12 @@ class ProfileKelulusanController extends Controller
     {
         $request->validate(
             [
-                'nama_profile' => 'required',
+                'nama_profile' => 'required|max:100',
                 'deskripsi' => 'required|max:255',
             ],
             [
                 'nama_profile.required' => 'Nama profile harus diisi',
+                'deskripsi.max' => 'Nama Profile maksimal 100 karakter',
                 'deskripsi.required' => 'Deskripsi harus diisi',
                 'deskripsi.max' => 'Deskripsi maksimal 255 karakter',
             ]

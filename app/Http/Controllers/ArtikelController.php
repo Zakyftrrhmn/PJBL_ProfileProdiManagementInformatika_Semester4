@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 class ArtikelController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      */

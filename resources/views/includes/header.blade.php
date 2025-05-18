@@ -16,7 +16,7 @@
     <link href="{{asset('assets/css/nucleo-icons.css')}}" rel="stylesheet"/>
     <link href="{{asset('assets/css/nucleo-svg.css')}}" rel="stylesheet"/>
     <!-- Main Styling -->
-    <link href="{{asset('assets/css/argon-dashboard-tailwind.css?v=1.0.1')}}" rel="stylesheet" />
+    <link href="{{asset('assets/css/argon-dashboard-tailwind.css?v=1')}}" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" />
   </head>

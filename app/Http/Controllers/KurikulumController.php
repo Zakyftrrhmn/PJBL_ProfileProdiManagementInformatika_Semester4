@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class KurikulumController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
