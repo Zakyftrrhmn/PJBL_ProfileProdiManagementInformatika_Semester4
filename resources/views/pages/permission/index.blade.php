@@ -39,9 +39,9 @@
                     <thead class="align-bottom">
                       <tr>
                         
-                        <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">No</th>
+                        <th class="px-6 py-3 font-bold !text-center uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">No</th>
                         <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Nama Permission</th>
-                        <th class="px-6 py-3 font-bold uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 !text-center">Action</th>
+                        {{-- <th class="px-6 py-3 font-bold uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 !text-center">Action</th> --}}
                       </tr>
                     </thead>
                     <tbody class="border-t">
@@ -53,7 +53,7 @@
                             <h6 class="mb-0 text-sm leading-normal dark:text-white
                                       max-w-xl
                                       whitespace-normal break-words
-                                      text-justify">
+                                      text-center">
                                       {{ $loop->iteration }}
                             </h6>
                           </div>
@@ -64,7 +64,7 @@
                             <h6 class="mb-0 text-sm leading-normal dark:text-white
                                       max-w-xl
                                       whitespace-normal break-words
-                                      text-justify">
+                                      text-left">
                                       {{ $p->name }}
                             </h6>
                           </div>

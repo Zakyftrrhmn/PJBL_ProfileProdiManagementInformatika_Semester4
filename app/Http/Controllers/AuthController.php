@@ -8,6 +8,22 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    // Mapping permission ke route yang sesuai
+    protected $permissionRoutes = [
+        'kurikulum'             => '/admin/kurikulum',
+        'dosen'                 => '/admin/dosen',
+        'kalender-akademik'     => '/admin/kalender_akademik',
+        'akreditasi'            => '/admin/akreditasi',
+        'laporan_kepuasan'      => '/admin/laporan_kepuasan',
+        'gallery'               => '/admin/gallery',
+        'prestasi_mahasiswa'    => '/admin/prestasi_mahasiswa',
+        'profile-kelulusan'     => '/admin/profile_kelulusan',
+        'karya_mahasiswa'       => '/admin/karya_mahasiswa',
+        'publish'               => '/admin/informasi',
+        'manajemen_konten'      => '/admin/visi',
+        'management-access'     => '/admin/users',
+    ];
+
     public function login()
     {
         return view('auth.login');
@@ -25,17 +41,27 @@ class AuthController extends Controller
             'password.required' => 'Password tidak boleh kosong',
         ]);
 
-        // Mengambil kredensial dari request
+        // Ambil kredensial
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/deskripsi');
+            $user = Auth::user();
+
+            // Cek permission dan redirect ke route pertama yang diizinkan
+            foreach ($this->permissionRoutes as $permission => $route) {
+                if ($user->can($permission)) {
+                    return redirect()->intended($route);
+                }
+            }
+
+            // Jika tidak punya permission apapun
+            Auth::logout();
+            return redirect()->route('login')->with('error', 'Anda tidak memiliki akses ke halaman manapun.');
         }
 
         return redirect()->route('login')->with('error', 'Email atau password salah!');
     }
-
 
     public function logout()
     {

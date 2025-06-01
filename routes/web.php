@@ -51,8 +51,8 @@
         Route::resource('/karya_mahasiswa', KeryaMahasiswaController::class)->middleware('can:karya_mahasiswa');
         Route::resource('/kategori_karya', KategoriKaryaController::class)->middleware('can:karya_mahasiswa');
 
-        Route::resource('/informasi', InformasiController::class)->middleware('can:informasi');
-        Route::resource('/kategori_informasi', KategoriController::class)->middleware('can:informasi');
+        Route::resource('/informasi', InformasiController::class)->middleware('can:publish');
+        Route::resource('/kategori_informasi', KategoriController::class)->middleware('can:publish');
 
         Route::resource('/visi', visiController::class)->middleware('can:manajemen_konten');
         Route::resource('/misi', MisiController::class)->middleware('can:manajemen_konten');
@@ -61,7 +61,6 @@
 
         Route::resource('/hubungi_kami', HubungiKamiController::class)->middleware('can:hubungi-kami');
 
-        Route::resource('/deskripsi', DeskripsiController::class)->middleware('can:deskripsi');
         Route::resource('/users', UserController::class)->middleware('can:management-access');
         Route::put('/users/{user}/roles', [UserController::class, 'updateRoles'])->name('users.updateRoles')->middleware('can:management-access');
 
