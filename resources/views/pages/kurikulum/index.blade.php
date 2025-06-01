@@ -23,13 +23,13 @@
               </div>
             @endif
 
-            <div class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+            <div class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border  overflow-hidden">
               <div class="flex justify-between">
                 <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
                   <h6 class="dark:text-white">Tabel @yield('title') </h6>
                 </div>
                 <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                      <a href="{{ route('kurikulum.create') }}" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Tambah Data</a>
+                      <a href="{{ route('admin.kurikulum.create') }}" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Tambah Data</a>
                 </div>
               </div>
               
@@ -40,9 +40,12 @@
                       <tr>
                         
                         <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">No</th>
-                        <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Tahun Kurikulum</th>
-                        <th class="px-6 py-3 font-bold uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 text-left">Nama Kurikulum</th>
-                        <th class="px-6 py-3 font-bold uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 !text-center">File Kurikulum</th>
+                        <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Kode MK</th>
+                        <th class="px-6 py-3 font-bold uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 text-left">Mata Kuliah</th>
+                        <th class="px-6 py-3 font-bold uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 !text-center">Semester</th>
+                        <th class="px-6 py-3 font-bold uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 !text-center">Pembelajaran</th>
+                        <th class="px-6 py-3 font-bold uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 !text-center">SKS</th>
+                       <th class="px-6 py-3 font-bold uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 !text-center">RPS</th>
                         <th class="px-6 py-3 font-bold uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 !text-center">Action</th>
                       </tr>
                     </thead>
@@ -50,24 +53,24 @@
                       @foreach ($kurikulum as $k)
                       <tr>
 
-                        <td class=" align-middle bg-transparent">
+                        <td class="align-middle  ">
                           <div class="my-auto ">
                             <h6 class="mb-0 text-sm leading-normal dark:text-white
                                       max-w-xl
-                                      whitespace-normal break-words
+                                      tracking-none whitespace-nowrap
                                       text-justify">
                                       {{ $loop->iteration }}
                             </h6>
                           </div>
                         </td>
                           
-                        <td class=" align-middle bg-transparent">
+                        <td class=" align-middle bg-transparent ">
                           <div class="my-auto">
                             <h6 class="mb-0 text-sm leading-normal dark:text-white
                                       max-w-xl
-                                      whitespace-normal break-words
+                                      tracking-none whitespace-nowrap
                                       text-justify">
-                                      {{ $k->tahun_kurikulum }}
+                                      {{ $k->kode_mk }}
                             </h6>
                           </div>
                         </td>
@@ -76,22 +79,70 @@
                           <div class="my-auto">
                             <h6 class="mb-0 text-sm leading-normal dark:text-white
                                       max-w-xl
-                                      whitespace-normal break-words
-                                      text-justify">
-                                      {{ $k->nama_kurikulum }}
+                                      break-words 
+                                      text-justify ">
+                                      {{ $k->mata_kuliah }}
+                            </h6>
+                          </div>
+                        </td>
+
+                        <td class="align-middle bg-transparent text-center ">
+                          <div class="my-auto">
+                            @php
+                                $bgColor = match($k->semester) {
+                                    'Semester 1' => 'bg-blue-300 text-blue-800',
+                                    'Semester 2' => 'bg-green-300 text-green-800',
+                                    'Semester 3' => 'bg-yellow-300 text-yellow-800',
+                                    'Semester 4' => 'bg-purple-300 text-purple-800',
+                                    'Semester 5' => 'bg-pink-300 text-pink-800',
+                                    'Semester 6' => 'bg-indigo-300 text-indigo-800',
+                                    default => 'bg-gray-300 text-gray-800',
+                                };
+                            @endphp
+                            <span class="px-3 py-1 rounded-full text-sm font-semibold tracking-none whitespace-nowrap  {{ $bgColor }}">
+                                {{ $k->semester }}
+                            </span>
+                          </div>
+                        </td>
+
+                        <td class="align-middle bg-transparent">
+                          <div class="my-auto">
+                              @php
+                                $perkuliahan = match($k->bentuk_perkuliahan) {
+                                    'Teori' => 'T',
+                                    'Praktek' => 'P',
+                                    'Teori & Praktek' => 'T/P',
+                                };
+                            @endphp
+                            <h6 class="mb-0 text-sm leading-normal dark:text-white
+                                      max-w-xl
+                                      break-words 
+                                      text-center ">
+                                      {{ $perkuliahan }}
+                            </h6>
+                          </div>
+                        </td>
+
+                        <td class=" align-middle bg-transparent text-center">
+                          <div class="my-auto">
+                            <h6 class="mb-0 text-sm leading-normal dark:text-white
+                                      max-w-xl
+                                      tracking-none whitespace-nowrap
+                                      text-center">
+                                      {{ $k->sks }}
                             </h6>
                           </div>
                         </td>
 
                         <td class="align-middle bg-transparent text-center">
                           <div class="my-auto">                            
-                            @if ($k->file_kurikulum)
+                            @if ($k->rps)
                               <a 
-                                href="{{ asset('storage/kurikulum/' . $k->file_kurikulum) }}" 
+                                href="{{ asset('storage/kurikulum/' . $k->rps) }}" 
                                 download 
-                                class="text-blue-400 hover:text-white border border-blue-400 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:border-blue-300 dark:text-blue-300 dark:hover:text-white dark:hover:bg-blue-400 dark:focus:ring-blue-900"
+                                class="text-blue-400 hover:text-white border border-blue-400 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2 text-center  dark:border-blue-300 dark:text-blue-300 dark:hover:text-white dark:hover:bg-blue-400 dark:focus:ring-blue-900"
                               >
-                                <i class="fas fa-download mr-1"></i> Download File
+                                <i class="fas fa-download mr-1"></i> Download
                               </a>
                             @endif
                           </div>
@@ -99,13 +150,13 @@
 
                         <td class="align-middle bg-transparent border-b-0 whitespace-nowrap shadow-transparent items-center ">
                             <div class="flex space-x-1 justify-center">
-                                <a href="{{ route('kurikulum.edit', $k) }}" class="text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900">
+                                <a href="{{ route('admin.kurikulum.edit', $k) }}" class="text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-2 text-center  dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900">
                                 <i class="fas fa-edit mr-1"></i> Edit
                                 </a>
-                                <form action="{{ route('kurikulum.destroy', $k) }}" method="POST">
+                                <form action="{{ route('admin.kurikulum.destroy', $k) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                    <button type="submit" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-2 text-center  dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
                                       <i class="fas fa-trash-alt mr-1"></i> Hapus
                                     </button>
                                 </form>
@@ -124,18 +175,18 @@
         </div>
 
 @endsection
-@push('scripts')
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        if (document.getElementById("kurikulumTable") && typeof simpleDatatables !== 'undefined' && typeof simpleDatatables.DataTable !== 'undefined') {
-            const dataTable = new simpleDatatables.DataTable("#kurikulumTable", {
-                paging: true,
-                perPage: 10,
-                perPageSelect: [5, 10, 15, 20, 25],
-                sortable: false
+        @push('scripts')
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                if (document.getElementById("kurikulumTable") && typeof simpleDatatables !== 'undefined' && typeof simpleDatatables.DataTable !== 'undefined') {
+                    const dataTable = new simpleDatatables.DataTable("#kurikulumTable", {
+                        paging: true,
+                        perPage: 10,
+                        perPageSelect: [5, 10, 15, 20, 25],
+                        sortable: false
+                    });
+                }
             });
-        }
-    });
-</script>
+        </script>
 @endpush
 

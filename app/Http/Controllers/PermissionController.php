@@ -16,31 +16,26 @@ class PermissionController extends Controller
 
     public function create()
     {
-        return view('permissions.create');
+        return view('404');
     }
 
     public function store(Request $request)
     {
-        $request->validate(['name' => 'required|unique:permissions,name']);
-        Permission::create(['name' => $request->name]);
-        return redirect()->route('permissions.index')->with('success', 'Permission dibuat.');
+        return view('404');
     }
 
     public function edit(Permission $permission)
     {
-        return view('pages.permission.edit', compact('permission'));
+        return view('404');
     }
 
     public function update(Request $request, Permission $permission)
     {
-        $request->validate(['name' => 'required']);
-        $permission->update(['name' => $request->name]);
-        return redirect()->route('permissions.index')->with('success', 'Permission diperbarui.');
+        return view('404');
     }
 
     public function destroy(Permission $permission)
     {
-        $permission->delete();
-        return redirect()->route('permissions.index')->with('success', 'Permission dihapus.');
+        return view('404');
     }
 }

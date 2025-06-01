@@ -64,7 +64,7 @@ class UserController extends Controller
 
         $user->syncRoles($request->roles);
 
-        return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan');
+        return redirect()->route('admin.users.index')->with('success', 'User berhasil ditambahkan');
     }
 
     /**
@@ -130,7 +130,7 @@ class UserController extends Controller
         $user->update($data);
         $user->syncRoles($request->roles);
 
-        return redirect()->route('users.index')->with('success', 'Data User Berhasil Di Perbaharui');
+        return redirect()->route('admin.users.index')->with('success', 'Data User Berhasil Di Perbaharui');
     }
 
 
@@ -141,6 +141,6 @@ class UserController extends Controller
     {
         $user  = User::find($id);
         $user->delete();
-        return redirect()->route('users.index')->with('success', 'Data User Berhasil Di Hapus');
+        return redirect()->route('admin.users.index')->with('success', 'Data User Berhasil Di Hapus');
     }
 }

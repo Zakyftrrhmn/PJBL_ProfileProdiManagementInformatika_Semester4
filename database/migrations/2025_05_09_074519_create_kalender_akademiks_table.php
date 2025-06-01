@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('kalender_akademik', function (Blueprint $table) {
             $table->id();
-            $table->integer('tahun_ajaran');
-            $table->string('file_kalender');
+            $table->string('judul');
+            $table->string('photo_kalender');
             $table->softDeletes();
             $table->timestamps();
         });

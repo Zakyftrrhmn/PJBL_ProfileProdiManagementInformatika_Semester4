@@ -17,17 +17,16 @@ class RolePermissionSeeder extends Seeder
         $permissions = [
             'kurikulum',
             'dosen',
-            'modul-perkuliahan',
-            'silabus',
             'kalender-akademik',
-            'management-access',
-            'deskripsi',
-            'visi-misi',
-            'hubungi-kami',
-            'artikel',
-            'kategori',
-            'galeri',
+            'akreditasi',
+            'laporan_kepuasan',
+            'gallery',
+            'prestasi_mahasiswa',
             'profile-kelulusan',
+            'karya_mahasiswa',
+            'publish',
+            'manajemen_konten',
+            'management-access',
 
         ];
 

@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('dosen', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_dosen');
-            $table->string('nip');
+            $table->string('photo');
+            $table->string('username');
+            $table->string('nama');
+            $table->string('asal_kota');
             $table->string('nidn');
-            $table->string('keahlian_dosen');
-            $table->string('foto_dosen');
+            $table->string('website');
+            $table->string('email');
+            $table->string('pendidikan');
+            $table->string('jabatan');
             $table->softDeletes();
             $table->timestamps();
         });

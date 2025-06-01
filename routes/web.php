@@ -1,22 +1,28 @@
     <?php
 
-    use App\Http\Controllers\ArtikelController;
+    use App\Http\Controllers\AkreditasiController;
+    use App\Http\Controllers\AlasanBergabungController;
+    use App\Http\Controllers\KeryaMahasiswaController;
     use App\Http\Controllers\AuthController;
     use App\Http\Controllers\DeskripsiController;
     use App\Http\Controllers\DosenController;
-    use App\Http\Controllers\GaleryController;
+    use App\Http\Controllers\GalleryController;
     use App\Http\Controllers\HubungiKamiController;
+    use App\Http\Controllers\InformasiController;
     use App\Http\Controllers\KalenderAkademikController;
     use App\Http\Controllers\KategoriController;
+    use App\Http\Controllers\KategoriKaryaController;
+    use App\Http\Controllers\KontakController;
     use App\Http\Controllers\KurikulumController;
-    use App\Http\Controllers\ModulPerkuliahanController;
+    use App\Http\Controllers\LaporanKepuasanController;
+    use App\Http\Controllers\MisiController;
     use App\Http\Controllers\ProfileKelulusanController;
-    use App\Http\Controllers\SilabusController;
     use App\Http\Controllers\UserController;
-    use App\Http\Controllers\VisiMisiController;
     use Illuminate\Support\Facades\Route;
     use App\Http\Controllers\RoleController;
     use App\Http\Controllers\PermissionController;
+    use App\Http\Controllers\PrestasiMahasiswaController;
+    use App\Http\Controllers\visiController;
 
     Route::get('/', function () {
         return view('layouts.app');
@@ -27,25 +33,35 @@
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     // Route yang hanya bisa diakses jika user sudah login
-    Route::middleware(['auth'])->group(function () {
+    Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/', function () {
             return view('layouts.app');
         });
 
-        Route::resource('/deskripsi', DeskripsiController::class)->middleware('can:deskripsi');
-        Route::resource('/visi_misi', VisiMisiController::class)->middleware('can:visi-misi');
         Route::resource('/kurikulum', KurikulumController::class)->middleware('can:kurikulum');
-        Route::resource('/profile_kelulusan', ProfileKelulusanController::class)->middleware('can:profile-kelulusan');
         Route::resource('/dosen', DosenController::class)->middleware('can:dosen');
-        Route::resource('/modul_perkuliahan', ModulPerkuliahanController::class)->middleware('can:modul-perkuliahan');
-        Route::resource('/silabus', SilabusController::class)->middleware('can:silabus');
         Route::resource('/kalender_akademik', KalenderAkademikController::class)->middleware('can:kalender-akademik');
-        Route::resource('/hubungi_kami', HubungiKamiController::class)->middleware('can:hubungi-kami');
-        Route::resource('/artikel', ArtikelController::class)->middleware('can:artikel');
-        Route::resource('/kategori', KategoriController::class)->middleware('can:kategori');
-        Route::resource('/galery', GaleryController::class)->middleware('can:galeri');
+        Route::resource('/akreditasi', AkreditasiController::class)->middleware('can:akreditasi');
+        Route::resource('/profile_kelulusan', ProfileKelulusanController::class)->middleware('can:profile-kelulusan');
+        Route::resource('/laporan_kepuasan', LaporanKepuasanController::class)->middleware('can:laporan_kepuasan');
+        Route::resource('/gallery', GalleryController::class)->middleware('can:gallery');
+        Route::resource('/prestasi_mahasiswa', PrestasiMahasiswaController::class)->middleware('can:prestasi_mahasiswa');
 
+        Route::resource('/karya_mahasiswa', KeryaMahasiswaController::class)->middleware('can:karya_mahasiswa');
+        Route::resource('/kategori_karya', KategoriKaryaController::class)->middleware('can:karya_mahasiswa');
+
+        Route::resource('/informasi', InformasiController::class)->middleware('can:informasi');
+        Route::resource('/kategori_informasi', KategoriController::class)->middleware('can:informasi');
+
+        Route::resource('/visi', visiController::class)->middleware('can:manajemen_konten');
+        Route::resource('/misi', MisiController::class)->middleware('can:manajemen_konten');
+        Route::resource('/alasan_bergabung', AlasanBergabungController::class)->middleware('can:manajemen_konten');
+        Route::resource('/kontak', KontakController::class)->middleware('can:manajemen_konten');
+
+        Route::resource('/hubungi_kami', HubungiKamiController::class)->middleware('can:hubungi-kami');
+
+        Route::resource('/deskripsi', DeskripsiController::class)->middleware('can:deskripsi');
         Route::resource('/users', UserController::class)->middleware('can:management-access');
         Route::put('/users/{user}/roles', [UserController::class, 'updateRoles'])->name('users.updateRoles')->middleware('can:management-access');
 

@@ -41,7 +41,7 @@ class DeskripsiController extends Controller
         );
 
         Deskripsi::create($request->all());
-        return redirect()->route('deskripsi.index')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->route('admin.deskripsi.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -76,7 +76,7 @@ class DeskripsiController extends Controller
         );
 
         $deskripsi->update($request->all());
-        return redirect()->route('deskripsi.index')->with('success', 'Data berhasil diubah');
+        return redirect()->route('admin.deskripsi.index')->with('success', 'Data berhasil diubah');
     }
 
     /**
@@ -85,6 +85,6 @@ class DeskripsiController extends Controller
     public function destroy(Deskripsi $deskripsi)
     {
         $deskripsi->delete();
-        return redirect()->route('deskripsi.index')->with('success', 'Data berhasil dihapus');
+        return redirect()->route('admin.deskripsi.index')->with('success', 'Data berhasil dihapus');
     }
 }

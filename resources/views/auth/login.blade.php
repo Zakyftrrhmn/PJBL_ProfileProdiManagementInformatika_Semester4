@@ -23,6 +23,13 @@
         </div>
       @endif
 
+      <!-- Session Flash -->
+      @if(session('error'))
+        <div class="bg-red-600 text-white text-sm rounded py-2 px-4 mb-4 text-center shadow">
+          {{ session('error') }}
+        </div>
+      @endif
+
       <form method="POST" action="{{ route('login.proses') }}">
         @csrf
         <!-- Email -->

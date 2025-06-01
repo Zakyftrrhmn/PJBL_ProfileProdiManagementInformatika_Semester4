@@ -36,6 +36,7 @@ class AuthController extends Controller
         return redirect()->route('login')->with('error', 'Email atau password salah!');
     }
 
+
     public function logout()
     {
         Auth::logout();

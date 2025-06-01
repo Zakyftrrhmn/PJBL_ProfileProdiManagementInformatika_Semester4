@@ -24,13 +24,13 @@
             @endif
 
             <div class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-              <div class="flex justify-between">
+              <div class="flex justify-between ">
                 <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
                   <h6 class="dark:text-white">Tabel @yield('title') </h6>
                 </div>
                 <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
                   @if($deskripsi->isEmpty())
-                      <a href="{{ route('deskripsi.create') }}" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Tambah Data</a>
+                      <a href="{{ route('admin.deskripsi.create') }}" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Tambah Data</a>
                   @endif
                 </div>
               </div>
@@ -62,10 +62,10 @@
 
                         <td class="p-2 align-middle bg-transparent border-b-0 whitespace-nowrap shadow-transparent items-center ">
                             <div class="flex space-x-1 justify-center">
-                                <a href="{{ route('deskripsi.edit', $d) }}" class="text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900">
+                                <a href="{{ route('admin.deskripsi.edit', $d) }}" class="text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900">
                                 <i class="fas fa-edit mr-1"></i> Edit
                                 </a>
-                                <form action="{{ route('deskripsi.destroy', $d) }}" method="POST">
+                                <form action="{{ route('admin.deskripsi.destroy', $d) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">

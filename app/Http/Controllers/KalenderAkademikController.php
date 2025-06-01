@@ -14,8 +14,8 @@ class KalenderAkademikController extends Controller
      */
     public function index()
     {
-        $kalenderAkademik = KalenderAkademik::all();
-        return view('pages.kalenderAkademik.index', compact('kalenderAkademik'));
+        $kalender = KalenderAkademik::first();
+        return view('pages.kalenderAkademik.index', compact('kalender'));
     }
 
     /**
@@ -23,7 +23,7 @@ class KalenderAkademikController extends Controller
      */
     public function create()
     {
-        return view('pages.kalenderAkademik.create');
+        return view('404');
     }
 
     /**
@@ -32,25 +32,21 @@ class KalenderAkademikController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tahun_ajaran' => 'required',
-            'file_kalender' => 'required|file|mimes:pdf,doc,docx|max:2048',
+            'judul' => 'required|string|max:255',
+            'photo_kalender' => 'required|file|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $data = [
-            'tahun_ajaran' => $request->tahun_ajaran,
-        ];
+        // Simpan file
+        $path = $request->file('photo_kalender')->store('kalender', 'public');
 
-        // Jika ada file diunggah
-        if ($request->hasFile('file_kalender')) {
-            $file = $request->file('file_kalender');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('kalenderAkademik', $filename, 'public');
-            $data['file_kalender'] = $filename;
-        }
+        KalenderAkademik::create([
+            'judul' => $request->judul,
+            'photo_kalender' => $path,
+        ]);
 
-        KalenderAkademik::create($data);
-        return redirect()->route('kalender_akademik.index')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->back()->with('success', 'Data berhasil disimpan.');
     }
+
 
     /**
      * Display the specified resource.
@@ -63,48 +59,37 @@ class KalenderAkademikController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(KalenderAkademik $kalenderAkademik)
-    {
-        return view('pages.kalenderAkademik.edit', compact('kalenderAkademik'));
-    }
+    public function edit(KalenderAkademik $kalenderAkademik) {}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, KalenderAkademik $kalenderAkademik)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'tahun_ajaran' => 'required',
-            'file_kalender' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'judul' => 'required|string|max:255',
+            'photo_kalender' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $data = [
-            'tahun_ajaran' => $request->tahun_ajaran,
-        ];
+        $kalender = KalenderAkademik::findOrFail($id);
 
-        // Jika ada file baru diunggah
-        if ($request->hasFile('file_kalender')) {
-            // Hapus file lama jika ada
-            if ($kalenderAkademik->file_kalender && Storage::disk('public')->exists('kalenderAkademik/' . $kalenderAkademik->file_kalender)) {
-                Storage::disk('public')->delete('kalenderAkademik/' . $kalenderAkademik->file_kalender);
-            }
-
-            $file = $request->file('file_kalender');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('kalenderAkademik', $filename, 'public');
-            $data['file_kalender'] = $filename;
+        if ($request->hasFile('photo_kalender')) {
+            $path = $request->file('photo_kalender')->store('kalender', 'public');
+            $kalender->photo_kalender = $path;
         }
 
-        $kalenderAkademik->update($data);
-        return redirect()->route('kalender_akademik.index')->with('success', 'Data berhasil diubah');
+        $kalender->judul = $request->judul;
+        $kalender->save();
+
+        return redirect()->back()->with('success', 'Data berhasil diperbarui.');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(KalenderAkademik $kalenderAkademik)
     {
-        $kalenderAkademik->delete();
-        return redirect()->route('kalender_akademik.index')->with('success', 'Data berhasil dihapus');
+        return view('404');
     }
 }

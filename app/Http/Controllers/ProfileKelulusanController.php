@@ -43,7 +43,7 @@ class ProfileKelulusanController extends Controller
         );
 
         ProfileKelulusan::create($request->all());
-        return redirect()->route('profile_kelulusan.index')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->route('admin.profile_kelulusan.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -82,7 +82,7 @@ class ProfileKelulusanController extends Controller
         );
 
         $profileKelulusan->update($request->all());
-        return redirect()->route('profile_kelulusan.index')->with('success', 'Data berhasil diubah');
+        return redirect()->route('admin.profile_kelulusan.index')->with('success', 'Data berhasil diubah');
     }
 
     /**
@@ -91,6 +91,6 @@ class ProfileKelulusanController extends Controller
     public function destroy(ProfileKelulusan $profileKelulusan)
     {
         $profileKelulusan->delete();
-        return redirect()->route('profile_kelulusan.index')->with('success', 'Data berhasil dihapus');
+        return redirect()->route('admin.profile_kelulusan.index')->with('success', 'Data berhasil dihapus');
     }
 }

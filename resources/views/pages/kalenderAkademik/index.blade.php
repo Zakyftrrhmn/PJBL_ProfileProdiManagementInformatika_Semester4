@@ -1,10 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.app') 
 @section('title', 'Kalender Akademik')
 @section('content')
-    
-        <div class="flex flex-wrap -mx-3">
-          <div class="flex-none w-full max-w-full px-3">
 
+<div class="flex flex-wrap -mx-3">
+    <div class="flex-none w-full max-w-full px-3">
             @if (session('success'))
               <div id="alert-3" class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
                 <svg class="shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -23,107 +22,74 @@
               </div>
             @endif
 
-            <div class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-              <div class="flex justify-between">
+
+        <div class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+
+            <div class="flex justify-between">
                 <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                  <h6 class="dark:text-white">Tabel @yield('title') </h6>
+                    <h6 class="dark:text-white">Form @yield('title')</h6>
                 </div>
-                <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                      <a href="{{ route('kalender_akademik.create') }}" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Tambah Data</a>
-                </div>
-              </div>
-              
-              <div class="flex-auto px-0 pt-5 pb-2">
-                <div class="p-4 overflow-x-auto">
-                  <table id="kalender_akademik_table" class="items-center justify-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
-                    <thead class="align-bottom">
-                      <tr>
-                        
-                        <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">No</th>
-                        <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Tahun Ajaran</th>
-                        <th class="px-6 py-3 font-bold uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 !text-center">File Kalender</th>
-                        <th class="px-6 py-3 font-bold uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 !text-center">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody class="border-t">
-                      @foreach ($kalenderAkademik as $ka)
-                      <tr>
-
-                        <td class=" align-middle bg-transparent">
-                          <div class="my-auto ">
-                            <h6 class="mb-0 text-sm leading-normal dark:text-white
-                                      max-w-xl
-                                      whitespace-normal break-words
-                                      text-justify">
-                                      {{ $loop->iteration }}
-                            </h6>
-                          </div>
-                        </td>
-                          
-                        <td class=" align-middle bg-transparent">
-                          <div class="my-auto">
-                            <h6 class="mb-0 text-sm leading-normal dark:text-white
-                                      max-w-xl
-                                      whitespace-normal break-words
-                                      text-justify">
-                                      {{ $ka->tahun_ajaran }}
-                            </h6>
-                          </div>
-                        </td>
-
-                        <td class="align-middle bg-transparent text-center">
-                          <div class="my-auto">                            
-                            @if ($ka->file_kalender)
-                              <a 
-                                href="{{ asset('storage/kalenderAkademik/' . $ka->file_kalender) }}" 
-                                download 
-                                class="text-blue-400 hover:text-white border border-blue-400 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:border-blue-300 dark:text-blue-300 dark:hover:text-white dark:hover:bg-blue-400 dark:focus:ring-blue-900"
-                              >
-                                <i class="fas fa-download mr-1"></i> Download File
-                              </a>
-                            @endif
-                          </div>
-                        </td>
-
-                        <td class="align-middle bg-transparent border-b-0 whitespace-nowrap shadow-transparent items-center ">
-                            <div class="flex space-x-1 justify-center">
-                                <a href="{{ route('kalender_akademik.edit', $ka) }}" class="text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900">
-                                <i class="fas fa-edit mr-1"></i> Edit
-                                </a>
-                                <form action="{{ route('kalender_akademik.destroy', $ka) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                                      <i class="fas fa-trash-alt mr-1"></i> Hapus
-                                    </button>
-                                </form>
-
-                            </div>
-                        </td>
-
-                      </tr>
-                      @endforeach
-                    </tbody>
-                  </table>
-                </div>
-              </div>
             </div>
-          </div>
+
+            <div class="flex-auto px-6 pt-5 pb-6">
+              <form 
+                    action="{{ isset($kalender) ? route('admin.kalender_akademik.update', $kalender->id) : route('admin.kalender_akademik.store') }}" 
+                    method="POST" 
+                    enctype="multipart/form-data"
+                >
+                    @csrf
+                    @if(isset($kalender))
+                        @method('PUT')
+                    @endif
+
+                    <div class="mb-4">
+                        <label for="judul" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">
+                            Judul Kalender <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" id="judul" name="judul" 
+                            value="{{ old('judul', $kalender->judul ?? '') }}" required
+                            class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('judul') border-red-500 dark:border-red-500 @enderror">
+                        
+                        @error('judul')
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="photo_kalender" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">
+                            Upload Photo Akademik <span class="text-red-500">*</span>
+                        </label>
+                        <input type="file" id="photo_kalender" name="photo_kalender" accept=".pdf,.doc,.docx,.jpg,.png"
+                            class="block w-full text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('photo_kalender') border-red-500 dark:border-red-500 @enderror">
+
+                        <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                            Format file yang diizinkan: .jpg, .jpeg, .png | Maksimal ukuran: 2MB
+                        </p>
+
+                        {{-- Tampilkan file lama jika sedang edit --}}
+                        @if(isset($kalender) && $kalender->photo_kalender)
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">
+                                Foto saat ini: <img src="{{ asset('storage/' . $kalender->photo_kalender) }}" alt="Foto kalender" class="h-40 mt-2 rounded">
+                            </p>
+                        @endif
+
+                        @error('photo_kalender')
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+
+                    <div class="flex justify-end">
+                        <button type="submit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 shadow-md">
+                            Simpan Data
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
         </div>
+    </div>
+</div>
 
 @endsection
-@push('scripts')
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        if (document.getElementById("kalender_akademik_table") && typeof simpleDatatables !== 'undefined' && typeof simpleDatatables.DataTable !== 'undefined') {
-            const dataTable = new simpleDatatables.DataTable("#kalender_akademik_table", {
-                paging: true,
-                perPage: 10,
-                perPageSelect: [5, 10, 15, 20, 25],
-                sortable: false
-            });
-        }
-    });
-</script>
-@endpush
-

@@ -9,7 +9,7 @@ class KalenderAkademik extends Model
     protected $table = 'kalender_akademik';
 
     protected $fillable = [
-        'tahun_ajaran',
-        'file_kalender',
+        'judul',
+        'photo_kalender',
     ];
 }

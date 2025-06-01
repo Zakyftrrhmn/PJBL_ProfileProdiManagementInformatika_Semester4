@@ -12,7 +12,7 @@
     <link rel="icon" type="image/png" href="{{asset('assets/img/logo.png')}}"/>
 
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body class="bg-slate-50 text-slate-800 antialiased ">
 
     @yield('content')
 

@@ -29,14 +29,14 @@ class RoleController extends Controller
 
         Role::create(['name' => $request->name]);
 
-        return redirect()->route('roles.index')->with('success', 'Role dibuat.');
+        return redirect()->route('admin.roles.index')->with('success', 'Role dibuat.');
     }
 
     public function edit(Role $role)
     {
 
         if ($role->name === 'Superadmin') {
-            return redirect()->route('roles.index')->with('error', 'Role Superadmin tidak dapat diubah.');
+            return redirect()->route('admin.roles.index')->with('error', 'Role Superadmin tidak dapat diubah.');
         }
 
         $permissions = Permission::all();
@@ -47,22 +47,22 @@ class RoleController extends Controller
     {
 
         if ($role->name === 'Superadmin') {
-            return redirect()->route('roles.index')->with('error', 'Role Superadmin tidak dapat diubah.');
+            return redirect()->route('admin.roles.index')->with('error', 'Role Superadmin tidak dapat diubah.');
         }
 
 
         $request->validate(['name' => 'required']);
         $role->update(['name' => $request->name]);
-        return redirect()->route('roles.index')->with('success', 'Nama role diperbarui.');
+        return redirect()->route('admin.roles.index')->with('success', 'Nama role diperbarui.');
     }
 
     public function destroy(Role $role)
     {
         if ($role->name === 'Superadmin') {
-            return redirect()->route('roles.index')->with('error', 'Role Superadmin tidak dapat dihapus.');
+            return redirect()->route('admin.roles.index')->with('error', 'Role Superadmin tidak dapat dihapus.');
         }
         $role->delete();
-        return redirect()->route('roles.index')->with('success', 'Role dihapus.');
+        return redirect()->route('admin.roles.index')->with('success', 'Role dihapus.');
     }
 
     public function editPermissions(Role $role)
@@ -74,6 +74,6 @@ class RoleController extends Controller
     public function updatePermissions(Request $request, Role $role)
     {
         $role->syncPermissions($request->permissions);
-        return redirect()->route('roles.index')->with('success', 'Permission role diperbarui.');
+        return redirect()->route('admin.roles.index')->with('success', 'Permission role diperbarui.');
     }
 }

@@ -13,7 +13,7 @@
             </div>
 
             <div class="flex-auto px-6 pt-5 pb-6">
-                <form action="{{ route('roles.permissions.update', $role->id) }}" method="POST">
+                <form action="{{ route('admin.roles.permissions.update', $role->id) }}" method="POST">
                     @csrf
                     @method('PUT')
 
@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="flex justify-end">
-                        <a href="{{ route('roles.index') }}" class="mr-2 text-slate-700 dark:text-white border border-slate-300 hover:bg-slate-100 dark:border-slate-500 dark:hover:bg-slate-700 font-medium rounded-lg text-sm px-4 py-2">
+                        <a href="{{ route('admin.roles.index') }}" class="mr-2 text-slate-700 dark:text-white border border-slate-300 hover:bg-slate-100 dark:border-slate-500 dark:hover:bg-slate-700 font-medium rounded-lg text-sm px-4 py-2">
                             Kembali
                         </a>
                         <button type="submit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 shadow-md">

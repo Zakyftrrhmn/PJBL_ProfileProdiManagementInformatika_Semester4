@@ -14,7 +14,7 @@ class KurikulumController extends Controller
      */
     public function index()
     {
-        $kurikulum = Kurikulum::all();
+        $kurikulum = Kurikulum::orderBy('semester')->get();
         return view('pages.kurikulum.index', compact('kurikulum'));
     }
 
@@ -31,28 +31,41 @@ class KurikulumController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'tahun_kurikulum' => 'required|integer',
-            'nama_kurikulum' => 'required|string|max:255',
-            'file_kurikulum' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        $request->validate(
+            [
+                'kode_mk' => 'required|string|max:10|unique:kurikulum,kode_mk',
+                'mata_kuliah' => 'required|string|max:255',
+                'bentuk_perkuliahan' => 'required|string|max:255',
+                'sks' => 'required|string|max:255',
+                'rps' => 'required|file|mimes:pdf,doc,docx',
+                'semester' => 'required|string|max:10',
+            ],
+            [
+                'kode_mk.required' => 'Kode MK harus diisi',
+                'mata_kuliah.required' => 'Mata kuliah harus diisi',
+                'bentuk_perkuliahan.required' => 'Bentuk perkuliahan harus diisi',
+                'sks.required' => 'SKS harus diisi',
+                'rps.required' => 'RPS harus diisi',
+                'semester.required' => 'Semester harus diisi',
+                'kode_mk.unique' => 'Kode MK sudah terdaftar',
+                'rps.mimes' => 'Format file RPS harus PDF, DOC, atau DOCX',
+            ]
+        );
+
+        $file = $request->file('rps');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->storeAs('kurikulum', $filename, 'public');
+
+        Kurikulum::create([
+            'kode_mk' => $request->kode_mk,
+            'mata_kuliah' => $request->mata_kuliah,
+            'bentuk_perkuliahan' => $request->bentuk_perkuliahan,
+            'sks' => $request->sks,
+            'rps' => $filename,
+            'semester' => $request->semester,
         ]);
 
-        $data = [
-            'tahun_kurikulum' => $request->tahun_kurikulum,
-            'nama_kurikulum' => $request->nama_kurikulum,
-        ];
-
-        // Jika ada file diunggah
-        if ($request->hasFile('file_kurikulum')) {
-            $file = $request->file('file_kurikulum');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('kurikulum', $filename, 'public');
-            $data['file_kurikulum'] = $filename;
-        }
-
-        Kurikulum::create($data);
-
-        return redirect()->route('kurikulum.index')->with('success', 'Data kurikulum berhasil ditambahkan.');
+        return redirect()->route('admin.kurikulum.index')->with('success', 'Data kurikulum berhasil ditambahkan.');
     }
 
 
@@ -75,36 +88,56 @@ class KurikulumController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Kurikulum $kurikulum)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'tahun_kurikulum' => 'required|integer',
-            'nama_kurikulum' => 'required|string|max:255',
-            'file_kurikulum' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-        ]);
+        $kurikulum = Kurikulum::findOrFail($id);
+
+        $request->validate(
+            [
+                'kode_mk' => 'required|string|max:10|unique:kurikulum,kode_mk,' . $kurikulum->id,
+                'mata_kuliah' => 'required|string|max:255',
+                'bentuk_perkuliahan' => 'required|string|max:255',
+                'sks' => 'required|string|max:255',
+                'rps' => 'nullable|file|mimes:pdf,doc,docx',
+                'semester' => 'required|string|max:10',
+            ],
+            [
+                'kode_mk.required' => 'Kode MK harus diisi',
+                'mata_kuliah.required' => 'Mata kuliah harus diisi',
+                'bentuk_perkuliahan.required' => 'Bentuk perkuliahan harus diisi',
+                'sks.required' => 'SKS harus diisi',
+                'semester.required' => 'Semester harus diisi',
+                'kode_mk.unique' => 'Kode MK sudah terdaftar',
+                'rps.mimes' => 'Format file RPS harus PDF, DOC, atau DOCX',
+            ]
+        );
 
         $data = [
-            'tahun_kurikulum' => $request->tahun_kurikulum,
-            'nama_kurikulum' => $request->nama_kurikulum,
+            'kode_mk' => $request->kode_mk,
+            'mata_kuliah' => $request->mata_kuliah,
+            'bentuk_perkuliahan' => $request->bentuk_perkuliahan,
+            'sks' => $request->sks,
+            'semester' => $request->semester,
         ];
 
         // Jika ada file baru diunggah
-        if ($request->hasFile('file_kurikulum')) {
+        if ($request->hasFile('rps')) {
             // Hapus file lama jika ada
-            if ($kurikulum->file_kurikulum && Storage::disk('public')->exists('kurikulum/' . $kurikulum->file_kurikulum)) {
-                Storage::disk('public')->delete('kurikulum/' . $kurikulum->file_kurikulum);
+            if ($kurikulum->rps && Storage::disk('public')->exists('kurikulum/' . $kurikulum->rps)) {
+                Storage::disk('public')->delete('kurikulum/' . $kurikulum->rps);
             }
 
-            $file = $request->file('file_kurikulum');
+            $file = $request->file('rps');
             $filename = time() . '_' . $file->getClientOriginalName();
             $file->storeAs('kurikulum', $filename, 'public');
-            $data['file_kurikulum'] = $filename;
+            $data['rps'] = $filename;
         }
 
         $kurikulum->update($data);
 
-        return redirect()->route('kurikulum.index')->with('success', 'Data kurikulum berhasil diperbarui.');
+        return redirect()->route('admin.kurikulum.index')->with('success', 'Data kurikulum berhasil diperbarui.');
     }
+
 
 
     /**
@@ -113,6 +146,6 @@ class KurikulumController extends Controller
     public function destroy(Kurikulum $kurikulum)
     {
         $kurikulum->delete();
-        return redirect()->route('kurikulum.index')->with('success', 'Data kurikulum berhasil dihapus.');
+        return redirect()->route('admin.kurikulum.index')->with('success', 'Data kurikulum berhasil dihapus.');
     }
 }

@@ -1,6 +1,11 @@
 @include('includes.header')
 
   <body class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
+
+    @include('includes.loading')
+
+
+
     <div class="absolute w-full bg-blue-500 dark:hidden min-h-75"></div>
 
     @include('includes.sidebar')
@@ -9,7 +14,7 @@
 
       @include('includes.navbar')
 
-      <div class="w-full px-6 py-6 mx-auto">
+      <div class="w-full px-6 py-6 mx-auto overflow-hidden">
         <!-- table 1 -->
         @yield('content')
 
@@ -17,6 +22,11 @@
       </div>
     </main>
 
-@include('includes.scripts')
-@stack('scripts')
+    @include('includes.scripts')
+
+    @stack('scripts')
+
+  </body>
+
+</html>
 

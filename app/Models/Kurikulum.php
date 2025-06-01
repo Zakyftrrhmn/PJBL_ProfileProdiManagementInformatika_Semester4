@@ -8,5 +8,12 @@ class Kurikulum extends Model
 {
     protected $table = 'kurikulum';
 
-    protected $fillable = ['tahun_kurikulum', 'nama_kurikulum', 'file_kurikulum'];
+    protected $fillable = [
+        'kode_mk',
+        'mata_kuliah',
+        'bentuk_perkuliahan',
+        'sks',
+        'rps',
+        'semester',
+    ];
 }

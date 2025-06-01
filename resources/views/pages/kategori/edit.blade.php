@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Edit Data Deskripsi')
+@section('title', 'Edit Data Kategori')
 @section('content')
 
 <div class="flex flex-wrap -mx-3">
@@ -13,13 +13,13 @@
             </div>
 
             <div class="flex-auto px-6 pt-5 pb-6">
-                <form action="{{ route('kategori.update', $kategori) }}" method="POST">
+                <form action="{{ route('admin.kategori_informasi.update', $kategori_informasi) }}" method="POST">
                     @method('PUT')
                     @csrf
 
                     <div class="mb-4">
-                        <label for="nama_kategori" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Nama Kategori</label>
-                        <input type="text" id="nama_kategori" name="nama_kategori" rows="4" class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 dark:placeholder-slate-400 dark:focus:ring-blue-500 @error('nama_kategori') border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500 @enderror" required value="{{ $kategori->nama_kategori }}">
+                        <label for="nama_kategori" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Nama Kategori <span class="text-red-500">*</span></label>
+                        <input type="text" id="nama_kategori" name="nama_kategori" rows="4" class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 dark:placeholder-slate-400 dark:focus:ring-blue-500 @error('nama_kategori') border-red-500 focus:ring-red-500 dark:border-red-500 dark:focus:ring-red-500 @enderror" required value="{{ $kategori_informasi->nama_kategori }}">
 
                         @error('nama_kategori')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
@@ -28,7 +28,7 @@
 
 
                     <div class="flex justify-end">
-                        <a href="{{ route('kategori.index') }}" class="mr-2 text-slate-700 dark:text-white border border-slate-300 hover:bg-slate-100 dark:border-slate-500 dark:hover:bg-slate-700 font-medium rounded-lg text-sm px-4 py-2">
+                        <a href="{{ route('admin.kategori_informasi.index') }}" class="mr-2 text-slate-700 dark:text-white border border-slate-300 hover:bg-slate-100 dark:border-slate-500 dark:hover:bg-slate-700 font-medium rounded-lg text-sm px-4 py-2">
                             Kembali
                         </a>
                         <button type="submit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 shadow-md">

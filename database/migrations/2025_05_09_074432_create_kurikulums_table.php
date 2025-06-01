@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('kurikulum', function (Blueprint $table) {
             $table->id();
-            $table->integer('tahun_kurikulum');
-            $table->string('nama_kurikulum');
-            $table->string('file_kurikulum');
+            $table->integer('kode_mk')->unique();
+            $table->string('mata_kuliah');
+            $table->string('bentuk_perkuliahan');
+            $table->string('sks');
+            $table->string('rps');
+            $table->string('semester');
             $table->softDeletes();
             $table->timestamps();
         });

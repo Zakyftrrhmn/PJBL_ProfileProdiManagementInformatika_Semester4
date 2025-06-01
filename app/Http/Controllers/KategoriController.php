@@ -13,8 +13,8 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $kategori = Kategori::all();
-        return view('pages.kategori.index', compact('kategori'));
+        $kategori_informasi = Kategori::all();
+        return view('pages.kategori.index', compact('kategori_informasi'));
     }
 
     /**
@@ -42,13 +42,13 @@ class KategoriController extends Controller
         );
 
         Kategori::create($request->all());
-        return redirect()->route('kategori.index')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->route('admin.kategori_informasi.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Kategori $kategori)
+    public function show(Kategori $kategori_informasi)
     {
         return view('404');
     }
@@ -56,16 +56,16 @@ class KategoriController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Kategori $kategori)
+    public function edit(Kategori $kategori_informasi)
     {
-        $kategori = Kategori::find($kategori->id);
-        return view('pages.kategori.edit', compact('kategori'));
+        $kategori_informasi = Kategori::find($kategori_informasi->id);
+        return view('pages.kategori.edit', compact('kategori_informasi'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Kategori $kategori)
+    public function update(Request $request, Kategori $kategori_informasi)
     {
         $request->validate(
             [
@@ -78,16 +78,16 @@ class KategoriController extends Controller
             ]
         );
 
-        $kategori->update($request->all());
-        return redirect()->route('kategori.index')->with('success', 'Data berhasil diubah');
+        $kategori_informasi->update($request->all());
+        return redirect()->route('admin.kategori_informasi.index')->with('success', 'Data berhasil diubah');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kategori $kategori)
+    public function destroy(Kategori $kategori_informasi)
     {
-        $kategori->delete();
-        return redirect()->route('kategori.index')->with('success', 'Data berhasil dihapus');
+        $kategori_informasi->delete();
+        return redirect()->route('admin.kategori_informasi.index')->with('success', 'Data berhasil dihapus');
     }
 }

@@ -23,15 +23,10 @@
         <ul class="flex flex-col pl-0 mb-0">
 
 
-            @if (\App\Helpers\PermissionHelpers::canAny(['kurikulum', 'dosen', 'modul-perkuliahan', 'kalender-akademik', 'silabus']))
-
-            <li class="mt-3 mb-3 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider pointer-events-none select-none">
-            Perkuliahan
-            </li>
 
             @can('kurikulum')
             <li class="mt-0.5 w-full">
-                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('kurikulum*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : ''}}" href="/kurikulum">
+                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/kurikulum*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : ''}}" href="{{route('admin.kurikulum.index')}}">
                 <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center text-center xl:p-2.5">
                     <i class="ni ni-book-bookmark text-slate-700 text-sm leading-normal dark:text-white"></i>
                 </div>
@@ -42,40 +37,18 @@
 
             @can('dosen')
             <li class="mt-0.5 w-full">
-                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('dosen*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : ''}} " href="/dosen">
+                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/dosen*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : ''}} " href="{{route('admin.dosen.index')}}">
                 <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center text-center xl:p-2.5">
-                    <i class="ni ni-hat-3 text-slate-700 text-sm leading-normal dark:text-white"></i>
+                    <i class="ni ni-single-02 text-slate-700 text-sm leading-normal dark:text-white"></i>
                 </div>
                 <span class="ml-1">Dosen</span>
                 </a>
             </li>
             @endcan
 
-            @can('modul-perkuliahan')
-            <li class="mt-0.5 w-full">
-                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('modul_perkuliahan*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : ''}} " href="/modul_perkuliahan">
-                <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center text-center xl:p-2.5">
-                    <i class="ni ni-collection text-slate-700 text-sm leading-normal dark:text-white"></i>
-                </div>
-                <span class="ml-1">Modul Perkuliahan</span>
-                </a>
-            </li>
-            @endcan
-
-            @can('silabus')
-            <li class="mt-0.5 w-full">
-                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('silabus*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }}" href="/silabus">
-                <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center text-center xl:p-2.5">
-                    <i class="ni ni-folder-17 text-slate-700 text-sm leading-normal dark:text-white"></i>
-                </div>
-                <span class="ml-1">Silabus</span>
-                </a>
-            </li>
-            @endcan
-
             @can('kalender-akademik')
             <li class="mt-0.5 w-full">
-                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('kalender_akademik*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }} " href="/kalender_akademik">
+                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/kalender_akademik*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }} " href="{{route('admin.kalender_akademik.index')}}">
                 <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center text-center xl:p-2.5">
                     <i class="ni ni-calendar-grid-58 text-slate-700 text-sm leading-normal dark:text-white"></i>
                 </div>
@@ -83,126 +56,236 @@
                 </a>
             </li>
             @endcan
-            @endif
 
-           
-            @can('management-access')
-
-            <li class="mt-3 mb-1 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider pointer-events-none select-none">
-            MANAJEMEN AKSES
-            </li>
+            @can('akreditasi')
             <li class="mt-0.5 w-full">
-                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('users*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }} " href="/users">
+                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/akreditasi*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }} " href="{{route('admin.akreditasi.index')}}">
                 <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center text-center xl:p-2.5">
-                    <i class="ni ni-single-02 text-slate-700 text-sm leading-normal dark:text-white"></i>
+                    <i class="ni ni-badge text-slate-700 text-sm leading-normal dark:text-white"></i>
                 </div>
-                <span class="ml-1">User</span>
-                </a>
-            </li>
-            <li class="mt-0.5 w-full">
-                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('permissions*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }} " href="/permissions">
-                <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center text-center xl:p-2.5">
-                    <i class="ni ni-key-25 text-slate-700 text-sm leading-normal dark:text-white"></i>
-                </div>
-                <span class="ml-1">Permission</span>
-                </a>
-            </li>
-
-            <li class="mt-0.5 w-full">
-                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('roles*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }} " href="/roles">
-                <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center text-center xl:p-2.5">
-                    <i class="ni ni-settings-gear-65 text-slate-700 text-sm leading-normal dark:text-white"></i>
-                </div>
-                <span class="ml-1">Role</span>
-                </a>
-            </li>
-            
-            @endcan
-
-            
-
-            @if (\App\Helpers\PermissionHelpers::canAny(['deskripsi', 'visi-misi', 'hubungi-kami', 'artikel', 'kategori', 'galeri', 'profile-kelulusan']))
-            <li class="mt-3 mb-3 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider pointer-events-none select-none">
-            PAGES
-            </li>
-
-            @can('deskripsi')
-            <li class="mt-0.5 w-full">
-                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg  {{ Request::is('deskripsi*') ? 'bg-blue-500/15 font-semibold text-slate-700 rounded-lg' : '' }}" href="/deskripsi">
-                <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                    <i class="ni ni-single-copy-04 text-slate-700 text-sm leading-normal dark:text-white"></i>
-                </div>
-                <span class="ml-1">Deskripsi</span>
-                </a>
-            </li>
-            @endcan
-
-            @can('visi-misi')
-            <li class="mt-0.5 w-full">
-                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('visi_misi*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : ''}}" href="/visi_misi">
-                <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center text-center xl:p-2.5">
-                    <i class="ni ni-world-2 text-slate-700 text-sm leading-normal dark:text-white"></i>
-                </div>
-                <span class="ml-1">Visi & Misi</span>
-                </a>
-            </li>
-            @endcan
-
-            @can('hubungi-kami')
-            <li class="mt-0.5 w-full">
-                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{  Request::is('hubungi_kami*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : ''}} " href="/hubungi_kami">
-                <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center text-center xl:p-2.5">
-                    <i class="ni ni-mobile-button text-slate-700 text-sm leading-normal dark:text-white"></i>
-                </div>
-                <span class="ml-1">Pesan Masuk</span>
-                </a>
-            </li>
-            @endcan
-
-            @can('artikel')
-            <li class="mt-0.5 w-full">
-                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('artikel*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }} " href="/artikel">
-                <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center text-center xl:p-2.5">
-                    <i class="ni ni-notification-70 text-slate-700 text-sm leading-normal dark:text-white"></i>
-                </div>
-                <span class="ml-1">Artikel</span>
-                </a>
-            </li>
-            @endcan
-
-            @can('kategori')
-            <li class="mt-0.5 w-full">
-                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('kategori*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }} " href="/kategori">
-                <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center text-center xl:p-2.5">
-                    <i class="ni ni-tag text-slate-700 text-sm leading-normal dark:text-white"></i>
-                </div>
-                <span class="ml-1">Kategori</span>
-                </a>
-            </li>
-            @endcan
-
-            @can('galeri')
-            <li class="mt-0.5 w-full">
-                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('galeri*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }} " href="/galeri">
-                <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center text-center xl:p-2.5">
-                    <i class="ni ni-image text-slate-700 text-sm leading-normal dark:text-white"></i>
-                </div>
-                <span class="ml-1">Galeri</span>
+                <span class="ml-1">akreditasi</span>
                 </a>
             </li>
             @endcan
 
             @can('profile-kelulusan')
             <li class="mt-0.5 w-full">
-                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('profile_kelulusan*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }}" href="/profile_kelulusan">
+                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/profile_kelulusan*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }} " href="{{route('admin.profile_kelulusan.index')}}">
                 <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center text-center xl:p-2.5">
-                    <i class="ni ni-badge text-slate-700 text-sm leading-normal dark:text-white"></i>
+                    <i class="ni ni-briefcase-24 text-slate-700 text-sm leading-normal dark:text-white"></i>
                 </div>
-                <span class="ml-1">Profil Kelulusan</span>
+                <span class="ml-1">Profile Lulusan</span>
                 </a>
             </li>
             @endcan
-            @endif
+
+            @can('laporan_kepuasan')
+            <li class="mt-0.5 w-full">
+                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/laporan_kepuasan*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }} " href="{{route('admin.laporan_kepuasan.index')}}">
+                <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center text-center xl:p-2.5">
+                    <i class="ni ni-satisfied text-slate-700 text-sm leading-normal dark:text-white"></i>
+                </div>
+                <span class="ml-1">Laporan Kepuasan</span>
+                </a>
+            </li>
+            @endcan
+            
+            @can('gallery')
+            <li class="mt-0.5 w-full">
+                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/gallery*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }} " href="{{route('admin.gallery.index')}}">
+                <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center text-center xl:p-2.5">
+                    <i class="ni ni-image text-slate-700 text-sm leading-normal dark:text-white"></i>
+                </div>
+                <span class="ml-1">Gallery</span>
+                </a>
+            </li>
+            @endcan
+
+            @can('prestasi_mahasiswa')
+            <li class="mt-0.5 w-full">
+                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/prestasi_mahasiswa*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }} " href="{{route('admin.prestasi_mahasiswa.index')}}">
+                <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center text-center xl:p-2.5">
+                    <i class="ni ni-trophy text-slate-700 text-sm leading-normal dark:text-white"></i>
+                </div>
+                <span class="ml-1">Prestasi Mahasiswa</span>
+                </a>
+            </li>
+            @endcan
+
+            @can('karya_mahasiswa')
+            <li x-data="{ open: {{ Request::is('admin/karya_mahasiswa*') || Request::is('admin/kategori_karya*') ? 'true' : 'false' }} }" class="mt-0.5 w-full px-2">
+                <!-- Bungkus button dalam rounded div -->
+                <div class="rounded-lg overflow-hidden">
+                    <button @click="open = !open" class="w-full py-2 text-sm ease-nav-brand flex items-center justify-between whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700">
+                        <div class="flex items-center">
+                            <div class="mr-2 flex h-8 w-8 items-center justify-center bg-center text-center xl:p-2.5">
+                                <i class="ni ni-bulb-61	 text-slate-700 text-sm leading-normal dark:text-white"></i>
+                            </div>
+                            <span class="ml-1">Karya Mahasiswa</span>
+                        </div>
+                        <svg :class="{ 'rotate-180': open }" class="w-4 h-4 ml-auto transition-transform transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Dropdown Items -->
+                <ul x-show="open" x-transition x-cloak class="ml-6 mt-1 space-y-1">
+                    <li>
+                        <a href="{{route('admin.karya_mahasiswa.index')}}" class="py-2 text-sm ease-nav-brand flex items-center gap-2 px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/karya_mahasiswa*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }}">
+                            <i class="ni ni-bullet-list-67 text-slate-700 text-sm leading-normal dark:text-white"></i>
+                            <span>Daftar Karya  </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.kategori_karya.index')}}" class="py-2 text-sm ease-nav-brand flex items-center gap-2 px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/kategori_karya*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }}">
+                            <i class="ni ni-tag text-slate-700 text-sm leading-normal dark:text-white"></i>
+                            <span>Kategori Karya</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            @endcan
+
+
+            @can('publish')
+            <li x-data="{ open: {{ Request::is('admin/informasi*') || Request::is('admin/kategori_informasi*') ? 'true' : 'false' }} }" class="mt-0.5 w-full px-2">
+                <!-- Bungkus button dalam rounded div -->
+                <div class="rounded-lg overflow-hidden">
+                    <button @click="open = !open" class="w-full py-2 text-sm ease-nav-brand flex items-center justify-between whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700">
+                        <div class="flex items-center">
+                            <div class="mr-2 flex h-8 w-8 items-center justify-center bg-center text-center xl:p-2.5">
+                                <i class="ni ni-single-copy-04	 text-slate-700 text-sm leading-normal dark:text-white"></i>
+                            </div>
+                            <span class="ml-1">Publish</span>
+                        </div>
+                        <svg :class="{ 'rotate-180': open }" class="w-4 h-4 ml-auto transition-transform transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Dropdown Items -->
+                <ul x-show="open" x-transition x-cloak class="ml-6 mt-1 space-y-1">
+                    <li>
+                        <a href="{{route('admin.informasi.index')}}" class="py-2 text-sm ease-nav-brand flex items-center gap-2 px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/informasi*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }}">
+                            <i class="ni ni-notification-70 text-slate-700 text-sm leading-normal dark:text-white"></i>
+                            <span>Informasi</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.kategori_informasi.index')}}" class="py-2 text-sm ease-nav-brand flex items-center gap-2 px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/kategori*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }}">
+                            <i class="ni ni-tag text-slate-700 text-sm leading-normal dark:text-white"></i>
+                            <span>Kategori</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            @endcan
+            
+            @can('manajemen_konten')
+            <li x-data="{ open: {{ Request::is('admin/visi*') || Request::is('admin/misi*') || Request::is('admin/alasan*') || Request::is('admin/kontak*') || Request::is('admin/pesan*') || Request::is('admin/frontside*') ? 'true' : 'false' }} }" class="mt-0.5 w-full px-2">
+                <div class="rounded-lg overflow-hidden">
+                    <button @click="open = !open" class="w-full py-2 text-sm ease-nav-brand flex items-center justify-between whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700">
+                        <div class="flex items-center">
+                            <div class="mr-2 flex h-8 w-8 items-center justify-center bg-center text-center xl:p-2.5">
+                                <i class="ni ni-collection text-slate-700 text-sm leading-normal dark:text-white"></i>
+                            </div>
+                            <span class="ml-1">Manajemen Konten</span>
+                        </div>
+                        <svg :class="{ 'rotate-180': open }" class="w-4 h-4 ml-auto transition-transform transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Submenu Dropdown -->
+                <ul x-show="open" x-transition x-cloak class="ml-6 mt-1 space-y-1">
+                    <li>
+                        <a href="{{ route('admin.visi.index') }}" class="py-2 text-sm flex items-center gap-2 px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/visi*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }}">
+                            <i class="ni ni-ungroup text-slate-700 text-sm dark:text-white"></i>
+                            <span>Visi</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.misi.index') }}" class="py-2 text-sm flex items-center gap-2 px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/misi*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }}">
+                            <i class="ni ni-compass-04 text-slate-700 text-sm dark:text-white"></i>
+                            <span>Misi</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.alasan_bergabung.index') }}" class="py-2 text-sm flex items-center gap-2 px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/alasan_bergabung*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }}">
+                            <i class="ni ni-chat-round text-slate-700 text-sm dark:text-white"></i>
+                            <span>Alasan Bergabung</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.kontak.index') }}" class="py-2 text-sm flex items-center gap-2 px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/kontak*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }}">
+                            <i class="ni ni-email-83 text-slate-700 text-sm dark:text-white"></i>
+                            <span>Kontak Kami</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 text-sm flex items-center gap-2 px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/pesan*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }}">
+                            <i class="ni ni-send text-slate-700 text-sm dark:text-white"></i>
+                            <span>Pesan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="py-2 text-sm flex items-center gap-2 px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/frontside*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }}">
+                            <i class="ni ni-world text-slate-700 text-sm dark:text-white"></i>
+                            <span>Frontside</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            @endcan
+
+            @can('management-access')
+
+            <li x-data="{ open: {{ Request::is('admin/users*') || Request::is('admin/permissions*') || Request::is('admin/roles*') ? 'true' : 'false' }} }" class="mt-0.5 max-w-full  mx-2">
+
+                <!-- Trigger Dropdown -->
+                <button @click="open = !open" class="w-full py-2 text-sm ease-nav-brand my-0 flex items-center justify-between whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg">
+                    <div class="flex items-center">
+                        <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center text-center xl:p-2.5">
+                            <i class="ni ni-lock-circle-open text-slate-700 text-sm leading-normal dark:text-white"></i>
+                        </div>
+                        <span class="ml-1">Manajemen Akses</span>
+                    </div>
+                    <!-- Chevron icon -->
+                    <svg :class="{ 'rotate-180': open }" class="w-4 h-4 ml-auto transition-transform transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+
+                <!-- Dropdown Items -->
+                <ul x-show="open" x-transition x-cloak class="ml-6 mt-1 space-y-1">
+                    <li>
+                        <a class="py-2 text-sm ease-nav-brand flex items-center gap-2 whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/users*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }}"
+                            href="{{route('admin.users.index')}}">
+                            <i class="ni ni-single-02 text-slate-700 text-sm leading-normal dark:text-white"></i>
+                            <span>User</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="py-2 text-sm ease-nav-brand flex items-center gap-2 whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/permissions*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }}"
+                            href="{{route('admin.permissions.index')}}">
+                            <i class="ni ni-key-25 text-slate-700 text-sm leading-normal dark:text-white"></i>
+                            <span>Permission</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="py-2 text-sm ease-nav-brand flex items-center gap-2 whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/roles*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }}"
+                            href="{{route('admin.roles.index')}}">
+                            <i class="ni ni-settings-gear-65 text-slate-700 text-sm leading-normal dark:text-white"></i>
+                            <span>Role</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            @endcan
+
         </ul>
 
 
