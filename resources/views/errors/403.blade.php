@@ -1,6 +1,4 @@
-@extends('layouts.app')
-@section('title', 'Akses Ditolak')
-@section('content')
+
 <section class="bg-white dark:bg-gray-900">
     <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
         <div class="mx-auto max-w-screen-sm text-center">
@@ -9,10 +7,6 @@
             <p class="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
                 Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.
             </p>
-            <a href="{{ url()->previous() }}" class="inline-flex text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-red-900 my-4">
-                Kembali ke Beranda
-            </a>
         </div>   
     </div>
 </section>
-@endsection

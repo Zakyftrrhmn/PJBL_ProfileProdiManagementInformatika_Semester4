@@ -10,6 +10,7 @@ class AuthController extends Controller
 {
     // Mapping permission ke route yang sesuai
     protected $permissionRoutes = [
+        'dashboard'             => '/admin/dashboard',
         'kurikulum'             => '/admin/kurikulum',
         'dosen'                 => '/admin/dosen',
         'kalender-akademik'     => '/admin/kalender_akademik',

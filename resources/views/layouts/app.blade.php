@@ -6,7 +6,7 @@
 
 
 
-    <div class="absolute w-full bg-blue-500 dark:hidden min-h-75"></div>
+    <div class="fixed w-full bg-[#5E72E2] dark:hidden min-h-75"></div>
 
     @include('includes.sidebar')
 
@@ -14,7 +14,7 @@
 
       @include('includes.navbar')
 
-      <div class="w-full px-6 py-6 mx-auto overflow-hidden">
+      <div class="w-full px-6 py-6 mx-auto">
         <!-- table 1 -->
         @yield('content')
 

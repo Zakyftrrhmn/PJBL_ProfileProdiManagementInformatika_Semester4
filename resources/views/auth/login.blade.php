@@ -4,15 +4,15 @@
 @section('content')
 <div class="flex h-screen w-full bg-[#1e1e2f] px-3 py-2">
   <!-- Left Section -->
-  <div class="hidden md:flex w-1/2  items-center justify-center bg-[#1e1e2f] ">
-    <img src="{{ asset('assets/img/logo-dark.png') }}" alt="Logo" class="w-2/3 animate-fade-in" />
+ <div class="hidden md:flex w-1/2 items-center justify-center p-8">
+    <img src="{{ asset('assets/img/logo-dark.png') }}" alt="Logo" class="w-2/3 max-w-xs animate-fade-in" />
   </div>
 
   <!-- Right Section -->
   <div class="w-full md:w-1/2 flex items-center justify-center bg-[#1e1e2f]">
     <div class="w-full max-w-md px-6 sm:px-10 py-10 bg-[#1e1e2f] text-white rounded-xl shadow-lg md:shadow-white/10 animate-slide-up">
       <div class="text-center mb-6">
-        <h2 class="text-3xl font-bold text-white">Welcome Back</h2>
+        <h2 class="text-3xl font-bold text-white">Welcome</h2>
         <p class="text-sm text-gray-400 mt-2">Please login to continue</p>
       </div>
 

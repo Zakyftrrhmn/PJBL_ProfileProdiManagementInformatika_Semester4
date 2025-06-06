@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <a href="{{ route('hubungi_kami.index') }}" class="text-slate-700 dark:text-white border border-slate-300 hover:bg-slate-100 dark:border-slate-500 dark:hover:bg-slate-700 font-medium rounded-lg text-sm px-4 py-2">
+                    <a href="{{ route('admin.hubungi_kami.index') }}" class="text-slate-700 dark:text-white border border-slate-300 hover:bg-slate-100 dark:border-slate-500 dark:hover:bg-slate-700 font-medium rounded-lg text-sm px-4 py-2">
                         Kembali
                     </a>
                 </div>

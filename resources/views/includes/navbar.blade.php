@@ -15,10 +15,10 @@
           class="text-sm pl-2 capitalize leading-normal text-white before:float-left before:pr-2 before:text-white before:content-['/']"
           aria-current="page"
         >
-          Tables
+          @yield('title')
         </li>
       </ol>
-      <h6 class="mb-0 font-bold text-white capitalize">Tables</h6>
+      <h6 class="mb-0 font-bold text-white capitalize">@yield('title')</h6>
     </nav>
 
     <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('thumbnail');
             $table->longText('judul');
+            $table->string('slug')->unique();
             $table->string('isi');
             $table->integer('tahun');
             $table->foreignId('kategori_id')->constrained('kategori_karya')->onDelete('cascade');

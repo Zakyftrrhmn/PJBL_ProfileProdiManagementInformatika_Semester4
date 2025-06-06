@@ -1,6 +1,6 @@
     
     <div id="transition-overlay"
-        class="fixed top-0 left-0 w-full h-full z-[9999] pointer-events-none opacity-0 scale-95 rotate-0 bg-blue-500 transition-all duration-700 ease-in-out transform origin-center flex items-center justify-center text-white text-center active">
+        class="fixed top-0 left-0 w-full h-full z-[9999] pointer-events-none opacity-0 scale-95 rotate-0 bg-[#5E72E2] transition-all duration-300 ease-in-out transform origin-center flex items-center justify-center text-white text-center active">
         
     <div class="flex flex-col items-center space-y-2 animate-fade-in">
         <img src="{{ asset('assets/img/logo-dark.png') }}" alt="Logo" class="w-20 h-20 animate-pulse">

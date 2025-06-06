@@ -46,7 +46,7 @@
 
                   {{-- Tahun --}}
                     <div class="mb-4">
-                        <label for="tahun" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Tahun <span class="text-red-500">*</span></label>
+                        <label for="tahun" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Tahun Pembuatan <span class="text-red-500">*</span></label>
                         <select id="tahun" name="tahun" required
                             class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('tahun') border-red-500 @enderror">
                             <option value="">-- Pilih Tahun --</option>
@@ -72,7 +72,8 @@
 
                     {{-- Thumbnail --}}
                     <div class="mb-4">
-                        <label for="thumbnail" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Thumbnail <span class="text-red-500">*</span></label>
+                        <label for="thumbnail" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Thumbnail <span class="text-red-500">*</span> <span class="text-xs bg-red-200 px-2 py-1 rounded-full text-red-800">Rekomendasi ukuran 1200 x 300 px
+                        </span></label>
                         <input type="file" id="thumbnail" name="thumbnail" accept="image/*"
                             class="block w-full text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('thumbnail') border-red-500 @enderror">
                         <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">Format file yang diizinkan: .jpg, .jpeg, .png (max 2mb)</p>

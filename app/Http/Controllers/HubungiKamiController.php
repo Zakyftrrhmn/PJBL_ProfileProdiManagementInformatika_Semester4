@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class HubungiKamiController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      */
@@ -22,7 +21,7 @@ class HubungiKamiController extends Controller
      */
     public function create()
     {
-        //
+        return view('404');
     }
 
     /**
@@ -30,7 +29,7 @@ class HubungiKamiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return view('404');
     }
 
     /**
@@ -38,14 +37,13 @@ class HubungiKamiController extends Controller
      */
     public function show(HubungiKami $hubungiKami)
     {
-        HubungiKami::find($hubungiKami->id);
         return view('pages.hubungiKami.show', compact('hubungiKami'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(HubungiKami $hubungiKami)
+    public function edit(string $id)
     {
         return view('404');
     }
@@ -53,7 +51,7 @@ class HubungiKamiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, HubungiKami $hubungiKami)
+    public function update(Request $request, string $id)
     {
         return view('404');
     }
@@ -64,6 +62,6 @@ class HubungiKamiController extends Controller
     public function destroy(HubungiKami $hubungiKami)
     {
         $hubungiKami->delete();
-        return redirect()->route('hubungi_kami.index')->with('success', 'Data berhasil dihapus');
+        return redirect()->route('admin.hubungi_kami.index')->with('success', 'Data berhasil dihapus');
     }
 }

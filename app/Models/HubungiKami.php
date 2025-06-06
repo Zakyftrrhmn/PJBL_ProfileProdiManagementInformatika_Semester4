@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Model;
 
 class HubungiKami extends Model
@@ -11,7 +12,6 @@ class HubungiKami extends Model
     protected $fillable = [
         'nama',
         'email',
-        'subjek',
         'pesan',
     ];
 }

@@ -20,6 +20,10 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             KategoriSeeder::class,
             KategoriKaryaSeeder::class,
+            FrontsideSeeder::class,
+            VisiSeeder::class,
+            MisiSeeder::class,
+            KontakSeeder::class,
         ]);
     }
 }

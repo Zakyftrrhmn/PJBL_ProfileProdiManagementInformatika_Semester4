@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('email');
-            $table->string('subjek');
             $table->text('pesan');
             $table->softDeletes();
             $table->timestamps();

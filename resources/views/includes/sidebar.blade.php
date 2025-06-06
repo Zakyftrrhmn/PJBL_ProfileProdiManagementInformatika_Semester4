@@ -22,7 +22,16 @@
 
         <ul class="flex flex-col pl-0 mb-0">
 
-
+            @can('dashboard')
+            <li class="mt-0.5 w-full">
+                <a class="py-2 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/dashboard*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : ''}}" href="{{route('admin.dashboard.index')}}">
+                <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center text-center xl:p-2.5">
+                    <i class="ni ni-tv-2 text-slate-700 text-sm leading-normal dark:text-white"></i>
+                </div>
+                <span class="ml-1">Dashboard</span>
+                </a>
+            </li>
+            @endcan
 
             @can('kurikulum')
             <li class="mt-0.5 w-full">
@@ -226,13 +235,14 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="py-2 text-sm flex items-center gap-2 px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/pesan*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }}">
+                        <a href="{{ route('admin.hubungi_kami.index') }}" class="py-2 text-sm flex items-center gap-2 px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/pesan*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }}">
                             <i class="ni ni-send text-slate-700 text-sm dark:text-white"></i>
                             <span>Pesan</span>
                         </a>
                     </li>
+                    
                     <li>
-                        <a href="#" class="py-2 text-sm flex items-center gap-2 px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/frontside*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }}">
+                        <a href="{{ route('admin.frontside.index') }}" class="py-2 text-sm flex items-center gap-2 px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/frontside*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }}">
                             <i class="ni ni-world text-slate-700 text-sm dark:text-white"></i>
                             <span>Frontside</span>
                         </a>

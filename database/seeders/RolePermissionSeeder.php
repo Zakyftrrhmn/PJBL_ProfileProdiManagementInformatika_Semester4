@@ -15,6 +15,7 @@ class RolePermissionSeeder extends Seeder
 
         // Daftar permission
         $permissions = [
+            'dashboard',
             'kurikulum',
             'dosen',
             'kalender-akademik',
