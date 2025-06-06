@@ -18,7 +18,7 @@
           <nav class="hidden md:flex items-center space-x-8 mx-auto">
             <a
               href="{{  route('beranda') }}"
-              class="text-gray-700 text-sm font-normal hover:text-black transition"
+              class="{{ Request::is('/') ? 'text-black font-bold' : 'text-gray-700 font-normal'}}  text-sm  hover:text-black transition"
               >Beranda</a
             >
 
@@ -26,7 +26,7 @@
             <div x-data="{ open: false }" class="relative">
               <button
                 @click="open = !open"
-                class="text-gray-700 text-sm font-normal hover:text-black focus:outline-none flex gap-x-1 items-center"
+                class=" {{ Request::is('kurikulum*') || Request::is('akreditasi*') || Request::is('kalender_akademik*') || Request::is('profile_lulusan*') ? 'text-black font-bold' : 'text-gray-700 font-normal'}} text-sm hover:text-black focus:outline-none flex gap-x-1 items-center"
               >
                 Akademik
                 <svg
@@ -49,7 +49,7 @@
               >
                 <a
                   href="{{ route('kurikulum') }}"
-                  class="block px-4 py-2 mb-1 text-sm text-white hover:bg-gray-700 rounded transition-colors duration-300"
+                  class=" block px-4 py-2 mb-1 text-sm text-white hover:bg-gray-700 rounded transition-colors duration-300"
                 >Kurikulum</a>
                 <a
                   href="{{ route('akreditasi') }}"
@@ -68,13 +68,13 @@
 
             <a
               href="{{ route('laporan_kepuasan') }}"
-              class="text-gray-700 text-sm font-normal hover:text-black transition"
+              class="{{ Request::is('laporan_kepuasan*') ? 'text-black font-bold' : 'text-gray-700 font-normal'}} text-sm hover:text-black transition"
               >Laporan Kepuasan</a
             >
 
             <a
               href="{{ route('karya_mahasiswa') }}"
-              class="text-gray-700 text-sm font-normal hover:text-black transition"
+              class="{{ Request::is('karya_mahasiswa*') ? 'text-black font-bold' : 'text-gray-700 font-normal'}} text-sm  hover:text-black transition"
               >Karya</a
             >
 
@@ -82,7 +82,7 @@
             <div x-data="{ open: false }" class="relative">
               <button
                 @click="open = !open"
-                class="text-gray-700 text-sm font-normal hover:text-black focus:outline-none flex gap-x-1 items-center"
+                class="{{ Request::is('informasi*') || Request::is('galeri*') || Request::is('prestasi_mahasiswa*') ? 'text-black font-bold' : 'text-gray-700 font-normal'}} text-sm hover:text-black focus:outline-none flex gap-x-1 items-center"
               >
                 Umum
 

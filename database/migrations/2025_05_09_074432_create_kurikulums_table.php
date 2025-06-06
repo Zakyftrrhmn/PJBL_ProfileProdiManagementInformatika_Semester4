@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('kurikulum', function (Blueprint $table) {
             $table->id();
-            $table->integer('kode_mk')->unique();
+            $table->string('kode_mk')->unique();
             $table->string('mata_kuliah');
             $table->string('bentuk_perkuliahan');
             $table->string('sks');
