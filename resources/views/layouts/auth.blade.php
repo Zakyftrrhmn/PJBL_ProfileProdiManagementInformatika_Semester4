@@ -9,10 +9,13 @@
         <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     
-    <link rel="icon" type="image/png" href="{{asset('assets/img/logo.png')}}"/>
+    <link rel="icon" type="image/png" href="{{asset('assets/img/icon.svg')}}"/>
+    <!-- Google Fonts: Rubik & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+
 
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased ">
+<body class="bg-gradient-to-br from-[#f0e8ff] to-[#e4d4fc] min-h-screen flex items-center justify-center">
 
     @yield('content')
 

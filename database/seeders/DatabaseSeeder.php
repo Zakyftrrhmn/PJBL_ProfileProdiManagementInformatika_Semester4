@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             VisiSeeder::class,
             MisiSeeder::class,
             KontakSeeder::class,
+            KalenderAkademikSeeder::class,
+            AkreditasiSeeder::class
         ]);
     }
 }

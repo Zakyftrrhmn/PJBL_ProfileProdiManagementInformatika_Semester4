@@ -1,83 +1,71 @@
 @extends('layouts.auth')
-@section('title', 'Halaman Login | Prodi Management Informatika')
+@section('title', 'Halaman Login | Prodi Manajemen Informatika')
 
 @section('content')
-<div class="flex h-screen w-full bg-[#1e1e2f] px-3 py-2">
-  <!-- Left Section -->
- <div class="hidden md:flex w-1/2 items-center justify-center p-8">
-    <img src="{{ asset('assets/img/logo-dark.png') }}" alt="Logo" class="w-2/3 max-w-xs animate-fade-in" />
-  </div>
 
-  <!-- Right Section -->
-  <div class="w-full md:w-1/2 flex items-center justify-center bg-[#1e1e2f]">
-    <div class="w-full max-w-md px-6 sm:px-10 py-10 bg-[#1e1e2f] text-white rounded-xl shadow-lg md:shadow-white/10 animate-slide-up">
-      <div class="text-center mb-6">
-        <h2 class="text-3xl font-bold text-white">Welcome</h2>
-        <p class="text-sm text-gray-400 mt-2">Please login to continue</p>
+  <div class="flex flex-col md:flex-row w-full max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-lg bg-white">
+    
+    <!-- Left Section -->
+    <div class="w-full md:w-1/2 bg-white p-10 flex flex-col justify-center">
+      <div class="mb-6">
+        <img src="{{ asset('assets/img/logo.png') }}" alt="Logo MI" class="w-12 h-12 rounded-full mb-4" /> 
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-2 font-[Rubik] uppercase">Selamat Datang</h1>
+        <p class="text-gray-500 text-sm font-inter">Login untuk mengakses sistem Prodi Manajemen Informatika PSDKU Pelalawan.</p>
       </div>
 
       <!-- Session Flash -->
       @if(session('success'))
-        <div class="bg-green-600 text-white text-sm rounded py-2 px-4 mb-4 text-center shadow">
+        <div class="bg-green-500 text-white text-sm rounded py-2 px-4 mb-4 text-center shadow">
           {{ session('success') }}
         </div>
       @endif
 
-      <!-- Session Flash -->
       @if(session('error'))
-        <div class="bg-red-600 text-white text-sm rounded py-2 px-4 mb-4 text-center shadow">
+        <div class="bg-red-500 text-white text-sm rounded py-2 px-4 mb-4 text-center shadow">
           {{ session('error') }}
         </div>
       @endif
 
-      <form method="POST" action="{{ route('login.proses') }}">
+      <form class="space-y-5 mt-6" method="POST" action="{{ route('login.proses') }}">
         @csrf
         <!-- Email -->
-        <div class="mb-4">
-          <label for="email" class="block text-sm font-semibold mb-2">Email</label>
-          <input type="email" name="email" id="email" placeholder="mail@user.com"
-                 class="w-full px-4 py-2 rounded bg-[#2a2a40] text-sm text-white border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition @error('email') border-red-500 dark:border-red-500 @enderror" required>
-                 @error('email')
-                    <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
-                 @enderror
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700 font-inter">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com"
+                 class="mt-1 block w-full px-4 py-2 border rounded-xl shadow-sm outline-none focus:ring-purple-500 focus:border-purple-500 @error('email') border-red-500 @enderror" required />
+          @error('email')
+            <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+          @enderror
         </div>
 
         <!-- Password -->
-        <div class="mb-4">
-          <label for="password" class="block text-sm font-semibold mb-2">Password</label>
-          <input type="password" name="password" id="password" placeholder="********"
-                 class="w-full px-4 py-2 rounded bg-[#2a2a40] text-sm text-white border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition @error('password') border-red-500 dark:border-red-500 @enderror" required>
-                 @error('password')
-                    <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
-                 @enderror
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700 font-inter" >Password</label>
+          <input type="password" id="password" name="password" placeholder="••••••••"
+                 class="mt-1 block w-full px-4 py-2 border rounded-xl shadow-sm outline-none focus:ring-purple-500 focus:border-purple-500 @error('password') border-red-500 @enderror" required />
+          @error('password')
+            <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+          @enderror
         </div>
 
         <!-- Login Button -->
         <button type="submit"
-                class="w-full bg-blue-600 hover:bg-blue-700 transition text-white font-semibold py-3 rounded-full shadow-md mt-2">
+                class="w-full py-2 px-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl transition duration-300">
           Login
         </button>
+
+        <p class="text-sm text-center text-gray-400 mt-4">© 2025 MI PSDKU Pelalawan</p>
       </form>
     </div>
+
+    <!-- Right Section -->
+    <div class="hidden md:block w-full md:w-1/2 bg-[#f5edff] p-6 relative rounded-2xl shadow-lg mt-6 md:mt-0">
+      <div class="flex items-center justify-center w-full h-full overflow-hidden rounded-2xl">
+        <img src="{{ asset('assets/img/login.png') }}"
+            alt="Illustration"
+            class="object-cover w-full h-full" />
+      </div>
+    </div>
+
   </div>
-</div>
-
-<!-- Animations -->
-<style>
-  @keyframes fade-in {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-  }
-  .animate-fade-in {
-    animation: fade-in 1s ease-out;
-  }
-
-  @keyframes slide-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .animate-slide-up {
-    animation: slide-up 0.8s ease-out;
-  }
-</style>
 @endsection

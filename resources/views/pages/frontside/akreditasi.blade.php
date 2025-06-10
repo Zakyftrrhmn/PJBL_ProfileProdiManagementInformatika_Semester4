@@ -34,38 +34,42 @@
             </div>
 
             <!-- Tabel Data Akreditasi -->
-            <div class="w-full lg:w-1/2">
-            <table class="w-full text-sm text-left text-white bg-[#202020] rounded-xl shadow-2xl overflow-hidden">
-                <tbody>
-                <tr class="border-b border-gray-700">
-                    <td class="px-6 py-4 font-semibold">Nama Prodi</td>
-                    <td class="px-6 py-4 text-white">: {{ $akreditasi->nama_prodi }}</td>
+<div class="w-full lg:w-1/2">
+    <div class="bg-[#1E1E1E] rounded-xl shadow-xl overflow-hidden">
+        <table class="w-full text-sm text-white">
+            <tbody>
+                <tr class="even:bg-[#2a2a2a] hover:bg-[#333333] transition">
+                    <td class="px-6 py-4 font-medium text-gray-300 w-1/3">Nama Prodi</td>
+                    <td class="px-6 py-4">:{{ $akreditasi->nama_prodi }}</td>
                 </tr>
-                <tr class="border-b border-gray-700">
-                    <td class="px-6 py-4 font-semibold">Akreditasi</td>
-                    <td class="px-6 py-4 text-white">: {{ $akreditasi->akreditasi }}</td>
+                <tr class="even:bg-[#2a2a2a] hover:bg-[#333333] transition">
+                    <td class="px-6 py-4 font-medium text-gray-300">Akreditasi</td>
+                    <td class="px-6 py-4">:{{ $akreditasi->akreditasi }}</td>
                 </tr>
-                <tr class="border-b border-gray-700">
-                    <td class="px-6 py-4 font-semibold">SK Akreditasi</td>
-                    <td class="px-6 py-4 text-white">: {{ $akreditasi->sk_akreditasi }}</td>
+                <tr class="even:bg-[#2a2a2a] hover:bg-[#333333] transition">
+                    <td class="px-6 py-4 font-medium text-gray-300 ">SK Akreditasi</td>
+                    <td class="px-6 py-4">:{{ $akreditasi->sk_akreditasi }}</td>
                 </tr>
-                <tr class="border-b border-gray-700">
-                    <td class="px-6 py-4 font-semibold">Tanggal Berlaku Akreditasi</td>
-                    <td class="px-6 py-4 text-white">: {{ \Carbon\Carbon::parse($akreditasi->tanggal_mulai)->translatedFormat('d F Y') }} – {{ \Carbon\Carbon::parse($akreditasi->tanggal_berakhir)->translatedFormat('d F Y') }}</td>
+                <tr class="even:bg-[#2a2a2a] hover:bg-[#333333] transition">
+                    <td class="px-6 py-4 font-medium text-gray-300">Tanggal Berlaku</td>
+                    <td class="px-6 py-4">:
+                        {{ \Carbon\Carbon::parse($akreditasi->tanggal_mulai)->translatedFormat('d F Y') }} –
+                        {{ \Carbon\Carbon::parse($akreditasi->tanggal_berakhir)->translatedFormat('d F Y') }}
+                    </td>
+                </tr>
+                <tr class="even:bg-[#2a2a2a] hover:bg-[#333333] transition">
+                    <td class="px-6 py-4 font-medium text-gray-300 md:text-nowrap">Lembaga Akreditasi</td>
+                    <td class="px-6 py-4">:{{ $akreditasi->lembaga_akreditasi }}</td>
+                </tr>
+                <tr class="even:bg-[#2a2a2a] hover:bg-[#333333] transition">
+                    <td class="px-6 py-4 font-medium text-gray-300">Jenjang</td>
+                    <td class="px-6 py-4">:{{ $akreditasi->jenjang }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-                </tr>
-                <tr  class="border-b border-gray-700">
-                    <td class="px-6 py-4 font-semibold">Lembaga Akreditasi</td>
-                    <td class="px-6 py-4 text-white">: {{ $akreditasi->lembaga_akreditasi }}</td>
-                </tr>
-                <tr class="border-b border-gray-700">
-                    <td class="px-6 py-4 font-semibold">Jenjang</td>
-                    <td class="px-6 py-4 text-white">: {{ $akreditasi->jenjang }}</td>
-                </tr>
-
-                </tbody>
-            </table>
-            </div>
         </div>
         @endif
       

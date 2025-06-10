@@ -14,7 +14,7 @@
             <!-- Tahun Karya -->
             <div class="text-sm text-gray-600 flex items-center gap-2 mb-4">
                 <span class="flex items-center gap-1">
-                    <i class="fas fa-clock"></i> Project Tahun: {{ $karya_mahasiswa->tahun }}
+                    <i class="fas fa-clock"></i> Project dibuat pada Tahun: {{ $karya_mahasiswa->tahun }} - <span class="text-green-800 bg-green-300 px-2 py-1 text-xs font-semibold uppercase rounded-full">{{ $karya_mahasiswa->kategori_karya->nama_kategori ?? 'Tanpa Kategori' }}</span>
                 </span>
             </div>
 
