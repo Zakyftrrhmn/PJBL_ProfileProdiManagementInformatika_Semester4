@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Edit Data Deskripsi')
+@section('title', 'Edit Kategori Karya')
 @section('content')
 
 <div class="flex flex-wrap -mx-3">
