@@ -6,7 +6,7 @@
 
 
 
-    <div class="fixed w-full bg-[#5E72E2] dark:hidden min-h-75"></div>
+    <div class="fixed w-full bg-[#5E72E2] -mt-6 dark:hidden min-h-75"></div>
 
     @include('includes.sidebar')
 
