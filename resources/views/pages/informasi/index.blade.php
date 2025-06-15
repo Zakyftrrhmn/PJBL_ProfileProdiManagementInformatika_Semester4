@@ -54,7 +54,9 @@
                   <h6 class="mb-0 text-sm leading-normal dark:text-white">{{ $loop->iteration }}</h6>
                 </td>
                 <td class="px-6 py-3 align-middle bg-transparent">
-                  <h6 class="mb-0 text-sm leading-normal dark:text-white text-justify">{{ $i->judul }}</h6>
+                  <h6 class="mb-0 text-sm leading-normal dark:text-white text-justify">
+                    {{ \Illuminate\Support\Str::limit($i->judul, 20) }}
+                  </h6>
                 </td>
                 <td class="px-6 py-3 align-middle bg-transparent">
                  <img src="{{ asset('storage/' . $i->thumbnail) }}" alt="Thumbnail" class="w-20 h-20 object-cover rounded-lg shadow-md transition-transform duration-300 hover:scale-105" />

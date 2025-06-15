@@ -17,22 +17,23 @@
                     @csrf
                     @method('PUT')
 
-                    {{-- Username --}}
-                    <div class="mb-4">
-                        <label for="username" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Username <span class="text-red-500">*</span></label>
-                        <input type="text" id="username" name="username" value="{{ old('username', $dosen->username) }}" required
-                               class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('username') border-red-500 dark:border-red-500 @enderror">
-                        @error('username')
-                            <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
-                        @enderror
-                    </div>
-
                     {{-- Nama Dosen --}}
                     <div class="mb-4">
                         <label for="nama" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Nama Dosen <span class="text-red-500">*</span></label>
                         <input type="text" id="nama" name="nama" value="{{ old('nama', $dosen->nama) }}" required
                                class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('nama') border-red-500 dark:border-red-500 @enderror">
                         @error('nama')
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    
+                    {{-- Username --}}
+                    <div class="mb-4">
+                        <label for="username" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Username <span class="text-red-500">*</span></label>
+                        <input type="text" id="username" name="username" value="{{ old('username', $dosen->username) }}" required
+                               class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('username') border-red-500 dark:border-red-500 @enderror">
+                        @error('username')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
@@ -70,7 +71,7 @@
                     {{-- Website --}}
                     <div class="mb-4">
                         <label for="website" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Website <span class="text-red-500">*</span></label>
-                        <input type="url" id="website" name="website" value="{{ old('website', $dosen->website) }}"
+                        <input type="text" id="website" name="website" value="{{ old('website', $dosen->website) }}"
                                class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('website') border-red-500 dark:border-red-500 @enderror">
                         @error('website')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>

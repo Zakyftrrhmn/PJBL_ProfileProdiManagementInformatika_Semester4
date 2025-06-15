@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class KaryaMahasiswaResource extends JsonResource
 {
@@ -14,9 +15,15 @@ class KaryaMahasiswaResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $karyaMahasiswaUrl = $this->thumbnail ? Storage::url($this->thumbnail) : null;
+
+        // Hapus leading slash (/) jika ada
+        if ($karyaMahasiswaUrl !== null) {
+            $karyaMahasiswaUrl = ltrim($karyaMahasiswaUrl, '/');
+        }
+
         return  [
-            'id' => $this->id,
-            'thumbnail' => $this->thumbnail,
+            'thumbnail' => $karyaMahasiswaUrl,
             'judul' => $this->judul,
             'kategori' => $this->kategori_karya->nama_kategori,
             'isi' => $this->isi,

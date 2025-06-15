@@ -473,14 +473,13 @@
                 <span class="underline text-green-500">{{ $i->kategori->nama_kategori ?? 'Tanpa Kategori' }}</span>
               </div>
               <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-2 text-sm text-[#838AA7]">
-                  <img
-                    src="{{ asset('assets/frontside/img/naruto.jpg') }}"
-                    class="w-5 h-5 rounded-full object-cover"
-                    alt="admin"
-                  />
-                  <span class="text-xs md:text-md">{{ $i->user->name ?? 'Unknown' }}</span>
-                </div>
+                <div class="flex items-center space-x-1 text-sm text-[#838AA7]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+                    </svg>
+                    <span class="text-xs md:text-md">{{ $i->user->name ?? 'Unknown' }}</span>
+                  </div>
+
                 <div class="text-white text-center">
                   <svg
                     class="w-5 h-5 rounded-full bg-black"

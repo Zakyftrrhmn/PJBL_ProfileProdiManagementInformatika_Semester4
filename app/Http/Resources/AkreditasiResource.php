@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class AkreditasiResource extends JsonResource
 {
@@ -14,9 +15,15 @@ class AkreditasiResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $photoSertifikatUrl = $this->photo_sertifikat ? Storage::url($this->photo_sertifikat) : null;
+
+        // Hapus leading slash (/) jika ada
+        if ($photoSertifikatUrl !== null) {
+            $photoSertifikatUrl = ltrim($photoSertifikatUrl, '/');
+        }
+
         return [
-            'id' => $this->id,
-            'photo_sertifikat' => $this->photo_sertifikat,
+            'photo_sertifikat' => $photoSertifikatUrl,
             'nama_prodi' => $this->nama_prodi,
             'akreditasi' => $this->akreditasi,
             'sk_akreditasi' => $this->sk_akreditasi,

@@ -38,7 +38,7 @@ class PrestasiMahasiswaController extends Controller
             'penyelenggara' => 'required|string|max:100',
             'tanggal_lomba' => 'required|date',
             'peringkat' => 'required|string|max:50',
-            'file_sertifikat' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'file_sertifikat' => 'required|file|mimes:jpg,jpeg,png|max:2048',
         ], [
             'nama_mahasiswa.required' => 'Nama mahasiswa harus diisi',
             'nim.required' => 'NIM harus diisi',
@@ -48,7 +48,7 @@ class PrestasiMahasiswaController extends Controller
             'tanggal_lomba.required' => 'Tanggal lomba harus diisi',
             'peringkat.required' => 'Peringkat harus diisi',
             'file_sertifikat.required' => 'File sertifikat harus diunggah',
-            'file_sertifikat.mimes' => 'Format file harus berupa PDF, JPG, JPEG, atau PNG',
+            'file_sertifikat.mimes' => 'Format file harus berupa  JPG, JPEG, atau PNG',
             'file_sertifikat.max' => 'Ukuran file maksimal 2MB',
         ]);
 
@@ -104,7 +104,7 @@ class PrestasiMahasiswaController extends Controller
             'penyelenggara' => 'required|string|max:100',
             'tanggal_lomba' => 'required|date',
             'peringkat' => 'required|string|max:50',
-            'file_sertifikat' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'file_sertifikat' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
         ], [
             'nama_mahasiswa.required' => 'Nama mahasiswa harus diisi',
             'nim.required' => 'NIM harus diisi',
@@ -113,7 +113,7 @@ class PrestasiMahasiswaController extends Controller
             'penyelenggara.required' => 'Penyelenggara harus diisi',
             'tanggal_lomba.required' => 'Tanggal lomba harus diisi',
             'peringkat.required' => 'Peringkat harus diisi',
-            'file_sertifikat.mimes' => 'Format file harus berupa PDF, JPG, JPEG, atau PNG',
+            'file_sertifikat.mimes' => 'Format file harus berupa  JPG, JPEG, atau PNG',
             'file_sertifikat.max' => 'Ukuran file maksimal 2MB',
         ]);
 

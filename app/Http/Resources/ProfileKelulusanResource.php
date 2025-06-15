@@ -15,7 +15,6 @@ class ProfileKelulusanResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
             'nama_profile' => $this->nama_profile,
             'deskripsi' => $this->deskripsi
         ];

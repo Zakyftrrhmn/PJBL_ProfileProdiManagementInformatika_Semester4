@@ -81,8 +81,8 @@
 
                     <div class="mb-4">
                         <label for="file_sertifikat" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Upload Sertifikat <span class="text-red-500">*</span></label>
-                        <input type="file" id="file_sertifikat" name="file_sertifikat" accept=".pdf,.jpg,.jpeg,.png" class="block w-full text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('file_sertifikat') border-red-500 dark:border-red-500 @enderror">
-                        <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">Format file yang diizinkan: .pdf, .jpg, .jpeg, .png (max 2mb)</p>
+                        <input type="file" id="file_sertifikat" name="file_sertifikat" accept=".jpg,.jpeg,.png" class="block w-full text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('file_sertifikat') border-red-500 dark:border-red-500 @enderror">
+                        <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">Format file yang diizinkan: .jpg, .jpeg, .png (max 2mb)</p>
                         @error('file_sertifikat')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror

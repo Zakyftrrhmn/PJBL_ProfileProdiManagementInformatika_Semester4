@@ -32,7 +32,7 @@ class GalleryController extends Controller
         $request->validate([
             'photo' => 'required|file|mimes:jpg,jpeg,png|max:2048',
         ], [
-            'photo.required' => 'Foto dosen wajib diunggah',
+            'photo.required' => 'Foto gallery wajib diunggah',
             'photo.mimes' => 'Format foto harus JPG, JPEG, atau PNG',
         ]);
 

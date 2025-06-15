@@ -26,7 +26,7 @@
             </div>
 
             <!-- Isi -->
-            <div class="max-w-3xl mx-auto break-words break-all text-gray-800">
+            <div class="max-w-3xl mx-auto break-words break-all text-gray-800 prose">
                 {!! $karya_mahasiswa->isi !!}
             </div>
         </div>

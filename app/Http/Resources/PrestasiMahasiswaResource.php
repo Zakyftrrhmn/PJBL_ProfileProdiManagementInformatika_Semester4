@@ -15,7 +15,6 @@ class PrestasiMahasiswaResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
             'nama_mahasiswa' => $this->nama_mahasiswa,
             'nim' => $this->nim,
             'nama_lomba' => $this->nama_lomba,

@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class KalenderAkademikResource extends JsonResource
 {
@@ -14,10 +15,16 @@ class KalenderAkademikResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $photoKalenderUrl = $this->photo_kalender ? Storage::url($this->photo_kalender) : null;
+
+        // Hapus leading slash (/) jika ada
+        if ($photoKalenderUrl !== null) {
+            $photoKalenderUrl = ltrim($photoKalenderUrl, '/');
+        }
+
         return [
-            'id' => $this->id,
             'judul' => $this->judul,
-            'photo_kalender' => $this->photo_kalender
+            'photo_kalender' => $photoKalenderUrl
         ];
     }
 }

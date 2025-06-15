@@ -11,5 +11,8 @@ export default {
     theme: {
         extend: {},
     },
-    plugins: [],
+    plugins: [
+        // Tambahkan baris ini untuk mengaktifkan plugin typography
+        require("@tailwindcss/typography"),
+    ],
 };

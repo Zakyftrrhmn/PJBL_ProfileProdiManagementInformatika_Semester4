@@ -15,6 +15,16 @@
             <div class="flex-auto px-6 pt-5 pb-6">
                 <form action="{{ route('admin.dosen.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    {{-- Nama --}}
+                    <div class="mb-4">
+                        <label for="nama" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Nama Dosen <span class="text-red-500">*</span></label>
+                        <input type="text" id="nama" name="nama" value="{{ old('nama') }}" required
+                               class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('nama') border-red-500 @enderror">
+                        @error('nama')
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
+                    </div>
+
 
                     {{-- Username --}}
                     <div class="mb-4">
@@ -26,16 +36,7 @@
                         @enderror
                     </div>
 
-                    {{-- Nama --}}
-                    <div class="mb-4">
-                        <label for="nama" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Nama Dosen <span class="text-red-500">*</span></label>
-                        <input type="text" id="nama" name="nama" value="{{ old('nama') }}" required
-                               class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('nama') border-red-500 @enderror">
-                        @error('nama')
-                            <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
-                        @enderror
-                    </div>
-
+                   
                     {{-- Asal Kota --}}
                     <div class="mb-4">
                         <label for="asal_kota" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Asal Kota <span class="text-red-500">*</span></label>
@@ -69,7 +70,7 @@
                     {{-- Website --}}
                     <div class="mb-4">
                         <label for="website" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Website <span class="text-red-500">*</span></label>
-                        <input type="url" id="website" name="website" placeholder="https://example.com" value="{{ old('website') }}"
+                        <input type="text" id="website" name="website" placeholder="https://example.com" value="{{ old('website') }}"
                                class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('website') border-red-500 @enderror">
                         @error('website')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
