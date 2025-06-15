@@ -91,11 +91,20 @@
                                 <a href="{{ route('admin.laporan_kepuasan.edit', $lk) }}" class="text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-2 text-center  dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900">
                                 <i class="fas fa-edit mr-1"></i> Edit
                                 </a>
-                                <form action="{{ route('admin.laporan_kepuasan.destroy', $lk) }}" method="POST">
+                                <form
+                                    action="{{ route('admin.laporan_kepuasan.destroy', $lk) }}"
+                                    method="POST"
+                                    x-data {{-- Ini mengaktifkan Alpine.js pada form ini --}}
+                                    @submit.prevent="$dispatch('open-delete-modal', { form: $event.target })" {{-- Ini akan mencegah submit default dan memicu modal --}}
+                                >
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-2 text-center  dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                                      <i class="fas fa-trash-alt mr-1"></i> Hapus
+                                    <button
+                                        type="submit"
+                                        class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-2 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+                                        {{-- Hapus atribut onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" --}}
+                                    >
+                                        <i class="fas fa-trash-alt mr-1"></i> Hapus
                                     </button>
                                 </form>
 

@@ -24,14 +24,13 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:roles,name'
+            'name' => 'required|unique:roles,name' // <-- INI PENTING!
         ]);
 
         Role::create(['name' => $request->name]);
 
         return redirect()->route('admin.roles.index')->with('success', 'Role dibuat.');
     }
-
     public function edit(Role $role)
     {
 
@@ -45,11 +44,9 @@ class RoleController extends Controller
 
     public function update(Request $request, Role $role)
     {
-
         if ($role->name === 'Superadmin') {
             return redirect()->route('admin.roles.index')->with('error', 'Role Superadmin tidak dapat diubah.');
         }
-
 
         $request->validate(['name' => 'required']);
         $role->update(['name' => $request->name]);

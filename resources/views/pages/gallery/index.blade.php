@@ -75,14 +75,22 @@
 
                         <td class="align-middle bg-transparent  border-b-0 whitespace-nowrap shadow-transparent items-center ">
                             <div class="flex space-x-1 justify-center">
-
-                                <form action="{{ route('admin.gallery.destroy', $g) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-2 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                                      <i class="fas fa-trash-alt mr-1"></i> Hapus
-                                    </button>
-                                </form>
+                            <form
+                                action="{{ route('admin.gallery.destroy', $g) }}"
+                                method="POST"
+                                x-data {{-- Ini penting untuk mengaktifkan Alpine.js pada form ini --}}
+                                @submit.prevent="$dispatch('open-delete-modal', { form: $event.target })" {{-- Ini yang akan mencegah submit default dan memicu modal --}}
+                            >
+                                @csrf
+                                @method('DELETE')
+                                <button
+                                    type="submit"
+                                    class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-2 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+                                    {{-- Hapus atribut onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" --}}
+                                >
+                                    <i class="fas fa-trash-alt mr-1"></i> Hapus
+                                </button>
+                            </form>
                             </div>
                         </td>
 

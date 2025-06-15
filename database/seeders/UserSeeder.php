@@ -14,34 +14,43 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $superadmin = User::create([
-            'name'  => 'Zaky Fathur Rahman',
-            'email' => 'superadmin@mail.com',
-            'password' => Hash::make('superadmin'),
-            'email_verified_at' => null,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        // Superadmin
+        $superadmin = User::firstOrCreate(
+            ['email' => 'superadmin@mail.com'], // Kriteria pencarian: cari user dengan email ini
+            [ // Atribut untuk dibuat jika tidak ditemukan
+                'name'              => 'Zaky Fathur Rahman',
+                'password'          => Hash::make('superadmin'),
+                'email_verified_at' => now(), // Sebaiknya langsung verified untuk admin
+                'created_at'        => now(),
+                'updated_at'        => now()
+            ]
+        );
         $superadmin->assignRole('Superadmin');
 
-        $kaprodi = User::create([
-            'name'  => 'Kumala Sari Tri Wahyuni',
-            'email' => 'kaprodi@mail.com',
-            'password' => Hash::make('kaprodi'),
-            'email_verified_at' => null,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        // Kaprodi
+        $kaprodi = User::firstOrCreate(
+            ['email' => 'kaprodi@mail.com'],
+            [
+                'name'              => 'Kumala Sari Tri Wahyuni',
+                'password'          => Hash::make('kaprodi'),
+                'email_verified_at' => now(),
+                'created_at'        => now(),
+                'updated_at'        => now()
+            ]
+        );
         $kaprodi->assignRole('Kaprodi');
 
-        $dosen = User::create([
-            'name'  => 'Risa Salsabilla',
-            'email' => 'dosen@mail.com',
-            'password' => Hash::make('dosen'),
-            'email_verified_at' => null,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        // Dosen
+        $dosen = User::firstOrCreate(
+            ['email' => 'dosen@mail.com'],
+            [
+                'name'              => 'Risa Salsabilla',
+                'password'          => Hash::make('dosen'),
+                'email_verified_at' => now(),
+                'created_at'        => now(),
+                'updated_at'        => now()
+            ]
+        );
         $dosen->assignRole('Dosen');
     }
 }

@@ -22,6 +22,8 @@
       </div>
     </main>
 
+    @include('includes.delete-modal')
+    
     @include('includes.scripts')
 
     @stack('scripts')
