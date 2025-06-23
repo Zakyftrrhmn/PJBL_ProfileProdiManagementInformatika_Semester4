@@ -14,39 +14,7 @@ class AkreditasiController extends Controller
      */
     public function index()
     {
-        $akreditasi = Akreditasi::first();
-        return new AkreditasiResource($akreditasi);
+        $akreditasi = Akreditasi::all();
+        return AkreditasiResource::collection($akreditasi);
     }
-
-    // /**
-    //  * Store a newly created resource in storage.
-    //  */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Display the specified resource.
-    //  */
-    // public function show(Akreditasi $akreditasi)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  */
-    // public function update(Request $request, Akreditasi $akreditasi)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Remove the specified resource from storage.
-    //  */
-    // public function destroy(Akreditasi $akreditasi)
-    // {
-    //     //
-    // }
 }

@@ -76,5 +76,7 @@
         display: none; /* hilangkan scrollbar Chrome */
       }
     </style>
+
+        @livewireStyles
   </head>
 

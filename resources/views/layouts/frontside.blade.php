@@ -1,4 +1,5 @@
 @include('includes.frontside.header')
+
     
   <body class="font-['Inter']">
 
@@ -11,5 +12,6 @@
     @include('includes.frontside.scripts')
     
     @vite('resources/js/app.js')
+        @livewireScripts
   </body>
 </html>

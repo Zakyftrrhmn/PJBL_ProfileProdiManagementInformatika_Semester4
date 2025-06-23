@@ -1,34 +1,39 @@
 <?php
 
-namespace App\Http;
+namespace App\Console;
 
-use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
-class Kernel extends HttpKernel
+class Kernel extends ConsoleKernel
 {
-    protected $middleware = [
-        // Middleware global
-        \App\Http\Middleware\PreventBackHistory::class, // jika ingin aktif global
+    /**
+     * The Artisan commands provided by your application.
+     *
+     * @var array
+     */
+    protected $commands = [
+        // Kosongkan ini atau pastikan tidak ada \App\Console\Commands\ImportCampusData::class
+        // Artisan harusnya auto-load dari folder Commands
     ];
 
-    protected $middlewareGroups = [
-        'web' => [
-            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-            \Illuminate\Session\Middleware\StartSession::class,
-            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \App\Http\Middleware\LogVisitor::class,
-            // Tambahkan custom middleware di sini jika perlu
-        ],
+    /**
+     * Define the application's command schedule.
+     */
+    protected function schedule(Schedule $schedule): void
+    {
+        // Jadwalkan command di sini
+        $schedule->command('campus:import-data')->dailyAt('03:00');
+    }
 
-        'api' => [
-            'throttle:api',
-            \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        ],
-    ];
+    /**
+     * Register the commands for the application.
+     */
+    protected function commands(): void
+    {
+        // Baris ini yang penting: Laravel akan mencari di semua file di App/Console/Commands
+        $this->load(__DIR__ . '/Commands');
 
-    protected $routeMiddleware = [
-        'prevent-back-history' => \App\Http\Middleware\PreventBackHistory::class,
-        // Tambahkan lainnya jika diperlukan
-    ];
+        require base_path('routes/console.php');
+    }
 }

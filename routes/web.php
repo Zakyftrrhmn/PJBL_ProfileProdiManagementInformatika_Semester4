@@ -21,6 +21,7 @@
     use App\Http\Controllers\GalleryController;
     use App\Http\Controllers\HubungiKamiController;
     use App\Http\Controllers\InformasiController;
+    use App\Http\Controllers\InformasiUmumController;
     use App\Http\Controllers\KalenderAkademikController;
     use App\Http\Controllers\KategoriController;
     use App\Http\Controllers\KategoriKaryaController;
@@ -35,6 +36,10 @@
     use App\Http\Controllers\PermissionController;
     use App\Http\Controllers\PrestasiMahasiswaController;
     use App\Http\Controllers\visiController;
+
+    Route::get('/chat', function () {
+        return view('chatbot');
+    })->name('chatbot.index');
 
     Route::get('/', [FrontsideFrontsideController::class, 'index'])->name('beranda');
     Route::get('/kurikulum', [FrontsideFrontsideController::class, 'kurikulum'])->name('kurikulum');
@@ -91,6 +96,8 @@
         Route::resource('/alasan_bergabung', AlasanBergabungController::class)->middleware('can:manajemen_konten');
         Route::resource('/kontak', KontakController::class)->middleware('can:manajemen_konten');
         Route::resource('/frontside', FrontsideController::class)->middleware('can:manajemen_konten');
+        Route::get('/umum', [InformasiUmumController::class, 'index'])->name('umum.index')->middleware('can:manajemen_konten');
+        Route::post('/umum', [InformasiUmumController::class, 'update'])->name('umum.update')->middleware('can:manajemen_konten');
 
         Route::resource('hubungi_kami', HubungiKamiController::class)->middleware('can:manajemen_konten');
 

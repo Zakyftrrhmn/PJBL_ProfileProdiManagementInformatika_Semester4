@@ -14,39 +14,9 @@ class KalenderAkademikController extends Controller
      */
     public function index()
     {
-        $kalenderAkademik = KalenderAkademik::first();
-        return new KalenderAkademikResource($kalenderAkademik);
+        // Ambil SEMUA data kalender akademik
+        $kalenderAkademik = KalenderAkademik::all();
+        // Kembalikan sebagai KOLEKSI dari KalenderAkademikResource
+        return KalenderAkademikResource::collection($kalenderAkademik);
     }
-
-    // /**
-    //  * Store a newly created resource in storage.
-    //  */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Display the specified resource.
-    //  */
-    // public function show(KalenderAkademik $kalenderAkademik)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  */
-    // public function update(Request $request, KalenderAkademik $kalenderAkademik)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Remove the specified resource from storage.
-    //  */
-    // public function destroy(KalenderAkademik $kalenderAkademik)
-    // {
-    //     //
-    // }
 }

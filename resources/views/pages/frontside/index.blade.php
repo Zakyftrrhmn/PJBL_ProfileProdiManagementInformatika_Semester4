@@ -35,12 +35,14 @@
 
           <!-- Tombol CTA -->
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="#"
-              class="bg-white text-black font-medium px-6 py-3 rounded-md hover:bg-gray-200 transition text-sm sm:text-base"
+           <a
+                href="{{ route('chatbot.index') }}"
+                class="bg-white text-black font-medium px-6 py-3 rounded-md hover:bg-gray-200 transition text-sm sm:text-base flex items-center justify-center gap-2" {{-- Tambahkan justify-center di sini --}}
             >
-              Get Started →
+                <img src="{{ asset('assets/frontside/img/chatbot.png') }}" class="w-8 h-8" alt="Chatbot Icon">
+                <span>MIPel Bot</span> {{-- Opsional: bungkus teks dengan span untuk kontrol lebih lanjut --}}
             </a>
+
             <a
               href="{{  route('kurikulum') }}"
               class="bg-[#202020] text-white font-medium px-6 py-3 rounded-md hover:opacity-90 transition text-sm sm:text-base"
@@ -52,21 +54,40 @@
 
     </section>
 
-      <!-- Hello Section -->
-    <section class="bg-white py-24 px-3 md:px-5 text-center font-inter">
-        <h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
+  
+  <section class="bg-white py-24 px-3 md:px-5 text-center font-inter">
+      <h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
           {{ $frontside ? $frontside->intro_title : 'Selamat Datang di Manajemen Informatika PSDKU Pelalawan'; }}
-        </h2>
-        <p class="text-gray-700 md:text-2xl leading-relaxed max-w-4xl mx-auto">
-          {!! $frontside ? $frontside->intro_description : '        Selamat datang di website Prodi kami! Yuk, jelajahi serunya dunia kampus
+      </h2>
+      <p class="text-gray-700 md:text-2xl leading-relaxed max-w-4xl mx-auto">
+          {!! $frontside ? $frontside->intro_description : ' Selamat datang di website Prodi kami! Yuk, jelajahi serunya dunia kampus
           dan jurusan kita di sini.
-          <strong class="text-black font-semibold"
-            >Jangan lupa kasih feedback, ya!</strong
-          >
+          <strong class="text-black font-semibold">Jangan lupa kasih feedback, ya!</strong>
           Terima kasih! ❤️'; !!}
-        </p>
-    </section>
+      </p>
+  </section>
 
+  <section class="bg-gray-100 py-16 px-4 md:px-8">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-white rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition duration-300 ease-in-out">
+              <div class="text-5xl font-bold text-indigo-600 mb-2">{{ $informasi_umum ? $informasi_umum->total_mahasiswa : '240+' }}</div>
+              <h3 class="text-xl font-semibold text-gray-800">Total Mahasiswa</h3>
+              <p class="text-gray-600 mt-2">Jumlah mahasiswa aktif yang terdaftar.</p>
+          </div>
+
+          <div class="bg-white rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition duration-300 ease-in-out">
+              <div class="text-5xl font-bold text-green-600 mb-2">{{ $informasi_umum ? $informasi_umum->total_dosen : '240+' }}</div>
+              <h3 class="text-xl font-semibold text-gray-800">Total Dosen</h3>
+              <p class="text-gray-600 mt-2">Dosen pengajar berkompeten di bidangnya.</p>
+          </div>
+
+          <div class="bg-white rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition duration-300 ease-in-out">
+              <div class="text-5xl font-bold text-red-600 mb-2">{{ $informasi_umum ? $informasi_umum->total_jurusan : '240+' }}</div>
+              <h3 class="text-xl font-semibold text-gray-800">Total Jurusan</h3>
+              <p class="text-gray-600 mt-2">Berbagai pilihan program studi menarik.</p>
+          </div>
+      </div>
+  </section>
 
     <!-- Visi Misi -->
 
@@ -195,7 +216,6 @@
       </div>
     </section>
 
-    
     <!-- Kenapa -->
     <section class="py-12 px-4">
       <div
@@ -246,8 +266,6 @@
         </div>
       </div>
     </section>
-
-
 
     <!-- proyek -->
     <section class="w-full bg-[#F6F8FD] py-16 px-4">
@@ -315,8 +333,6 @@
 
       </div>
     </section>
-
-
 
     <!-- Banner -->
     <section class="w-full px-5 md:px-20 py-16 bg-white relative z-0">

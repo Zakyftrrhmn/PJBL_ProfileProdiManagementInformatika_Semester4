@@ -22,4 +22,5 @@
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" />
+
   </head>

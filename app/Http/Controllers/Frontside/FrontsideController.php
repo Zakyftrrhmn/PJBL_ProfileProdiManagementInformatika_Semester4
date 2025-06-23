@@ -10,6 +10,7 @@ use App\Models\Frontside;
 use App\Models\Gallery;
 use App\Models\HubungiKami;
 use App\Models\Informasi;
+use App\Models\InformasiUmum;
 use App\Models\KalenderAkademik;
 use App\Models\KaryaMahasiswa;
 use App\Models\Kontak;
@@ -37,6 +38,7 @@ class FrontsideController extends Controller
             'viewed_at' => now(),
         ]);
 
+        $informasi_umum = InformasiUmum::first();
         $kontak_kami = Kontak::first();
         $visi = Visi::first();
         $misi = Misi::all();
@@ -45,7 +47,7 @@ class FrontsideController extends Controller
         $dosen = Dosen::all();
         $informasi = Informasi::latest()->take(4)->get();
         $frontside = Frontside::first();
-        return view('pages.frontside.index', compact('frontside', 'visi', 'misi', 'alasan_bergabung', 'karya_mahasiswa', 'dosen', 'informasi', 'kontak_kami'));
+        return view('pages.frontside.index', compact('frontside', 'visi', 'misi', 'alasan_bergabung', 'karya_mahasiswa', 'dosen', 'informasi', 'kontak_kami', 'informasi_umum'));
     }
 
     public function kurikulum()

@@ -140,7 +140,7 @@
                               <a 
                                 href="{{ asset('storage/kurikulum/' . $k->rps) }}" 
                                 download 
-                                class="text-blue-400 hover:text-white border border-blue-400 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2 text-center  dark:border-blue-300 dark:text-blue-300 dark:hover:text-white dark:hover:bg-blue-400 dark:focus:ring-blue-900"
+                                class="text-blue-400 hover:text-white border border-blue-400 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2 text-center  dark:border-blue-300 dark:text-blue-300 dark:hover:text-white dark:hover:bg-blue-400 dark:focus:ring-blue-900" target="_blank" rel="noopener noreferrer"
                               >
                                 <i class="fas fa-download mr-1"></i> Download
                               </a>

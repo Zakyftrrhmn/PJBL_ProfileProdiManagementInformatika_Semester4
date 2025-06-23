@@ -238,6 +238,14 @@
                             <span>Frontside</span>
                         </a>
                     </li>
+
+                   <li>
+                        <a href="{{ route('admin.umum.index') }}" class="py-2 text-sm flex items-center gap-2 px-4 transition-colors dark:text-white dark:opacity-80 hover:bg-blue-500/15 hover:font-semibold hover:text-slate-700 hover:rounded-lg {{ Request::is('admin/umum*') ? 'bg-blue-500/13 font-semibold text-slate-700 rounded-lg' : '' }}">
+                            {{-- Mengubah ikon di sini --}}
+                            <i class="fa-solid fa-info-circle text-blue-500 text-sm dark:text-blue-400"></i> {{-- Informasi: Info Circle --}}
+                            <span>Informasi Umum</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
             @endcan

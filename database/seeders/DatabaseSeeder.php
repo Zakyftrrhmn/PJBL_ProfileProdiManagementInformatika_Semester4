@@ -25,7 +25,11 @@ class DatabaseSeeder extends Seeder
             MisiSeeder::class,
             KontakSeeder::class,
             KalenderAkademikSeeder::class,
-            AkreditasiSeeder::class
+            AkreditasiSeeder::class,
+            AlasanBergabungSeeder::class,
+            KurikulumSeeder::class,
+            PrestasiMahasiswaSeeder::class,
+            InformasiUmumSeeder::class,
         ]);
     }
 }

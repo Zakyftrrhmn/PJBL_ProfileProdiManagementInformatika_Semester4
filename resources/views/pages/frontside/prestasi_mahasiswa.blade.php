@@ -58,7 +58,7 @@
 
             <!-- Sertifikat + Badge -->
             <div class="mt-4 md:mt-0 md:ml-auto flex flex-col items-start md:items-end gap-3">
-              <span class="text-xs px-4 py-1 bg-green-200 text-green-800 rounded-full font-semibold">
+              <span class="text-xs px-4 py-1 bg-green-200 text-green-800 rounded-full font-semibold whitespace-nowrap">
                 🏅 {{ $prestasi->peringkat }}
               </span>
               @if ($prestasi->file_sertifikat)

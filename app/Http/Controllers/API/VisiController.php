@@ -14,8 +14,10 @@ class VisiController extends Controller
      */
     public function index()
     {
-        $visi = Visi::first(); // hanya 1 baris data
-        return new VisiResource($visi);
+        // Ambil SEMUA data visi
+        $visi = Visi::all();
+        // Kembalikan sebagai KOLEKSI dari VisiResource
+        return VisiResource::collection($visi);
     }
 
     // /**
