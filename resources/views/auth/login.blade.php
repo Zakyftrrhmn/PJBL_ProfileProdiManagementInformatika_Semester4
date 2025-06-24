@@ -1,78 +1,95 @@
 @extends('layouts.auth')
-@section('title', 'Halaman Login | Prodi Manajemen Informatika')
+@section('title', 'Halaman Login | MI Pelalawan') 
 
 @section('content')
 
-  <div class="flex flex-col md:flex-row w-full max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-lg bg-white">
-    
-    <!-- Left Section -->
-    <div class="w-full md:w-1/2 bg-white p-10 flex flex-col justify-center">
-      <div class="mb-6">
-        <img src="{{ asset('assets/img/logo.png') }}" alt="Logo MI" class="w-12 h-12 rounded-full mb-4" /> 
-        <h1 class="text-4xl font-extrabold text-gray-900 mb-2 font-[Rubik] uppercase">Selamat Datang</h1>
-        <p class="text-gray-500 text-sm font-inter">Login untuk mengakses sistem Prodi Manajemen Informatika PSDKU Pelalawan.</p>
-      </div>
 
-            @if(session('success'))
-                {{-- Modifikasi untuk pesan sukses --}}
-                <div class="bg-green-500 text-white text-sm rounded-lg py-3 px-5 mb-5 text-center shadow-md animate-fade-in-down">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            @if(session('error'))
-                {{-- Modifikasi untuk pesan error --}}
-                <div class="bg-red-500 text-white text-sm rounded-lg py-3 px-5 mb-5 text-center shadow-md animate-fade-in-down">
-                    {{ session('error') }}
-                </div>
-            @endif
-
-      <form class="space-y-5 mt-6" method="POST" action="{{ route('login.proses') }}">
-        @csrf
-        <!-- Email -->
-        <div>
-          <label for="email" class="block text-sm font-medium text-gray-700 font-inter">Email</label>
-          <input type="email" id="email" name="email" placeholder="you@example.com"
-                 class="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm outline-none
-                                  focus:ring-2 focus:ring-purple-500 focus:border-purple-500
-                                  bg-gray-50 @error('email') border-red-500 ring-red-500 @enderror transition-all duration-200" required />
-          @error('email')
-            <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
-          @enderror
+        <div class="hidden md:flex absolute top-12 -left-1  items-center space-x-2 bg-white rounded-br-full rounded-tr-full p-2 pr-4 shadow-md">
+            <img src="{{ asset('assets/img/back-square-svgrepo-com.svg') }}" alt="Logo" class="w-8 h-8 md:w-10 md:h-10">
+            <span class="text-xl md:text-2xl font-bold text-gray-800">MI Pelalawan</span>
         </div>
+        
+<div class="flex flex-col md:flex-row w-full max-w-6xl mx-auto overflow-hidden shadow-2x relative z-10">
+    <div class="relative w-full md:w-[55%] flex items-end justify-center p-6 md:p-10 min-h-[300px] md:min-h-full">
+        
 
-        <!-- Password -->
-        <div>
-          <label for="password" class="block text-sm font-medium text-gray-700 font-inter" >Password</label>
-          <input type="password" id="password" name="password" placeholder="••••••••"
-                 class="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm outline-none
-                                  focus:ring-2 focus:ring-purple-500 focus:border-purple-500
+        <img src="{{ asset('assets/img/login.svg') }}" alt="Login Illustration" class="w-full h-auto object-contain max-h-[80%] md:max-h-full">
+    </div>
+
+    <div class="w-auto md:w-[45%] h-auto bg-white p-6 md:p-12 flex flex-col justify-center rounded-t-3xl md:rounded-3xl shadow-lg my-0 md:my-12">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2 text-center">WELCOME BACK!</h1>
+        <p class="text-gray-500 text-sm mb-8 text-center">Login untuk dapat mengakses halaman frontside MI Pelalawan</p>
+
+        @if(session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <span class="block sm:inline">{{ session('success') }}</span>
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <span class="block sm:inline">{{ session('error') }}</span>
+            </div>
+        @endif
+
+
+        <form class="space-y-5 mt-6" method="POST" action="{{ route('login.proses') }}">
+            @csrf
+            <div>
+                {{-- Label sr-only untuk aksesibilitas, karena ikon sudah jelas --}}
+                <label for="email" class="sr-only">Email</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        {{-- Ikon email --}}
+                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                        </svg>
+                    </div>
+                    <input type="email" id="email" name="email" placeholder="Masukkan Email"
+                           class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl shadow-sm outline-none
+                                  focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                                  bg-gray-50 @error('email') border-red-500 ring-red-500 @enderror transition-all duration-200"
+                           value="{{ old('email') }}" required />
+                </div>
+                @error('email')
+                    <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div>
+                <label for="password" class="sr-only">Password</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        {{-- Ikon gembok --}}
+                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <input type="password" id="password" name="password" placeholder="Masukkan Password"
+                           class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl shadow-sm outline-none
+                                  focus:ring-2 focus:ring-blue-500 focus:border-blue-500
                                   bg-gray-50 @error('password') border-red-500 ring-red-500 @enderror transition-all duration-200" required />
-          @error('password')
-            <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
-          @enderror
-        </div>
+                </div>
+                @error('password')
+                    <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <!-- Login Button -->
-        <button type="submit"
-                class="w-full py-3 px-4 bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600
-                               text-white font-bold text-lg rounded-xl shadow-lg transform hover:scale-105 transition duration-300 ease-in-out
-                               focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
-          Login
-        </button>
 
-        <p class="text-sm text-center text-gray-400 mt-4">© 2025 MI PSDKU Pelalawan</p>
-      </form>
+            <button type="submit"
+                    class="w-full flex items-center justify-center py-3 px-4 bg-blue-600 hover:bg-blue-700
+                           text-white font-bold text-lg rounded-xl shadow-lg transform hover:scale-105 transition duration-300 ease-in-out
+                           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                {{-- Ikon panah --}}
+                <svg class="w-5 h-5 mr-2 -rotate-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 2a.75.75 0 01.75.75v10.638l3.96-4.03a.75.75 0 111.08 1.04l-5.25 5.375a.75.75 0 01-1.08 0l-5.25-5.375a.75.75 0 111.08-1.04l3.96 4.03V2.75A.75.75 0 0110 2z" clip-rule="evenodd" />
+                </svg>
+                MASUK
+            </button>
+            <p class="text-sm text-center text-gray-400 mt-4">© 2025 Manajemen Informatika PSDKU Pelalawan</p> {{-- Mengubah teks copyright --}}
+        </form>
     </div>
 
-    <!-- Right Section -->
-    <div class="hidden md:block w-full md:w-1/2 bg-[#f5edff] p-6 relative rounded-2xl shadow-lg mt-6 md:mt-0">
-      <div class="flex items-center justify-center w-full h-full overflow-hidden rounded-2xl">
-        <img src="{{ asset('assets/img/login.png') }}"
-            alt="Illustration"
-            class="object-cover w-full h-full" />
-      </div>
-    </div>
-
-  </div>
+</div>
 @endsection

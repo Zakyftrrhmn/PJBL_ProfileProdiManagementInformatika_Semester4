@@ -23,7 +23,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // Jadwalkan command di sini
-        $schedule->command('campus:import-data')->dailyAt('03:00');
+        $schedule->command('campus:import-data')->everyMinute();
     }
 
     /**

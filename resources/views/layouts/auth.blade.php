@@ -15,7 +15,7 @@
 
 
 </head>
-<body class="bg-gradient-to-br from-[#f0e8ff] to-[#e4d4fc] min-h-screen flex items-center justify-center">
+<body class="min-h-screen flex items-center justify-center bg-no-repeat bg-cover bg-center" style="background-image: url('{{ asset('assets/img/bgloginn.png') }}');">
 
     @yield('content')
 
