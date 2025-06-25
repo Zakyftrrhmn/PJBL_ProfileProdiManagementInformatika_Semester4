@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ProfileKelulusan;
 use Illuminate\Http\Request;
+// use Illuminate\Support\Str; // Tidak diperlukan di controller karena sudah di Model
 
 class ProfileKelulusanController extends Controller
 {
@@ -36,13 +37,13 @@ class ProfileKelulusanController extends Controller
             ],
             [
                 'nama_profile.required' => 'Nama profile harus diisi',
-                'deskripsi.max' => 'Nama Profile maksimal 100 karakter',
+                'nama_profile.max' => 'Nama Profile maksimal 100 karakter', // Perbaiki pesan validasi ini
                 'deskripsi.required' => 'Deskripsi harus diisi',
                 'deskripsi.max' => 'Deskripsi maksimal 255 karakter',
             ]
         );
 
-        ProfileKelulusan::create($request->all());
+        ProfileKelulusan::create($request->all()); // ID akan otomatis terisi oleh metode boot() di model
         return redirect()->route('admin.profile_kelulusan.index')->with('success', 'Data berhasil ditambahkan');
     }
 
@@ -59,7 +60,8 @@ class ProfileKelulusanController extends Controller
      */
     public function edit(ProfileKelulusan $profileKelulusan)
     {
-        ProfileKelulusan::findOrFail($profileKelulusan->id);
+        // Baris ini dihapus karena $profileKelulusan sudah otomatis ditemukan oleh route model binding
+        // ProfileKelulusan::findOrFail($profileKelulusan->id);
         return view('pages.profileKelulusan.edit', compact('profileKelulusan'));
     }
 
@@ -70,12 +72,14 @@ class ProfileKelulusanController extends Controller
     {
         $request->validate(
             [
-                'nama_profile' => 'required|max:100',
+                // Jika nama_profile harus unik, Anda perlu menambahkan pengecualian ID saat ini:
+                // 'nama_profile' => 'required|max:100|unique:profile_kelulusan,nama_profile,' . $profileKelulusan->id . ',id',
+                'nama_profile' => 'required|max:100', // Sesuai dengan validasi Anda saat ini
                 'deskripsi' => 'required|max:255',
             ],
             [
                 'nama_profile.required' => 'Nama profile harus diisi',
-                'deskripsi.max' => 'Nama Profile maksimal 100 karakter',
+                'nama_profile.max' => 'Nama Profile maksimal 100 karakter', // Perbaiki pesan validasi ini
                 'deskripsi.required' => 'Deskripsi harus diisi',
                 'deskripsi.max' => 'Deskripsi maksimal 255 karakter',
             ]

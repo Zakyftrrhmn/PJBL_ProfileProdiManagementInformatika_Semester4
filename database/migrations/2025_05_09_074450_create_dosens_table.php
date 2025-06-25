@@ -12,16 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('dosen', function (Blueprint $table) {
-            $table->id();
+            // Mengubah $table->id(); menjadi $table->uuid('id')->primary();
+            $table->uuid('id')->primary(); // Menggunakan UUID sebagai primary key
             $table->string('photo');
-            $table->string('username');
+            $table->string('username')->unique(); // Tetap unique
             $table->string('nama');
             $table->string('asal_kota');
-            $table->string('nidn');
-            $table->string('website');
-            $table->string('email');
+            $table->string('nidn')->unique(); // Tetap unique
+            $table->string('website')->nullable(); // Website bisa null
+            $table->string('email')->unique()->nullable(); // Email unique tapi bisa null
             $table->string('pendidikan');
-            $table->string('jabatan');
+            $table->string('jabatan')->nullable(); // Jabatan bisa null
+            $table->string('kompetensi')->nullable(); // Tambahkan kolom kompetensi, bisa null
             $table->softDeletes();
             $table->timestamps();
         });

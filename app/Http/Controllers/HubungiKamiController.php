@@ -21,7 +21,7 @@ class HubungiKamiController extends Controller
      */
     public function create()
     {
-        return view('404');
+        return view('404'); // Tetap mengembalikan 404 jika tidak ada form create di admin
     }
 
     /**
@@ -29,14 +29,32 @@ class HubungiKamiController extends Controller
      */
     public function store(Request $request)
     {
-        return view('404');
+        // Implementasi store untuk menyimpan pesan kontak
+        $request->validate(
+            [
+                'nama' => 'required|string|max:100',
+                'email' => 'required|email|max:255',
+                'pesan' => 'required|string|max:1000',
+            ],
+            [
+                'nama.required' => 'Nama harus diisi',
+                'email.required' => 'Email harus diisi',
+                'email.email' => 'Format email tidak valid',
+                'pesan.required' => 'Pesan harus diisi',
+            ]
+        );
+
+        HubungiKami::create($request->all()); // ID akan otomatis terisi oleh metode boot() di model
+        return redirect()->back()->with('success', 'Pesan Anda berhasil dikirim!'); // Biasanya redirect ke halaman yang sama atau halaman sukses
     }
 
     /**
      * Display the specified resource.
      */
+    // Ubah parameter dari string $id menjadi HubungiKami $hubungiKami (Route Model Binding)
     public function show(HubungiKami $hubungiKami)
     {
+        // $hubungiKami sudah otomatis ditemukan berdasarkan UUID oleh route model binding
         return view('pages.hubungiKami.show', compact('hubungiKami'));
     }
 
@@ -45,7 +63,7 @@ class HubungiKamiController extends Controller
      */
     public function edit(string $id)
     {
-        return view('404');
+        return view('404'); // Tetap mengembalikan 404 jika tidak ada fungsionalitas edit
     }
 
     /**
@@ -53,12 +71,13 @@ class HubungiKamiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return view('404');
+        return view('404'); // Tetap mengembalikan 404 jika tidak ada fungsionalitas update
     }
 
     /**
      * Remove the specified resource from storage.
      */
+    // Ubah parameter dari string $id menjadi HubungiKami $hubungiKami (Route Model Binding)
     public function destroy(HubungiKami $hubungiKami)
     {
         $hubungiKami->delete();

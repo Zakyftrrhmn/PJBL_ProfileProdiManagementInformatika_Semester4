@@ -60,9 +60,11 @@
 
                     {{-- Email --}}
                     <div class="mb-4">
-                        <label for="email" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Email <span class="text-red-500">*</span></label>
-                        <input type="email" id="email" name="email" value="{{ old('email', $dosen->email) }}" required
-                               class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('email') border-red-500 dark:border-red-500 @enderror">
+                        <label for="email" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">
+                            Email <span class="py-1 px-2 text-green-800 bg-green-200 rounded text-xs">Opsional</span>
+                        </label>
+                        <input type="email" id="email" name="email" value="{{ old('email', $dosen->email) }}"
+                               class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('email') border-red-500 @enderror">
                         @error('email')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
@@ -70,9 +72,11 @@
 
                     {{-- Website --}}
                     <div class="mb-4">
-                        <label for="website" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Website <span class="text-red-500">*</span></label>
+                        <label for="website" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">
+                            Website <span class="py-1 px-2 text-green-800 bg-green-200 rounded text-xs">Opsional</span>
+                        </label>
                         <input type="text" id="website" name="website" value="{{ old('website', $dosen->website) }}"
-                               class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('website') border-red-500 dark:border-red-500 @enderror">
+                               class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('website') border-red-500 @enderror">
                         @error('website')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
@@ -82,7 +86,7 @@
                     <div class="mb-4">
                         <label for="pendidikan" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Pendidikan Terakhir <span class="text-red-500">*</span></label>
                         <input type="text" id="pendidikan" name="pendidikan" value="{{ old('pendidikan', $dosen->pendidikan) }}" required
-                               class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('pendidikan') border-red-500 dark:border-red-500 @enderror">
+                               class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('pendidikan') border-red-500 @enderror">
                         @error('pendidikan')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
@@ -90,22 +94,36 @@
 
                     {{-- Jabatan --}}
                     <div class="mb-4">
-                        <label for="jabatan" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Jabatan Akademik <span class="text-red-500">*</span></label>
-                        <input type="text" id="jabatan" name="jabatan" value="{{ old('jabatan', $dosen->jabatan) }}" required
-                               class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('jabatan') border-red-500 dark:border-red-500 @enderror">
+                        <label for="jabatan" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">
+                            Jabatan Akademik <span class="py-1 px-2 text-green-800 bg-green-200 rounded text-xs">Opsional</span>
+                        </label>
+                        <input type="text" id="jabatan" name="jabatan" value="{{ old('jabatan', $dosen->jabatan) }}"
+                               class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('jabatan') border-red-500 @enderror">
                         @error('jabatan')
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- Kompetensi --}}
+                    <div class="mb-4">
+                        <label for="kompetensi" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">
+                            Kompetensi <span class="py-1 px-2 text-green-800 bg-green-200 rounded text-xs">Opsional</span>
+                        </label>
+                        <input type="text" id="kompetensi" name="kompetensi" value="{{ old('kompetensi', $dosen->kompetensi) }}"
+                               class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600" placeholder="Contoh: Web Development, Data Science">
+                        @error('kompetensi')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
 
                     {{-- Foto --}}
                     <div class="mb-4">
-                        <label for="photo" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Upload Foto <span class="text-red-500">*</span></label>
+                        <label for="photo" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Upload Foto</label>
                         <input type="file" id="photo" name="photo" accept="image/*"
                                class="block w-full text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('photo') border-red-500 dark:border-red-500 @enderror">
-                               <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                                Format file yang diizinkan: .jpg, .jpeg, .png | Maksimal ukuran: 2MB
-                                </p>
+                        <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                        Format file yang diizinkan: .jpg, .jpeg, .png | Maksimal ukuran: 2MB (Biarkan kosong jika tidak ingin mengubah foto)
+                        </p>
                         @error('photo')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror

@@ -9,7 +9,6 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      */
@@ -55,12 +54,11 @@ class UserController extends Controller
         );
 
         $user = User::create([
+            // ID akan otomatis terisi oleh metode boot() di model User
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-
         ]);
-
 
         $user->syncRoles($request->roles);
 
@@ -72,16 +70,19 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Anda mungkin ingin mengubah ini menjadi route model binding juga:
+        // public function show(User $user) { ... return view('pages.user.show', compact('user')); }
+        return view('404');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    // Ubah parameter dari string $id menjadi User $user (Route Model Binding)
+    public function edit(User $user)
     {
         $roles = Role::pluck('name', 'name')->all();
-        $user = User::find($id);
+        // $user sudah otomatis ditemukan berdasarkan UUID oleh route model binding
         $userRoles = $user->roles()->pluck('name')->all();
         return view('pages.user.edit', [
             'user' => $user,
@@ -93,14 +94,14 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    // Ubah parameter dari string $id menjadi User $user (Route Model Binding)
+    public function update(Request $request, User $user)
     {
-        $user = User::findOrFail($id);
-
+        // Sesuaikan unique rule agar mengecualikan ID user saat ini
         $request->validate(
             [
                 'name' => 'required|string|max:255',
-                'email' => 'required|email|max:255|unique:users,email,' . $id,
+                'email' => 'required|email|max:255|unique:users,email,' . $user->id . ',id', // Gunakan $user->id
                 'password' => 'nullable|string|min:8|max:20',
                 'roles' => 'required|array',
                 'roles.*' => 'string'
@@ -137,9 +138,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    // Ubah parameter dari string $id menjadi User $user (Route Model Binding)
+    public function destroy(User $user)
     {
-        $user  = User::find($id);
+        // $user sudah otomatis ditemukan berdasarkan UUID oleh route model binding
         $user->delete();
         return redirect()->route('admin.users.index')->with('success', 'Data User Berhasil Di Hapus');
     }

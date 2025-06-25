@@ -23,14 +23,10 @@
               </div>
             @endif
 
-            <div class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border  overflow-hidden">
-              <div class="flex justify-between">
-                <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                  <h6 class="dark:text-white">Tabel @yield('title') </h6>
-                </div>
-                <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                      <a href="{{ route('admin.users.create') }}" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Tambah Data</a>
-                </div>
+            <div class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border overflow-hidden">
+              <div class="flex justify-between items-center p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent"> {{-- Tambah items-center --}}
+                <h6 class="dark:text-white">Tabel @yield('title') </h6>
+                <a href="{{ route('admin.users.create') }}" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Tambah Data</a> {{-- Pindahkan button Tambah Data --}}
               </div>
               
               <div class="flex-auto px-0 pt-5 pb-2">
@@ -38,7 +34,7 @@
                   <table id="userTables" class="items-center justify-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
                     <thead class="align-bottom">
                       <tr>
-                        
+                        {{-- Sesuaikan padding th agar konsisten dengan desain Roles --}}
                         <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">No</th>
                         <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Nama User</th>
                         <th class="px-6 py-3 font-bold uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70 text-left">Username</th>
@@ -49,9 +45,9 @@
                     <tbody class="border-t">
                       @foreach ($user as $u)
                       <tr>
-
-                        <td class=" align-middle bg-transparent">
-                          <div class="my-auto ">
+                        {{-- Terapkan kelas desain dari Roles pada semua td --}}
+                        <td class="p-2 align-middle bg-transparent whitespace-nowrap shadow-transparent">
+                          <div class="my-auto">
                             <h6 class="mb-0 text-sm leading-normal dark:text-white
                                       max-w-xl
                                       whitespace-normal break-words
@@ -61,7 +57,7 @@
                           </div>
                         </td>
                           
-                        <td class=" align-middle bg-transparent">
+                        <td class="p-2 align-middle bg-transparent whitespace-nowrap shadow-transparent">
                           <div class="my-auto">
                             <h6 class="mb-0 text-sm leading-normal dark:text-white
                                       max-w-xl
@@ -72,7 +68,7 @@
                           </div>
                         </td>
 
-                        <td class="align-middle bg-transparent">
+                        <td class="p-2 align-middle bg-transparent whitespace-nowrap shadow-transparent">
                           <div class="my-auto">
                             <h6 class="mb-0 text-sm leading-normal dark:text-white
                                       max-w-xl
@@ -83,7 +79,7 @@
                           </div>
                         </td>
 
-                        <td class="align-middle bg-transparent text-left">
+                        <td class="p-2 align-middle bg-transparent text-left whitespace-nowrap shadow-transparent">
                           <div class="inline-flex flex-wrap justify-left gap-2">
                             @if (!empty($u->getRoleNames()))
                               @foreach ($u->getRoleNames() as $rolename)
@@ -95,27 +91,30 @@
                           </div>
                         </td>
 
-                        <td class="align-middle bg-transparent border-b-0 whitespace-nowrap shadow-transparent items-center ">
+                        <td class="p-2 align-middle bg-transparent border-b-0 whitespace-nowrap shadow-transparent text-center">
                             <div class="flex space-x-1 justify-center">
-                                <a href="{{ route('admin.users.edit', $u) }}" class="text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900">
-                                <i class="fas fa-edit mr-1"></i> Edit
-                                </a>
-                                <form
-                                    action="{{ route('admin.users.destroy', $u) }}"
-                                    method="POST"
-                                    x-data {{-- Ini penting untuk mengaktifkan Alpine.js pada form ini --}}
-                                    @submit.prevent="$dispatch('open-delete-modal', { form: $event.target })" {{-- Ini akan mencegah submit default dan memicu modal --}}
-                                >
-                                    @csrf
-                                    @method('DELETE')
-                                    <button
-                                        type="submit"
-                                        class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
-                                        {{-- Hapus atribut onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" --}}
+                                @if ($u->email === 'superadmin@mail.com')
+                                    <span class="inline-block text-xs font-semibold text-white bg-red-600 px-3 py-2 rounded">Tidak Bisa Diubah</span>
+                                @else
+                                    <a href="{{ route('admin.users.edit', $u) }}" class="text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2  dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900">
+                                    <i class="fas fa-edit mr-1"></i> Edit
+                                    </a>
+                                    <form
+                                        action="{{ route('admin.users.destroy', $u) }}"
+                                        method="POST"
+                                        x-data {{-- Ini penting untuk mengaktifkan Alpine.js pada form ini --}}
+                                        @submit.prevent="$dispatch('open-delete-modal', { form: $event.target })" {{-- Ini akan mencegah submit default dan memicu modal --}}
                                     >
-                                        <i class="fas fa-trash-alt mr-1"></i> Hapus
-                                    </button>
-                                </form>
+                                        @csrf
+                                        @method('DELETE')
+                                        <button
+                                            type="submit"
+                                            class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+                                        >
+                                            <i class="fas fa-trash-alt mr-1"></i> Hapus
+                                        </button>
+                                    </form>
+                                @endif
                             </div>
                         </td>
 
@@ -130,18 +129,5 @@
         </div>
 
 @endsection
-@push('scripts')
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        if (document.getElementById("userTables") && typeof simpleDatatables !== 'undefined' && typeof simpleDatatables.DataTable !== 'undefined') {
-            const dataTable = new simpleDatatables.DataTable("#userTables", {
-                paging: true,
-                perPage: 10,
-                perPageSelect: [5, 10, 15, 20, 25],
-                sortable: false
-            });
-        }
-    });
-</script>
-@endpush
 
+{{-- Script for simpleDatatables is intentionally removed as per user's request --}}

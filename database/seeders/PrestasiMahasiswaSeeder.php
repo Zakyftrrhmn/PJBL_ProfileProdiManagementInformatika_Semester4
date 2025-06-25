@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str; // Tambahkan ini
 use Carbon\Carbon; // Untuk memudahkan manipulasi tanggal
 
 class PrestasiMahasiswaSeeder extends Seeder
@@ -69,6 +70,7 @@ class PrestasiMahasiswaSeeder extends Seeder
 
         foreach ($prestasiData as $data) {
             DB::table('prestasi_mahasiswas')->insert([
+                'id' => (string) Str::uuid(), // <-- TAMBAHKAN BARIS INI UNTUK UUID
                 'nama_mahasiswa' => $data['nama_mahasiswa'],
                 'nim' => $data['nim'],
                 'nama_lomba' => $data['nama_lomba'],

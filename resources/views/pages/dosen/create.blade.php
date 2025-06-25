@@ -25,7 +25,6 @@
                         @enderror
                     </div>
 
-
                     {{-- Username --}}
                     <div class="mb-4">
                         <label for="username" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Username <span class="text-red-500">*</span></label>
@@ -35,8 +34,7 @@
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
-
-                   
+                    
                     {{-- Asal Kota --}}
                     <div class="mb-4">
                         <label for="asal_kota" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Asal Kota <span class="text-red-500">*</span></label>
@@ -59,8 +57,10 @@
 
                     {{-- Email --}}
                     <div class="mb-4">
-                        <label for="email" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Email <span class="text-red-500">*</span></label>
-                        <input type="email" id="email" name="email" value="{{ old('email') }}" required
+                        <label for="email" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">
+                            Email <span class="py-1 px-2 text-green-800 bg-green-200 rounded-full text-xs">Opsional</span>
+                        </label>
+                        <input type="email" id="email" name="email" value="{{ old('email') }}"
                                class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('email') border-red-500 @enderror">
                         @error('email')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
@@ -69,7 +69,9 @@
 
                     {{-- Website --}}
                     <div class="mb-4">
-                        <label for="website" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Website <span class="text-red-500">*</span></label>
+                        <label for="website" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">
+                            Website <span class="py-1 px-2 text-green-800 bg-green-200 rounded-full text-xs">Opsional</span>
+                        </label>
                         <input type="text" id="website" name="website" placeholder="https://example.com" value="{{ old('website') }}"
                                class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('website') border-red-500 @enderror">
                         @error('website')
@@ -89,10 +91,24 @@
 
                     {{-- Jabatan --}}
                     <div class="mb-4">
-                        <label for="jabatan" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Jabatan Akademik <span class="text-red-500">*</span></label>
-                        <input type="text" id="jabatan" name="jabatan" value="{{ old('jabatan') }}" required
+                        <label for="jabatan" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">
+                            Jabatan Akademik <span class="py-1 px-2 text-green-800 bg-green-200 rounded-full text-xs">Opsional</span>
+                        </label>
+                        <input type="text" id="jabatan" name="jabatan" value="{{ old('jabatan') }}"
                                class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('jabatan') border-red-500 @enderror">
                         @error('jabatan')
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- Kompetensi --}}
+                    <div class="mb-4">
+                        <label for="kompetensi" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">
+                            Kompetensi <span class="py-1 px-2 text-green-800 bg-green-200 rounded-full text-xs">Opsional</span>
+                        </label>
+                        <input type="text" id="kompetensi" name="kompetensi" value="{{ old('kompetensi') }}"
+                               class="block w-full px-4 py-2 text-sm text-slate-700 bg-white border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-700 dark:text-white dark:border-slate-600" placeholder="Contoh: Web Development, Data Science">
+                        @error('kompetensi')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
@@ -100,12 +116,11 @@
                     {{-- Foto --}}
                     <div class="mb-4">
                         <label for="photo" class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Upload Foto <span class="text-red-500">*</span></label>
-                        <input type="file" id="photo" name="photo" accept="image/*"
-                               class="block w-full text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('photo') border-red-500 dark:border-red-500 @enderror">
-                               <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                                Format file yang diizinkan: .jpg, .jpeg, .png | Maksimal ukuran: 2MB
-                                </p>
-
+                        <input type="file" id="photo" name="photo" accept="image/*" required
+                               class="block w-full text-sm text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 dark:bg-slate-700 dark:text-white dark:border-slate-600 @error('photo') border-red-500 @enderror">
+                        <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                        Format file yang diizinkan: .jpg, .jpeg, .png | Maksimal ukuran: 2MB
+                        </p>
                         @error('photo')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror

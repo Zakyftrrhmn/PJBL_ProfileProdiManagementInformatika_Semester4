@@ -3,17 +3,14 @@
 
 @section('content')
 
-
-        <div class="hidden md:flex absolute top-12 -left-1  items-center space-x-2 bg-white rounded-br-full rounded-tr-full p-2 pr-4 shadow-md">
-            <img src="{{ asset('assets/img/back-square-svgrepo-com.svg') }}" alt="Logo" class="w-8 h-8 md:w-10 md:h-10">
-            <span class="text-xl md:text-2xl font-bold text-gray-800">MI Pelalawan</span>
-        </div>
+<a href="{{ route('beranda') }}" class="hidden md:flex absolute top-12 -left-1 items-center space-x-2 bg-white rounded-br-full rounded-tr-full p-2 pr-4 shadow-md">
+    <img src="{{ asset('assets/img/back-square-svgrepo-com.svg') }}" alt="Logo" class="w-8 h-8 md:w-10 md:h-10">
+    <span class="text-lg md:text-xl font-bold text-gray-800">MI Pelalawan</span>
+</a>
         
-<div class="flex flex-col md:flex-row w-full max-w-6xl mx-auto overflow-hidden shadow-2x relative z-10">
+<div class="flex flex-col md:flex-row w-full max-w-6xl mx-auto overflow-hidden relative z-10">
     <div class="relative w-full md:w-[55%] flex items-end justify-center p-6 md:p-10 min-h-[300px] md:min-h-full">
-        
-
-        <img src="{{ asset('assets/img/login.svg') }}" alt="Login Illustration" class="w-full h-auto object-contain max-h-[80%] md:max-h-full">
+        <img src="{{ asset('assets/img/login.svg') }}" alt="Ilustrasi Login" class="w-full h-auto object-contain max-h-[80%] md:max-h-full">
     </div>
 
     <div class="w-auto md:w-[45%] h-auto bg-white p-6 md:p-12 flex flex-col justify-center rounded-t-3xl md:rounded-3xl shadow-lg my-0 md:my-12">
@@ -32,7 +29,6 @@
             </div>
         @endif
 
-
         <form class="space-y-5 mt-6" method="POST" action="{{ route('login.proses') }}">
             @csrf
             <div>
@@ -49,11 +45,14 @@
                     <input type="email" id="email" name="email" placeholder="Masukkan Email"
                            class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl shadow-sm outline-none
                                   focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-                                  bg-gray-50 @error('email') border-red-500 ring-red-500 @enderror transition-all duration-200"
+                                  bg-gray-50 transition-all duration-200
+                                  @error('email') border-red-500 ring-red-500 @enderror
+                                  peer" {{-- Tambahkan 'peer' untuk styling disabled --}}
                            value="{{ old('email') }}" required />
                 </div>
+                {{-- Ini akan menampilkan pesan error lockout --}}
                 @error('email')
-                    <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+                    <p id="email-error" class="text-sm text-red-600 mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -69,15 +68,16 @@
                     <input type="password" id="password" name="password" placeholder="Masukkan Password"
                            class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl shadow-sm outline-none
                                   focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-                                  bg-gray-50 @error('password') border-red-500 ring-red-500 @enderror transition-all duration-200" required />
+                                  bg-gray-50 transition-all duration-200
+                                  @error('password') border-red-500 ring-red-500 @enderror
+                                  peer" {{-- Tambahkan 'peer' untuk styling disabled --}} required />
                 </div>
                 @error('password')
                     <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
-
-            <button type="submit"
+            <button type="submit" id="login-button"
                     class="w-full flex items-center justify-center py-3 px-4 bg-blue-600 hover:bg-blue-700
                            text-white font-bold text-lg rounded-xl shadow-lg transform hover:scale-105 transition duration-300 ease-in-out
                            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
@@ -87,9 +87,71 @@
                 </svg>
                 MASUK
             </button>
-            <p class="text-sm text-center text-gray-400 mt-4">© 2025 Manajemen Informatika PSDKU Pelalawan</p> {{-- Mengubah teks copyright --}}
+            <p class="text-sm text-center text-gray-400 mt-4">© 2025 Manajemen Informatika PSDKU Pelalawan</p>
         </form>
     </div>
-
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const loginButton = document.getElementById('login-button');
+        const emailErrorContainer = document.getElementById('email-error'); // Container for the error message
+
+        let lockoutSeconds = 0;
+        let originalErrorMessage = '';
+
+        if (emailErrorContainer) {
+            originalErrorMessage = emailErrorContainer.textContent;
+            const match = originalErrorMessage.match(/(\d+) detik/); 
+            if (match && match[1]) {
+                lockoutSeconds = parseInt(match[1]);
+            }
+        }
+
+        function updateCountdown() {
+            if (lockoutSeconds > 0) {
+                // Display the countdown message prominently
+                if (emailErrorContainer) {
+                    emailErrorContainer.textContent = `Terlalu banyak percobaan login. Silakan coba lagi dalam ${lockoutSeconds} detik.`;
+                    emailErrorContainer.classList.remove('text-green-600'); // Ensure it's red during countdown
+                    emailErrorContainer.classList.add('text-red-600');
+                }
+                
+                // Disable inputs and button
+                emailInput.disabled = true;
+                passwordInput.disabled = true;
+                loginButton.disabled = true;
+                loginButton.classList.add('opacity-50', 'cursor-not-allowed');
+                emailInput.classList.add('bg-gray-200', 'cursor-not-allowed'); // Add disabled visual for inputs
+                passwordInput.classList.add('bg-gray-200', 'cursor-not-allowed'); // Add disabled visual for inputs
+
+                lockoutSeconds--;
+
+            } else {
+                clearInterval(countdownInterval);
+                if (emailErrorContainer) {
+                    emailErrorContainer.textContent = 'Silakan coba login kembali.';
+                    emailErrorContainer.classList.remove('text-red-600');
+                    emailErrorContainer.classList.add('text-green-600'); 
+                }
+
+                // Re-enable inputs and button
+                emailInput.disabled = false;
+                passwordInput.disabled = false;
+                loginButton.disabled = false;
+                loginButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                emailInput.classList.remove('bg-gray-200', 'cursor-not-allowed'); // Remove disabled visual
+                passwordInput.classList.remove('bg-gray-200', 'cursor-not-allowed'); // Remove disabled visual
+            }
+        }
+
+        if (lockoutSeconds > 0) {
+            updateCountdown(); // Call immediately to display initial state
+            let countdownInterval = setInterval(updateCountdown, 1000);
+        }
+    });
+</script>
+
 @endsection

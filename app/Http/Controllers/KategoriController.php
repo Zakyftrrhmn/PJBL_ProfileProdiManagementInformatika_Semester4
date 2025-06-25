@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class KategoriController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      */
@@ -32,7 +31,7 @@ class KategoriController extends Controller
     {
         $request->validate(
             [
-                'nama_kategori' => 'required|unique:kategori|max:20',
+                'nama_kategori' => 'required|unique:kategori,nama_kategori|max:20', // Sesuaikan unique rule
             ],
             [
                 'nama_kategori.required' => 'Kategori harus diisi',
@@ -41,35 +40,39 @@ class KategoriController extends Controller
             ]
         );
 
-        Kategori::create($request->all());
+        Kategori::create($request->all()); // ID akan otomatis terisi oleh metode boot() di model Kategori
         return redirect()->route('admin.kategori_informasi.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
      * Display the specified resource.
      */
+    // Menggunakan Route Model Binding
     public function show(Kategori $kategori_informasi)
     {
-        return view('404');
+        return view('404'); // Tetap 404 jika tidak ada tampilan detail khusus
     }
 
     /**
      * Show the form for editing the specified resource.
      */
+    // Menggunakan Route Model Binding
     public function edit(Kategori $kategori_informasi)
     {
-        $kategori_informasi = Kategori::find($kategori_informasi->id);
+        // Tidak perlu lagi find($kategori_informasi->id) karena sudah otomatis ditemukan
         return view('pages.kategori.edit', compact('kategori_informasi'));
     }
 
     /**
      * Update the specified resource in storage.
      */
+    // Menggunakan Route Model Binding
     public function update(Request $request, Kategori $kategori_informasi)
     {
         $request->validate(
             [
-                'nama_kategori' => 'required|unique:kategori|max:20',
+                // Sesuaikan unique rule agar mengecualikan ID kategori saat ini
+                'nama_kategori' => 'required|unique:kategori,nama_kategori,' . $kategori_informasi->id . ',id|max:20',
             ],
             [
                 'nama_kategori.required' => 'Kategori harus diisi',
@@ -85,6 +88,7 @@ class KategoriController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    // Menggunakan Route Model Binding
     public function destroy(Kategori $kategori_informasi)
     {
         $kategori_informasi->delete();

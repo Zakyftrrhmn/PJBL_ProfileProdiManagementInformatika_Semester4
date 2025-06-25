@@ -344,95 +344,95 @@
         />
       </div>
     </section>
+    
+<section class="bg-[#202020] py-20 -mt-20 relative z-10">
+  <div class="max-w-7xl mx-auto px-4 text-center">
+    <span
+      class="uppercase text-[8px] md:text-xs font-semibold text-blue-700 bg-blue-200 px-3 py-1 rounded-full tracking-widest"
+    >
+      {{ $frontside ? $frontside->dosen_title : 'Tenaga pengajar berpengalaman'; }}
+    </span>
+    <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">
+      {{ $frontside ? $frontside->dosen_subtitle : 'Profil Dosen Pengajar'; }}
+    </h2>
+    <p class="text-[#838AA7] mt-1 text-base">
+      {{ $frontside ? $frontside->dosen_description : 'Lihat profil singkat para dosen.'; }}
+    </p>
+  </div>
 
-    <!-- Slider Section -->
-    <section class="bg-[#202020] py-20 -mt-20 relative z-10">
-      <div class="max-w-7xl mx-auto px-4 text-center">
-        <span
-          class="uppercase text-[8px] md:text-xs font-semibold text-blue-700 bg-blue-200 px-3 py-1 rounded-full tracking-widest"
-        >
-          {{ $frontside ? $frontside->dosen_title : 'Tenaga pengajar berpengalaman'; }}
-        </span>
-        <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">
-          {{ $frontside ? $frontside->dosen_subtitle : 'Profil Dosen Pengajar'; }}
-        </h2>
-        <p class="text-[#838AA7] mt-1 text-base">
-          {{ $frontside ? $frontside->dosen_description : 'Lihat profil singkat para dosen.'; }}
+  <div class="swiper mt-10 px-4">
+    @if ($dosen->isEmpty())
+      <div class="mt-10 flex justify-center">
+        <p class="text-center text-sm px-6 py-2 rounded-full text-red-700 bg-red-200">
+          Data Dosen Belum Ada
         </p>
       </div>
-
-      <div class="swiper mt-10 px-4">
-         @if ($dosen->isEmpty())
-           <div class="mt-10 flex justify-center">
-              <p class="text-center text-sm px-6 py-2 rounded-full text-red-700 bg-red-200">
-                Data Dosen Belum Ada
-              </p>
-            </div>
-        @else
-        <div class="swiper-wrapper">
-          <!-- Swiper Container -->
-          <!-- Swiper Slide -->
-          @foreach ($dosen as $d)
-          <div class="swiper-slide">
-            <!-- Card isi dosen seperti sebelumnya -->
+    @else
+    <div class="swiper-wrapper">
+      @foreach ($dosen as $d)
+      <div class="swiper-slide">
+        <div
+          class="bg-white rounded-xl shadow-md p-4 text-black min-w-[300px] max-w-xs mx-auto"
+        >
+          <div class="flex flex-col items-center">
             <div
-              class="bg-white rounded-xl shadow-md p-4 text-black min-w-[300px] max-w-xs mx-auto"
-            >
-              <div class="flex flex-col items-center">
-                <div
-                  class="w-full h-24  bg-cover bg-center rounded-lg mb-[-30px]" style="background-image: url('{{ asset('assets/frontside/img/abstrak.jpg') }}');"
-                ></div>
-                <img
-                  src="{{ asset('storage/dosen/' . $d->photo) }}"
-                  alt="photo dosen"
-                  class="w-24 h-24 rounded-full border-4 border-white object-cover"
-                />
-                <p class="text-sm text-[#838AA7] mt-2">{{ $d->username }}</p>
-                <h3 class="font-semibold text-lg">{{ $d->nama }}</h3>
-                <p class="text-xs text-[#838AA7] uppercase font-medium">
-                  {{ $d->asal_kota }} | NIDN {{ $d->nidn }}
-                </p>
-              </div>
-              <hr class="my-4 text-[#838AA7]" />
-              <div class="space-y-2 text-sm">
-                <div class="flex justify-between text-xs">
-                  <span class="flex items-center text-[#838AA7]"
-                    ><i class="fas fa-globe mr-2"></i> Website</span
-                  >
-                  <span class="text-right">{{ $d->website }}</span>
-                </div>
-                <div class="flex justify-between text-xs">
-                  <span class="flex items-center text-[#838AA7]"
-                    ><i class="fas fa-envelope mr-2"></i> Email</span
-                  >
-                  <span class="text-right">  {{ $d->email }} </span>
-                </div>
-                <div class="flex justify-between text-xs">
-                  <span class="flex items-center text-[#838AA7]"
-                    ><i class="fas fa-graduation-cap mr-2"></i> Pendidikan</span
-                  >
-                  <span class="text-right">{{ $d->pendidikan }}</span>
-                </div>
-                <div class="flex justify-between text-xs">
-                  <span class="flex items-center text-[#838AA7]"
-                    ><i class="fas fa-briefcase mr-2"></i> Jabatan</span
-                  >
-                  <span class="text-right">{{ $d->jabatan }}</span>
-                </div>
-              </div>
+              class="w-full h-24  bg-cover bg-center rounded-lg mb-[-30px]" style="background-image: url('{{ asset('assets/frontside/img/abstrak.jpg') }}');"
+            ></div>
+            <img
+              src="{{ asset('storage/dosen/' . $d->photo) }}"
+              alt="photo dosen"
+              class="w-24 h-24 rounded-full border-4 border-white object-cover"
+            />
+            <p class="text-sm text-[#838AA7] mt-2">{{ $d->username }}</p>
+            <h3 class="font-semibold text-lg">{{ $d->nama }}</h3>
+            <p class="text-xs text-[#838AA7] uppercase font-medium">
+              {{ $d->asal_kota }} | NIDN {{ $d->nidn }}
+            </p>
+          </div>
+          <hr class="my-4 text-[#838AA7]" />
+          <div class="space-y-2 text-sm">
+            <div class="flex justify-between text-xs">
+              <span class="flex items-center text-[#838AA7]"
+                ><i class="fas fa-globe mr-2"></i> Website</span
+              >
+              <span class="text-right">{{ $d->website ?? '-' }}</span>
+            </div>
+            <div class="flex justify-between text-xs">
+              <span class="flex items-center text-[#838AA7]"
+                ><i class="fas fa-envelope mr-2"></i> Email</span
+              >
+              <span class="text-right">{{ $d->email ?? '-' }}</span>
+            </div>
+            <div class="flex justify-between text-xs">
+              <span class="flex items-center text-[#838AA7]"
+                ><i class="fas fa-graduation-cap mr-2"></i> Pendidikan</span
+              >
+              <span class="text-right">{{ $d->pendidikan }}</span>
+            </div>
+            <div class="flex justify-between text-xs">
+              <span class="flex items-center text-[#838AA7]"
+                ><i class="fas fa-briefcase mr-2"></i> Jabatan</span
+              >
+              <span class="text-right">{{ $d->jabatan ?? '-' }}</span>
+            </div>
+            {{-- Tambahan untuk Kompetensi --}}
+            <div class="flex justify-between text-xs">
+              <span class="flex items-center text-[#838AA7]"
+                ><i class="fas fa-lightbulb mr-2"></i> Kompetensi</span
+              >
+              <span class="text-right">{{ $d->kompetensi ?? '-' }}</span>
             </div>
           </div>
-          @endforeach
-          <!-- Tambahkan slide lain sesuai kebutuhan -->
         </div>
-        <!-- Optional Navigation -->
-        <div class="swiper-button-prev text-white"></div>
-        <div class="swiper-button-next text-white"></div>
-        <div class="swiper-pagination mt-4"></div>
-        
-        @endif
       </div>
-    </section>
+      @endforeach
+      </div>
+    <div class="swiper-button-prev text-white"></div>
+    <div class="swiper-button-next text-white"></div>
+    <div class="swiper-pagination mt-4"></div>
+    @endif
+  </div>
+</section>
 
 
     <!-- Berita & Artikel -->

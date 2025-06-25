@@ -4,7 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB; // Pastikan ini diimpor
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str; // Tambahkan ini
 
 class AlasanBergabungSeeder extends Seeder
 {
@@ -26,6 +27,7 @@ class AlasanBergabungSeeder extends Seeder
         // Masukkan data ke tabel
         foreach ($alasanBergabung as $alasan) {
             DB::table('alasan_bergabung')->insert([
+                'id' => (string) Str::uuid(), // Tambahkan UUID secara manual
                 'alasan' => $alasan['alasan'],
                 'created_at' => now(),
                 'updated_at' => now(),

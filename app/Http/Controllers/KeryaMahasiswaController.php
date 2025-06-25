@@ -6,8 +6,9 @@ use App\Models\KaryaMahasiswa;
 use App\Models\KategoriKarya;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str; // Tambahkan ini jika Anda ingin membuat slug secara manual di controller
 
-class KeryaMahasiswaController extends Controller
+class KeryaMahasiswaController extends Controller // Typonya dipertahankan
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +24,7 @@ class KeryaMahasiswaController extends Controller
      */
     public function create()
     {
-        $kategori_karya = KategoriKarya::all();
+        $kategori_karya = KategoriKarya::all(); // ID-nya sekarang UUID
         return view('pages.karya_mahasiswa.create', compact('kategori_karya'));
     }
 
@@ -35,12 +36,13 @@ class KeryaMahasiswaController extends Controller
         $request->validate([
             'judul' => 'required|string|max:255',
             'isi' => 'required|string',
-            'kategori_id' => 'required|exists:kategori_karya,id',
-            'tahun' => 'required|string',
+            'kategori_id' => 'required|exists:kategori_karya,id', // 'exists' rule bekerja dengan UUID
+            'tahun' => 'required|integer', // Mengubah ke integer karena tahun adalah angka
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $data = $request->only(['judul', 'isi', 'kategori_id', 'tahun']);
+        // Slug akan otomatis dibuat di model KaryaMahasiswa saat 'creating'
 
         if ($request->hasFile('thumbnail')) {
             $data['thumbnail'] = $request->file('thumbnail')->store('karya_mahasiswa', 'public');
@@ -54,18 +56,19 @@ class KeryaMahasiswaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    // Ubah parameter dari string $id menjadi KaryaMahasiswa $karya_mahasiswa (Route Model Binding)
+    public function show(KaryaMahasiswa $karya_mahasiswa)
     {
-        $karya_mahasiswa = KaryaMahasiswa::with('kategori_karya')->findOrFail($id);
+        $karya_mahasiswa->load('kategori_karya'); // Load relasi kategori_karya
         return view('pages.karya_mahasiswa.show', compact('karya_mahasiswa'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    // Ubah parameter dari string $id menjadi KaryaMahasiswa $karya_mahasiswa (Route Model Binding)
+    public function edit(KaryaMahasiswa $karya_mahasiswa)
     {
-        $karya_mahasiswa = KaryaMahasiswa::findOrFail($id);
         $kategori_karya = KategoriKarya::all();
         return view('pages.karya_mahasiswa.edit', compact('karya_mahasiswa', 'kategori_karya'));
     }
@@ -73,29 +76,30 @@ class KeryaMahasiswaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    // Ubah parameter dari string $id menjadi KaryaMahasiswa $karya_mahasiswa (Route Model Binding)
+    public function update(Request $request, KaryaMahasiswa $karya_mahasiswa)
     {
-        $karya = KaryaMahasiswa::findOrFail($id);
-
+        // Sesuaikan validasi unique slug agar mengecualikan ID karya_mahasiswa saat ini
         $request->validate([
             'judul' => 'required|string|max:255',
             'isi' => 'required|string',
             'kategori_id' => 'required|exists:kategori_karya,id',
-            'tahun' => 'required|string',
+            'tahun' => 'required|integer', // Mengubah ke integer
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $data = $request->only(['judul', 'isi', 'kategori_id', 'tahun']);
+        // Slug akan otomatis diperbarui di model KaryaMahasiswa saat 'updating'
 
         if ($request->hasFile('thumbnail')) {
             // Hapus thumbnail lama jika ada
-            if ($karya->thumbnail && Storage::disk('public')->exists($karya->thumbnail)) {
-                Storage::disk('public')->delete($karya->thumbnail);
+            if ($karya_mahasiswa->thumbnail && Storage::disk('public')->exists($karya_mahasiswa->thumbnail)) {
+                Storage::disk('public')->delete($karya_mahasiswa->thumbnail);
             }
             $data['thumbnail'] = $request->file('thumbnail')->store('karya_mahasiswa', 'public');
         }
 
-        $karya->update($data);
+        $karya_mahasiswa->update($data);
 
         return redirect()->route('admin.karya_mahasiswa.index')->with('success', 'Karya Mahasiswa berhasil diperbarui.');
     }
@@ -103,15 +107,14 @@ class KeryaMahasiswaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    // Ubah parameter dari string $id menjadi KaryaMahasiswa $karya_mahasiswa (Route Model Binding)
+    public function destroy(KaryaMahasiswa $karya_mahasiswa)
     {
-        $karya = KaryaMahasiswa::findOrFail($id);
-
-        if ($karya->thumbnail && Storage::disk('public')->exists($karya->thumbnail)) {
-            Storage::disk('public')->delete($karya->thumbnail);
+        if ($karya_mahasiswa->thumbnail && Storage::disk('public')->exists($karya_mahasiswa->thumbnail)) {
+            Storage::disk('public')->delete($karya_mahasiswa->thumbnail);
         }
 
-        $karya->delete();
+        $karya_mahasiswa->delete();
 
         return redirect()->route('admin.karya_mahasiswa.index')->with('success', 'Karya Mahasiswa berhasil dihapus.');
     }

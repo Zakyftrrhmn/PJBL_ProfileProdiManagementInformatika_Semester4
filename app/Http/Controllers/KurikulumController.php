@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Kurikulum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+// use Illuminate\Support\Str; // Tidak perlu lagi di sini karena sudah di Model
 
 class KurikulumController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      */
@@ -57,6 +57,7 @@ class KurikulumController extends Controller
         $file->storeAs('kurikulum', $filename, 'public');
 
         Kurikulum::create([
+            // ID akan otomatis terisi oleh metode boot() di model Kurikulum
             'kode_mk' => $request->kode_mk,
             'mata_kuliah' => $request->mata_kuliah,
             'bentuk_perkuliahan' => $request->bentuk_perkuliahan,
@@ -67,7 +68,6 @@ class KurikulumController extends Controller
 
         return redirect()->route('admin.kurikulum.index')->with('success', 'Data kurikulum berhasil ditambahkan.');
     }
-
 
     /**
      * Display the specified resource.
@@ -82,6 +82,7 @@ class KurikulumController extends Controller
      */
     public function edit(Kurikulum $kurikulum)
     {
+        // $kurikulum sudah otomatis ditemukan berdasarkan UUID oleh route model binding
         return view('pages.kurikulum.edit', compact('kurikulum'));
     }
 
@@ -90,11 +91,12 @@ class KurikulumController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $kurikulum = Kurikulum::findOrFail($id);
+        $kurikulum = Kurikulum::findOrFail($id); // Tetap gunakan findOrFail($id) karena $id akan menjadi UUID
 
         $request->validate(
             [
-                'kode_mk' => 'required|string|max:10|unique:kurikulum,kode_mk,' . $kurikulum->id,
+                // Perhatikan: untuk unique rule, Anda perlu mengecualikan ID saat ini
+                'kode_mk' => 'required|string|max:10|unique:kurikulum,kode_mk,' . $kurikulum->id . ',id', // Tambahkan ',id' untuk memastikan kolom ID digunakan
                 'mata_kuliah' => 'required|string|max:255',
                 'bentuk_perkuliahan' => 'required|string|max:255',
                 'sks' => 'required|string|max:255',
@@ -138,13 +140,15 @@ class KurikulumController extends Controller
         return redirect()->route('admin.kurikulum.index')->with('success', 'Data kurikulum berhasil diperbarui.');
     }
 
-
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Kurikulum $kurikulum)
     {
+        // Route model binding akan otomatis menemukan model berdasarkan UUID
+        if ($kurikulum->rps && Storage::disk('public')->exists('kurikulum/' . $kurikulum->rps)) {
+            Storage::disk('public')->delete('kurikulum/' . $kurikulum->rps);
+        }
         $kurikulum->delete();
         return redirect()->route('admin.kurikulum.index')->with('success', 'Data kurikulum berhasil dihapus.');
     }

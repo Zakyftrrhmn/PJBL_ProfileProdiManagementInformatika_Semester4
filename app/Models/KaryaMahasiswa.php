@@ -11,12 +11,23 @@ class KaryaMahasiswa extends Model
 
     protected $fillable = ['judul', 'slug', 'thumbnail', 'isi', 'tahun', 'kategori_id'];
 
-    protected static function booted()
+    // Tambahkan properti ini untuk UUID
+    public $incrementing = false; // Memberi tahu Eloquent bahwa ID bukan auto-incrementing
+    protected $keyType = 'string'; // Memberi tahu Eloquent bahwa tipe key adalah string (UUID)
+
+    protected static function boot()
     {
+        parent::boot();
+
+        // Otomatis menghasilkan UUID saat membuat model baru
         static::creating(function ($karya) {
-            $karya->slug = Str::slug($karya->judul);
+            if (empty($karya->{$karya->getKeyName()})) {
+                $karya->{$karya->getKeyName()} = (string) Str::uuid();
+            }
+            $karya->slug = Str::slug($karya->judul); // Pastikan slug juga dibuat
         });
 
+        // Otomatis memperbarui slug saat memperbarui model
         static::updating(function ($karya) {
             $karya->slug = Str::slug($karya->judul);
         });
@@ -24,6 +35,7 @@ class KaryaMahasiswa extends Model
 
     public function kategori_karya()
     {
-        return $this->belongsTo(KategoriKarya::class, 'kategori_id');
+        // Relasi ke model KategoriKarya yang sekarang menggunakan UUID
+        return $this->belongsTo(KategoriKarya::class, 'kategori_id', 'id');
     }
 }

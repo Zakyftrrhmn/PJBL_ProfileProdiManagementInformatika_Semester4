@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+use Illuminate\Support\Str; // Pastikan ini ada
 
 class KurikulumSeeder extends Seeder
 {
@@ -25,6 +25,7 @@ class KurikulumSeeder extends Seeder
                 $kodeMkBase = "MK" . str_pad($semester, 2, '0', STR_PAD_LEFT) . str_pad($i, 2, '0', STR_PAD_LEFT);
 
                 $kurikulumData[] = [
+                    'id' => (string) Str::uuid(), // <-- TAMBAHKAN BARIS INI UNTUK UUID
                     'kode_mk' => $kodeMkBase . Str::random(3), // Menambahkan random string agar kode_mk unik
                     'mata_kuliah' => $judulMk,
                     'bentuk_perkuliahan' => ($i % 2 == 0) ? 'Teori' : 'Praktek',

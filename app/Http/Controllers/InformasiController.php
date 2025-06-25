@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Informasi;
-use App\Models\Kategori;
+use App\Models\Kategori; // Sudah ada
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str; // Tambahkan ini untuk slug di controller jika tidak di model
 
 class InformasiController extends Controller
 {
@@ -24,7 +25,7 @@ class InformasiController extends Controller
      */
     public function create()
     {
-        $kategori = Kategori::all(); // Ambil semua kategori
+        $kategori = Kategori::all(); // Ambil semua kategori (ID-nya sekarang UUID)
         return view('pages.informasi.create', compact('kategori'));
     }
 
@@ -33,7 +34,7 @@ class InformasiController extends Controller
         $request->validate([
             'judul' => 'required|string|max:255',
             'isi' => 'required|string',
-            'kategori_id' => 'required|exists:kategori,id',
+            'kategori_id' => 'required|exists:kategori,id', // 'exists' rule bekerja dengan UUID
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
             'judul.required' => 'Judul wajib diisi.',
@@ -45,30 +46,34 @@ class InformasiController extends Controller
         ]);
 
         $data = $request->only(['judul', 'isi', 'kategori_id']);
-        $data['user_id'] = Auth::id(); // Ambil ID user yang login
+        $data['user_id'] = Auth::id(); // Auth::id() akan mengembalikan UUID user yang login
+
+        // Slug akan otomatis dibuat di model Informasi saat 'creating'
 
         // Simpan thumbnail jika ada
         if ($request->hasFile('thumbnail')) {
             $data['thumbnail'] = $request->file('thumbnail')->store('informasi', 'public');
         }
 
-        informasi::create($data);
+        Informasi::create($data);
 
-        return redirect()->route('admin.informasi.index')->with('success', 'informasi berhasil ditambahkan.');
+        return redirect()->route('admin.informasi.index')->with('success', 'Informasi berhasil ditambahkan.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    // Ubah parameter dari string $id menjadi Informasi $informasi (Route Model Binding)
+    public function show(Informasi $informasi)
     {
-        $informasi = Informasi::findOrFail($id);
+        // $informasi sudah otomatis ditemukan berdasarkan UUID oleh route model binding
         return view('pages.informasi.show', compact('informasi'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
+    // Menggunakan Route Model Binding
     public function edit(Informasi $informasi)
     {
         $kategori = Kategori::all();
@@ -85,6 +90,8 @@ class InformasiController extends Controller
         ]);
 
         $data = $request->only(['judul', 'isi', 'kategori_id']);
+
+        // Slug akan otomatis diperbarui di model Informasi saat 'updating'
 
         // Jika ada file thumbnail baru
         if ($request->hasFile('thumbnail')) {
@@ -104,9 +111,10 @@ class InformasiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    // Ubah parameter dari string $id menjadi Informasi $informasi (Route Model Binding)
+    public function destroy(Informasi $informasi)
     {
-        $informasi = Informasi::findOrFail($id);
+        // Hapus thumbnail lama jika ada
         if ($informasi->thumbnail && Storage::disk('public')->exists($informasi->thumbnail)) {
             Storage::disk('public')->delete($informasi->thumbnail);
         }

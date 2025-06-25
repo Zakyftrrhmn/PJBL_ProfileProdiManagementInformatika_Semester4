@@ -48,7 +48,7 @@ class PrestasiMahasiswaController extends Controller
             'tanggal_lomba.required' => 'Tanggal lomba harus diisi',
             'peringkat.required' => 'Peringkat harus diisi',
             'file_sertifikat.required' => 'File sertifikat harus diunggah',
-            'file_sertifikat.mimes' => 'Format file harus berupa  JPG, JPEG, atau PNG',
+            'file_sertifikat.mimes' => 'Format file harus berupa JPG, JPEG, atau PNG',
             'file_sertifikat.max' => 'Ukuran file maksimal 2MB',
         ]);
 
@@ -57,6 +57,7 @@ class PrestasiMahasiswaController extends Controller
         $file->storeAs('prestasi_mahasiswa', $filename, 'public');
 
         PrestasiMahasiswa::create([
+            // ID akan otomatis terisi oleh metode boot() di model PrestasiMahasiswa
             'nama_mahasiswa' => $request->nama_mahasiswa,
             'nim' => $request->nim,
             'nama_lomba' => $request->nama_lomba,
@@ -74,28 +75,29 @@ class PrestasiMahasiswaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    // Ubah parameter dari string $id menjadi PrestasiMahasiswa $prestasi (Route Model Binding)
+    public function show(PrestasiMahasiswa $prestasi)
     {
-        $prestasi = PrestasiMahasiswa::findOrFail($id);
         return view('pages.prestasi_mahasiswa.show', compact('prestasi'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    // Ubah parameter dari string $id menjadi PrestasiMahasiswa $prestasi (Route Model Binding)
+    public function edit(PrestasiMahasiswa $prestasi)
     {
-        $prestasi = PrestasiMahasiswa::findOrFail($id);
+        // Tidak perlu lagi findOrFail karena $prestasi sudah menjadi instance model yang ditemukan
         return view('pages.prestasi_mahasiswa.edit', compact('prestasi'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    // Ubah parameter dari $id menjadi PrestasiMahasiswa $prestasi (Route Model Binding)
+    public function update(Request $request, PrestasiMahasiswa $prestasi)
     {
-        $prestasi = PrestasiMahasiswa::findOrFail($id);
-
+        // $prestasi sudah berisi instance model yang akan diupdate
         $request->validate([
             'nama_mahasiswa' => 'required|string|max:100',
             'nim' => 'required|string|max:20',
@@ -113,7 +115,7 @@ class PrestasiMahasiswaController extends Controller
             'penyelenggara.required' => 'Penyelenggara harus diisi',
             'tanggal_lomba.required' => 'Tanggal lomba harus diisi',
             'peringkat.required' => 'Peringkat harus diisi',
-            'file_sertifikat.mimes' => 'Format file harus berupa  JPG, JPEG, atau PNG',
+            'file_sertifikat.mimes' => 'Format file harus berupa JPG, JPEG, atau PNG',
             'file_sertifikat.max' => 'Ukuran file maksimal 2MB',
         ]);
 
@@ -129,7 +131,7 @@ class PrestasiMahasiswaController extends Controller
 
         // Jika file baru diunggah
         if ($request->hasFile('file_sertifikat')) {
-            // Hapus file lama
+            // Hapus file lama jika ada
             if ($prestasi->file_sertifikat && Storage::disk('public')->exists('prestasi_mahasiswa/' . $prestasi->file_sertifikat)) {
                 Storage::disk('public')->delete('prestasi_mahasiswa/' . $prestasi->file_sertifikat);
             }
@@ -149,9 +151,14 @@ class PrestasiMahasiswaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    // Ubah parameter dari string $id menjadi PrestasiMahasiswa $prestasi (Route Model Binding)
+    public function destroy(PrestasiMahasiswa $prestasi)
     {
-        $prestasi = PrestasiMahasiswa::findOrFail($id);
+        // Hapus file terkait jika ada
+        if ($prestasi->file_sertifikat && Storage::disk('public')->exists('prestasi_mahasiswa/' . $prestasi->file_sertifikat)) {
+            Storage::disk('public')->delete('prestasi_mahasiswa/' . $prestasi->file_sertifikat);
+        }
+
         $prestasi->delete();
         return redirect()->route('admin.prestasi_mahasiswa.index')->with('success', 'Data prestasi mahasiswa berhasil dihapus.');
     }

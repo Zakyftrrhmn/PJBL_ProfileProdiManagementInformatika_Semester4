@@ -44,14 +44,14 @@
                 {{-- Email --}}
                 <div class="mb-4">
                     <label class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Email</label>
-                    <input type="email" readonly value="{{ $dosen->email }}"
+                    <input type="email" readonly value="{{ $dosen->email ?? '-' }}"
                            class="block w-full px-4 py-2 text-sm bg-gray-100 border border-slate-300 rounded-lg shadow-sm cursor-not-allowed dark:bg-slate-700 dark:text-white dark:border-slate-600">
                 </div>
 
                 {{-- Website --}}
                 <div class="mb-4">
                     <label class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Website</label>
-                    <input type="url" readonly value="{{ $dosen->website }}"
+                    <input type="url" readonly value="{{ $dosen->website ?? '-' }}"
                            class="block w-full px-4 py-2 text-sm bg-gray-100 border border-slate-300 rounded-lg shadow-sm cursor-not-allowed dark:bg-slate-700 dark:text-white dark:border-slate-600">
                 </div>
 
@@ -65,7 +65,14 @@
                 {{-- Jabatan --}}
                 <div class="mb-4">
                     <label class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Jabatan Akademik</label>
-                    <input type="text" readonly value="{{ $dosen->jabatan }}"
+                    <input type="text" readonly value="{{ $dosen->jabatan ?? '-' }}"
+                           class="block w-full px-4 py-2 text-sm bg-gray-100 border border-slate-300 rounded-lg shadow-sm cursor-not-allowed dark:bg-slate-700 dark:text-white dark:border-slate-600">
+                </div>
+
+                {{-- Kompetensi --}}
+                <div class="mb-4">
+                    <label class="block mb-2 text-sm font-medium text-slate-700 dark:text-white">Kompetensi</label>
+                    <input type="text" readonly value="{{ $dosen->kompetensi ?? '-' }}"
                            class="block w-full px-4 py-2 text-sm bg-gray-100 border border-slate-300 rounded-lg shadow-sm cursor-not-allowed dark:bg-slate-700 dark:text-white dark:border-slate-600">
                 </div>
 

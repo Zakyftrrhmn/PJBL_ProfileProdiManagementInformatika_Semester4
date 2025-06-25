@@ -27,11 +27,11 @@ use Illuminate\Support\Facades\DB;
 class FrontsideController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan daftar sumber daya.
      */
     public function index()
     {
-
+        // Mencatat tampilan halaman untuk homepage
         DB::table('page_views')->insert([
             'page_slug' => 'homepage',
             'ip_address' => request()->ip(),
@@ -42,17 +42,16 @@ class FrontsideController extends Controller
         $kontak_kami = Kontak::first();
         $visi = Visi::first();
         $misi = Misi::all();
-        $karya_mahasiswa = KaryaMahasiswa::latest()->take(4)->get();
+        $karya_mahasiswa = KaryaMahasiswa::latest()->take(4)->get(); // Mengambil karya mahasiswa terbaru
         $alasan_bergabung = AlasanBergabung::all();
         $dosen = Dosen::all();
-        $informasi = Informasi::latest()->take(4)->get();
+        $informasi = Informasi::latest()->take(4)->get(); // Mengambil informasi terbaru
         $frontside = Frontside::first();
         return view('pages.frontside.index', compact('frontside', 'visi', 'misi', 'alasan_bergabung', 'karya_mahasiswa', 'dosen', 'informasi', 'kontak_kami', 'informasi_umum'));
     }
 
     public function kurikulum()
     {
-
         $kontak_kami = Kontak::first();
         $kurikulums = Kurikulum::orderBy('semester')->get();
         $perSemester = $kurikulums->groupBy('semester');
@@ -62,7 +61,6 @@ class FrontsideController extends Controller
 
     public function akreditasi()
     {
-
         $kontak_kami = Kontak::first();
         $frontside = Frontside::first();
         $akreditasi = Akreditasi::first();
@@ -71,16 +69,14 @@ class FrontsideController extends Controller
 
     public function kalender_akademik()
     {
-
         $kontak_kami = Kontak::first();
         $frontside = Frontside::first();
-        $kalender_akademik = KalenderAkademik::first();;
+        $kalender_akademik = KalenderAkademik::first();
         return view('pages.frontside.kalender_akademik', compact('frontside', 'kalender_akademik', 'kontak_kami'));
     }
 
     public function profile_lulusan()
     {
-
         $kontak_kami = Kontak::first();
         $frontside = Frontside::first();
         $profile = ProfileKelulusan::all();
@@ -89,7 +85,6 @@ class FrontsideController extends Controller
 
     public function laporan_kepuasan()
     {
-
         $kontak_kami = Kontak::first();
         $frontside = Frontside::first();
         $laporan_kepuasan = LaporanKepuasan::all();
@@ -98,7 +93,6 @@ class FrontsideController extends Controller
 
     public function karya_mahasiswa()
     {
-
         $kontak_kami = Kontak::first();
         $frontside = Frontside::first();
         $karya_mahasiswa = KaryaMahasiswa::all();
@@ -107,7 +101,6 @@ class FrontsideController extends Controller
 
     public function informasi()
     {
-
         $kontak_kami = Kontak::first();
         $frontside = Frontside::first();
         $informasi = Informasi::all();
@@ -116,7 +109,6 @@ class FrontsideController extends Controller
 
     public function galeri()
     {
-
         $kontak_kami = Kontak::first();
         $frontside = Frontside::first();
         $galeri = Gallery::all();
@@ -125,7 +117,6 @@ class FrontsideController extends Controller
 
     public function prestasi_mahasiswa()
     {
-
         $kontak_kami = Kontak::first();
         $frontside = Frontside::first();
         $prestasi_mahasiswa = PrestasiMahasiswa::all();
@@ -136,7 +127,7 @@ class FrontsideController extends Controller
     {
         $kontak_kami = Kontak::first();
         $frontside = Frontside::first();
-        return view('pages.frontside.hubungi_kami', compact('frontside', 'kontak_kami', 'kontak_kami'));
+        return view('pages.frontside.hubungi_kami', compact('frontside', 'kontak_kami')); // kontak_kami diulang
     }
 
     public function hubungi_kami_proses(Request $request)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage; // Tambahkan ini
 
 class GalleryController extends Controller
 {
@@ -41,6 +42,7 @@ class GalleryController extends Controller
         $file->storeAs('gallery', $filename, 'public');
 
         Gallery::create([
+            // ID akan otomatis terisi oleh metode boot() di model Gallery
             'photo' => $filename,
         ]);
 
@@ -70,14 +72,19 @@ class GalleryController extends Controller
     {
         return view('404');
     }
+
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    // Ubah parameter dari string $id menjadi Gallery $gallery (Route Model Binding)
+    public function destroy(Gallery $gallery)
     {
-        $gallery = Gallery::findOrFail($id);
-        $gallery->delete();
+        // Hapus file foto terkait jika ada
+        if ($gallery->photo && Storage::disk('public')->exists('gallery/' . $gallery->photo)) {
+            Storage::disk('public')->delete('gallery/' . $gallery->photo);
+        }
 
+        $gallery->delete();
         return redirect()->route('admin.gallery.index')->with('success', 'Data berhasil dihapus.');
     }
 }

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str; // Tambahkan ini
 
 class UserSeeder extends Seeder
 {
@@ -18,6 +19,7 @@ class UserSeeder extends Seeder
         $superadmin = User::firstOrCreate(
             ['email' => 'superadmin@mail.com'], // Kriteria pencarian: cari user dengan email ini
             [ // Atribut untuk dibuat jika tidak ditemukan
+                'id'                => (string) Str::uuid(), // <-- TAMBAHKAN UUID DI SINI
                 'name'              => 'Zaky Fathur Rahman',
                 'password'          => Hash::make('superadmin'),
                 'email_verified_at' => now(), // Sebaiknya langsung verified untuk admin
@@ -31,6 +33,7 @@ class UserSeeder extends Seeder
         $kaprodi = User::firstOrCreate(
             ['email' => 'kaprodi@mail.com'],
             [
+                'id'                => (string) Str::uuid(), // <-- TAMBAHKAN UUID DI SINI
                 'name'              => 'Kumala Sari Tri Wahyuni',
                 'password'          => Hash::make('kaprodi'),
                 'email_verified_at' => now(),
@@ -44,6 +47,7 @@ class UserSeeder extends Seeder
         $dosen = User::firstOrCreate(
             ['email' => 'dosen@mail.com'],
             [
+                'id'                => (string) Str::uuid(), // <-- TAMBAHKAN UUID DI SINI
                 'name'              => 'Risa Salsabilla',
                 'password'          => Hash::make('dosen'),
                 'email_verified_at' => now(),

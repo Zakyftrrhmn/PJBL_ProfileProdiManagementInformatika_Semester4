@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str; // Tambahkan ini
 
 class KategoriSeeder extends Seeder
 {
@@ -14,10 +15,16 @@ class KategoriSeeder extends Seeder
     public function run(): void
     {
         DB::table('kategori')->insert([
-            'nama_kategori' => 'Berita'
+            'id' => (string) Str::uuid(), // Tambahkan UUID secara manual
+            'nama_kategori' => 'Berita',
+            'created_at' => now(), // Tambahkan timestamps
+            'updated_at' => now(), // Tambahkan timestamps
         ]);
         DB::table('kategori')->insert([
-            'nama_kategori' => 'Artikel'
+            'id' => (string) Str::uuid(), // Tambahkan UUID secara manual
+            'nama_kategori' => 'Artikel',
+            'created_at' => now(), // Tambahkan timestamps
+            'updated_at' => now(), // Tambahkan timestamps
         ]);
     }
 }

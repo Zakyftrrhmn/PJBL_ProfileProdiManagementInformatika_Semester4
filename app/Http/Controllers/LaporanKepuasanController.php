@@ -36,10 +36,10 @@ class LaporanKepuasanController extends Controller
                 'file_laporan' => 'required|file|mimes:pdf,doc,docx',
             ],
             [
-                'nama_laporan.required' => 'Mata kuliah harus diisi',
-                'nama_laporan.max' => 'Mata kuliah tidak boleh lebih dari 50 karakter',
+                'nama_laporan.required' => 'Nama Laporan harus diisi', // Perbaiki pesan validasi
+                'nama_laporan.max' => 'Nama Laporan tidak boleh lebih dari 50 karakter', // Perbaiki pesan validasi
                 'file_laporan.required' => 'File Laporan harus diisi',
-                'file_laporan.mimes' => 'Format file File Laporan harus PDF, DOC, atau DOCX',
+                'file_laporan.mimes' => 'Format file Laporan harus PDF, DOC, atau DOCX',
             ]
         );
 
@@ -48,6 +48,7 @@ class LaporanKepuasanController extends Controller
         $file->storeAs('laporan_kepuasan', $filename, 'public');
 
         LaporanKepuasan::create([
+            // ID akan otomatis terisi oleh metode boot() di model LaporanKepuasan
             'nama_laporan' => $request->nama_laporan,
             'file_laporan' => $filename,
         ]);
@@ -66,29 +67,32 @@ class LaporanKepuasanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    // Ubah parameter dari string $id menjadi LaporanKepuasan $laporan_kepuasan (Route Model Binding)
+    public function edit(LaporanKepuasan $laporan_kepuasan)
     {
-        $laporan_kepuasan = LaporanKepuasan::findOrFail($id);
+        // Tidak perlu lagi findOrFail karena $laporan_kepuasan sudah menjadi instance model yang ditemukan
         return view('pages.laporan_kepuasan.edit', compact('laporan_kepuasan'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    // Ubah parameter dari string $id menjadi LaporanKepuasan $laporan_kepuasan (Route Model Binding)
+    public function update(Request $request, LaporanKepuasan $laporan_kepuasan)
     {
-
-        $laporan_kepuasan = LaporanKepuasan::findOrFail($id);
-
+        // $laporan_kepuasan sudah berisi instance model yang akan diupdate
+        // Tambahkan pengecualian ID jika nama_laporan harus unik
         $request->validate(
             [
-                'nama_laporan' => 'required|string|max:50',
+                // Contoh jika nama_laporan harus unique, sertakan id:
+                // 'nama_laporan' => 'required|string|max:50|unique:laporan_kepuasan,nama_laporan,' . $laporan_kepuasan->id . ',id',
+                'nama_laporan' => 'required|string|max:50', // Sesuai dengan validasi Anda saat ini
                 'file_laporan' => 'nullable|file|mimes:pdf,doc,docx',
             ],
             [
-                'nama_laporan.required' => 'Mata kuliah harus diisi',
-                'nama_laporan.max' => 'Mata kuliah tidak boleh lebih dari 50 karakter',
-                'file_laporan.mimes' => 'Format file File Laporan harus PDF, DOC, atau DOCX',
+                'nama_laporan.required' => 'Nama Laporan harus diisi',
+                'nama_laporan.max' => 'Nama Laporan tidak boleh lebih dari 50 karakter',
+                'file_laporan.mimes' => 'Format file Laporan harus PDF, DOC, atau DOCX',
             ]
         );
 
@@ -98,6 +102,7 @@ class LaporanKepuasanController extends Controller
 
         // Tambahkan file_laporan hanya jika ada file baru
         if ($request->hasFile('file_laporan')) {
+            // Hapus file lama jika ada
             if ($laporan_kepuasan->file_laporan && Storage::disk('public')->exists('laporan_kepuasan/' . $laporan_kepuasan->file_laporan)) {
                 Storage::disk('public')->delete('laporan_kepuasan/' . $laporan_kepuasan->file_laporan);
             }
@@ -108,7 +113,6 @@ class LaporanKepuasanController extends Controller
             $data['file_laporan'] = $filename;
         }
 
-
         $laporan_kepuasan->update($data);
         return redirect()->route('admin.laporan_kepuasan.index')->with('success', 'Data Laporan Kepuasan berhasil diperbarui.');
     }
@@ -116,9 +120,14 @@ class LaporanKepuasanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    // Ubah parameter dari string $id menjadi LaporanKepuasan $laporan_kepuasan (Route Model Binding)
+    public function destroy(LaporanKepuasan $laporan_kepuasan)
     {
-        $laporan_kepuasan = LaporanKepuasan::findOrFail($id);
+        // Hapus file terkait jika ada
+        if ($laporan_kepuasan->file_laporan && Storage::disk('public')->exists('laporan_kepuasan/' . $laporan_kepuasan->file_laporan)) {
+            Storage::disk('public')->delete('laporan_kepuasan/' . $laporan_kepuasan->file_laporan);
+        }
+
         $laporan_kepuasan->delete();
         return redirect()->route('admin.laporan_kepuasan.index')->with('success', 'Data Laporan Kepuasan berhasil dihapus.');
     }
